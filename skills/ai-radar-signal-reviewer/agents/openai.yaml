@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Radar Signal Reviewer"
+  short_description: "Audita señales diarias de AI Radar."
+  default_prompt: "Use $ai-radar-signal-reviewer to review a daily AI Radar snapshot for duplicates, weak evidence, and actionable improvements."

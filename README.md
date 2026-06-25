@@ -46,14 +46,14 @@ La primera clase usa este estado para mostrar como `AGENTS.md` cambia la forma e
 El stack debe mantenerse simple para que el foco del curso sea Codex, no el framework.
 
 - Frontend: HTML, CSS y JavaScript.
-- Dominio: modulos JavaScript reutilizables.
-- CLI: `airadar` para comandos internos del proyecto.
-- Automatizacion local: scripts Node.js.
+- Dominio y scripts internos: Python con libreria estandar.
+- CLI interno: `scripts/airadar.py` para comandos del proyecto y skills.
+- Automatizacion local: scripts Python llamados directamente por skills.
 - Proyecto agent-friendly: Dekk cuando existan comandos que deban usar humanos y agentes.
 - API: Vercel Functions cuando hagan falta endpoints.
 - Datos locales: fixtures y snapshots antes de conectar servicios externos.
 - Base de datos: Supabase cuando el contrato local ya funcione.
-- QA: `node:test` para dominio y Playwright cuando exista interfaz visual.
+- QA: `unittest` para dominio y Playwright cuando exista interfaz visual.
 - Demo final: video programatico con la evidencia del proyecto.
 
 ## Reglas Iniciales Para Codex
@@ -68,3 +68,58 @@ Antes de implementar, Codex debe distinguir:
 
 Codex no debe inventar archivos, comandos, servicios ni integraciones como si ya existieran.
 
+## Herramientas Locales
+
+El repositorio incluye scripts Python internos para consultar fixtures sin
+cargar todos los JSON en contexto. Las skills deben llamarlos directamente; no
+se mantienen ejecutadores de paquete.
+
+```bash
+python3 scripts/airadar.py list --tag agents --fields id,title,action
+python3 scripts/airadar.py summary --from 2026-06-15
+python3 scripts/airadar.py ranking --limit 3
+python3 scripts/airadar.py show 2026-06-24-deepmind-agent-control-roadmap --fields title,action,url
+python3 scripts/airadar.py validate --date 2026-06-20
+```
+
+Comandos disponibles:
+
+- `list`: filtra senales diarias por fecha, tag, impacto, estado, fuente o texto.
+- `summary`: resume conteos por fecha, impacto, estado, fuente y tags.
+- `show`: muestra una senal especifica por `id`.
+- `ranking`: consulta el ranking editorial cuando exista un fixture
+  `signal-review-ranking-YYYY-MM-DD.json`.
+- `validate`: valida estructura minima, ids, evidencias y tags de snapshots
+  diarios.
+
+Filtros utiles:
+
+- `--date YYYY-MM-DD`
+- `--from YYYY-MM-DD`
+- `--to YYYY-MM-DD`
+- `--tag agents`
+- `--impact high`
+- `--status actionable`
+- `--source Axios`
+- `--q DeepMind`
+- `--limit 5`
+- `--fields id,title,action,url`
+- `--format json`
+
+## Flujo Local-First Para Senales
+
+Cuando una solicitud pida senales por fecha, tag, fuente, impacto, estado o
+texto, AI Radar debe consultar primero los fixtures locales:
+
+```bash
+python3 scripts/airadar.py list --date 2026-06-17 --limit 2 --format json
+```
+
+Si el resultado contiene suficientes senales, la respuesta debe usar esos datos
+persistidos. Si no hay datos suficientes, se buscan fuentes externas, se curan
+las senales contra el contrato diario y se guarda o actualiza
+`data/fixtures/daily-radar-YYYY-MM-DD.json` antes de responder.
+
+La regla practica es: local primero, web solo cuando falte informacion, y toda
+curacion nueva debe quedar versionada en `data/fixtures/` salvo que se pida
+explicitamente una respuesta exploratoria sin persistencia.

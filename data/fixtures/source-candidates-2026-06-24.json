@@ -1,0 +1,249 @@
+{
+  "generatedAt": "2026-06-23T19:28:09-05:00",
+  "retrievedFrom": "data/fixtures/daily-radar-2026-06-24.json",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "candidates": [
+    {
+      "sourceId": "business-insider-google-ai-talent-wars-anthropic-jumper-shazeer-karpathy-openai-2026-6",
+      "canonicalUrl": "https://www.businessinsider.com/google-ai-talent-wars-anthropic-jumper-shazeer-karpathy-openai-2026-6",
+      "sourceName": "Business Insider",
+      "sourceType": "news",
+      "title": "Google DeepMind pierde figuras clave mientras se intensifica la guerra por talento de IA",
+      "publishedAt": "2026-06-23",
+      "retrievedAt": "2026-06-24",
+      "actors": [
+        "google-deepmind",
+        "openai",
+        "anthropic",
+        "noam-shazeer",
+        "john-jumper"
+      ],
+      "topics": [
+        "talent",
+        "frontier-models"
+      ],
+      "rawInput": "https://www.businessinsider.com/google-ai-talent-wars-anthropic-jumper-shazeer-karpathy-openai-2026-6",
+      "facts": [
+        "Noam Shazeer dejo Google para unirse a OpenAI.",
+        "John Jumper dejo Google DeepMind para unirse a Anthropic.",
+        "Business Insider reporto una caida de acciones de Google de hasta cerca de 7% tras los anuncios."
+      ],
+      "inferences": [
+        "El movimiento puede afectar la velocidad de ejecucion de laboratorios lideres.",
+        "OpenAI y Anthropic refuerzan areas estrategicas como investigacion y coding."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "axios-ai-lab-agi-google-deepmind-departures",
+      "canonicalUrl": "https://www.axios.com/2026/06/23/ai-lab-agi-google-deepmind-departures",
+      "sourceName": "Axios",
+      "sourceType": "news",
+      "title": "La consolidacion de talento frontier se extiende a startups y laboratorios grandes",
+      "publishedAt": "2026-06-23",
+      "retrievedAt": "2026-06-24",
+      "actors": [
+        "google-deepmind",
+        "openai",
+        "anthropic",
+        "nvidia",
+        "essential-ai"
+      ],
+      "topics": [
+        "talent",
+        "consolidation",
+        "frontier-models"
+      ],
+      "rawInput": "https://www.axios.com/2026/06/23/ai-lab-agi-google-deepmind-departures",
+      "facts": [
+        "Axios reporto una semana de salidas de alto perfil en laboratorios de IA.",
+        "Noam Shazeer y John Jumper fueron descritos como deserciones directas entre laboratorios.",
+        "Nvidia acqui-hired el equipo detras de Essential AI, incluyendo a Ashish Vaswani."
+      ],
+      "inferences": [
+        "La concentracion de investigadores clave puede cambiar ventajas competitivas.",
+        "La consolidacion puede acelerar mas contrataciones y adquisiciones de startups de IA."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "the-verge-nvidia-data-centers-rubin-liquid-cooling",
+      "canonicalUrl": "https://www.theverge.com/tech/954139/nvidia-data-centers-rubin-liquid-cooling",
+      "sourceName": "The Verge",
+      "sourceType": "news",
+      "title": "Nvidia impulsa diseno de datacenters de IA con enfriamiento liquido y menor uso de agua",
+      "publishedAt": "2026-06-22",
+      "retrievedAt": "2026-06-24",
+      "actors": [
+        "nvidia"
+      ],
+      "topics": [
+        "infrastructure",
+        "datacenters",
+        "sustainability"
+      ],
+      "rawInput": "https://www.theverge.com/tech/954139/nvidia-data-centers-rubin-liquid-cooling",
+      "facts": [
+        "The Verge reporto que el diseno Rubin usa enfriamiento 100% liquido.",
+        "El diseno permite servidores operando hasta 113 grados Fahrenheit.",
+        "Nvidia afirma que el diseno reduce el uso de agua de enfriamiento a casi cero."
+      ],
+      "inferences": [
+        "La infraestructura fisica de IA se convierte en criterio de seleccion de proveedor.",
+        "El anuncio no elimina riesgos de costos de construccion, energia y permisos locales."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "axios-trump-shadow-ai-policy",
+      "canonicalUrl": "https://www.axios.com/2026/06/18/trump-shadow-ai-policy",
+      "sourceName": "Axios",
+      "sourceType": "news",
+      "title": "Estados Unidos moldea la politica de IA con intervenciones ad hoc mas que reglas formales",
+      "publishedAt": "2026-06-18",
+      "retrievedAt": "2026-06-24",
+      "actors": [
+        "united-states",
+        "white-house",
+        "gsa",
+        "anthropic"
+      ],
+      "topics": [
+        "regulation",
+        "policy",
+        "procurement",
+        "national-security"
+      ],
+      "rawInput": "https://www.axios.com/2026/06/18/trump-shadow-ai-policy",
+      "facts": [
+        "Axios describio intervenciones empresa por empresa, frameworks voluntarios y acciones ejecutivas.",
+        "La nota identifica controles de exportacion, procurement federal y ciberseguridad como piezas centrales.",
+        "Axios reporto que la GSA considera reglas de privacidad y seguridad para LLMs que procesen informacion gubernamental."
+      ],
+      "inferences": [
+        "La falta de reglas estables aumenta incertidumbre para proveedores y compradores.",
+        "Los despliegues internacionales con modelos frontier requieren matriz de riesgo regulatorio."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "axios-google-deepmind-prepares-for-rogue-ai-agents",
+      "canonicalUrl": "https://www.axios.com/2026/06/18/google-deepmind-prepares-for-rogue-ai-agents",
+      "sourceName": "Axios",
+      "sourceType": "news",
+      "title": "DeepMind propone controles de seguridad para agentes autonomos mas capaces",
+      "publishedAt": "2026-06-18",
+      "retrievedAt": "2026-06-24",
+      "actors": [
+        "google-deepmind"
+      ],
+      "topics": [
+        "agents",
+        "safety",
+        "observability"
+      ],
+      "rawInput": "https://www.axios.com/2026/06/18/google-deepmind-prepares-for-rogue-ai-agents",
+      "facts": [
+        "Google DeepMind publico un AI Control Roadmap.",
+        "La propuesta contempla evaluacion de acciones, monitoreo, alertas y limites de acceso.",
+        "El marco asume para planificacion que un agente poderoso podria evadir supervision o exfiltrar un modelo."
+      ],
+      "inferences": [
+        "Los agentes autonomos requieren permisos minimos, observabilidad y mecanismos de contencion.",
+        "Los despliegues productivos de agentes necesitan revision humana y kill-switch."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "axios-ai-tech-moguls-g7",
+      "canonicalUrl": "https://www.axios.com/2026/06/20/ai-tech-moguls-g7",
+      "sourceName": "Axios",
+      "sourceType": "news",
+      "title": "CEOs de IA participan en el G7 y empujan coordinacion global de estandares",
+      "publishedAt": "2026-06-20",
+      "retrievedAt": "2026-06-24",
+      "actors": [
+        "g7",
+        "openai",
+        "google-deepmind",
+        "anthropic"
+      ],
+      "topics": [
+        "governance",
+        "standards",
+        "policy"
+      ],
+      "rawInput": "https://www.axios.com/2026/06/20/ai-tech-moguls-g7",
+      "facts": [
+        "Axios reporto participacion de lideres de OpenAI, Google DeepMind, Anthropic y otros en discusiones con lideres del G7.",
+        "Las conversaciones incluyeron reglas, estandares, riesgos y seguridad de IA.",
+        "El debate del G7 se conecto con preocupaciones por soberania tecnologica."
+      ],
+      "inferences": [
+        "La gobernanza de IA esta pasando de decisiones tecnicas internas a negociacion geopolitica.",
+        "Los productos con modelos frontier pueden enfrentar nuevos requisitos de compliance por mercado."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "business-insider-mark-zuckerberg-meta-glasses-style-comfort-tech-wearable-fashion",
+      "canonicalUrl": "https://www.businessinsider.com/mark-zuckerberg-meta-glasses-style-comfort-tech-wearable-fashion-2026-6",
+      "sourceName": "Business Insider",
+      "sourceType": "news",
+      "title": "Meta posiciona gafas de IA como plataforma wearable donde moda y funcion pesan igual",
+      "publishedAt": "2026-06-23",
+      "retrievedAt": "2026-06-24",
+      "actors": [
+        "meta",
+        "mark-zuckerberg",
+        "essilorluxottica"
+      ],
+      "topics": [
+        "wearables",
+        "computer-vision",
+        "privacy"
+      ],
+      "rawInput": "https://www.businessinsider.com/mark-zuckerberg-meta-glasses-style-comfort-tech-wearable-fashion-2026-6",
+      "facts": [
+        "Meta presento una nueva linea de gafas inteligentes desde 299 dolares.",
+        "Mark Zuckerberg dijo que cada modelo debe equilibrar apariencia, comodidad, funcionalidad y precio.",
+        "Business Insider reporto que las gafas fueron desarrolladas con EssilorLuxottica, pero sin marca Ray-Ban u Oakley."
+      ],
+      "inferences": [
+        "Los asistentes de IA se estan moviendo hacia hardware contextual y de uso diario.",
+        "Privacidad, diseno industrial y precio pueden afectar adopcion."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "the-verge-amazon-data-centers-water-use",
+      "canonicalUrl": "https://www.theverge.com/tech/948534/amazon-data-centers-water-use",
+      "sourceName": "The Verge",
+      "sourceType": "news",
+      "title": "Amazon reporta consumo de agua de datacenters en medio del escrutinio por infraestructura de IA",
+      "publishedAt": "2026-06-15",
+      "retrievedAt": "2026-06-24",
+      "actors": [
+        "amazon",
+        "aws"
+      ],
+      "topics": [
+        "cloud",
+        "datacenters",
+        "sustainability"
+      ],
+      "rawInput": "https://www.theverge.com/tech/948534/amazon-data-centers-water-use",
+      "facts": [
+        "The Verge reporto que Amazon declaro 2.5 mil millones de galones de agua usados por sus datacenters en 2025.",
+        "La cifra bajo 2% frente al ano anterior pese a expansion de operaciones.",
+        "El reporte excluye agua indirecta asociada a electricidad, construccion y otros insumos."
+      ],
+      "inferences": [
+        "La transparencia ambiental puede impactar la seleccion de infraestructura IA.",
+        "Clientes con criterios ESG o restricciones locales pueden exigir metricas ambientales comparables."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

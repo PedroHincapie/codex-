@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
 .pnpm-store/
+__pycache__/
+*.py[cod]
 dist/
 coverage/
 .env

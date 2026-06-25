@@ -1,0 +1,145 @@
+{
+  "$schema": "../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-20",
+  "generatedAt": "2026-06-20T00:00:00-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-20-anthropic-national-security",
+      "title": "Gobiernos empiezan a tratar modelos frontier como asunto de seguridad nacional",
+      "source": {
+        "name": "Axios",
+        "url": "https://www.axios.com/2026/06/19/trump-anthropic-national-security-the-axios-show",
+        "publishedAt": "2026-06-19",
+        "retrievedAt": "2026-06-20"
+      },
+      "evidence": [
+        "Trump dijo que Anthropic fue vista como posible amenaza de seguridad nacional.",
+        "Estados Unidos restringio acceso extranjero a modelos avanzados de Anthropic.",
+        "La administracion y Anthropic trabajan en estandares para evaluar jailbreaks."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Puede cambiar el acceso internacional a modelos, APIs y requisitos de compliance para productos que dependen de proveedores frontier."
+      },
+      "action": "Monitorear dependencias de modelos por pais y preparar fallback multi-provider.",
+      "status": "evolving",
+      "tags": [
+        "regulation",
+        "national-security",
+        "frontier-models",
+        "anthropic"
+      ]
+    },
+    {
+      "id": "2026-06-20-ai-ceos-g7",
+      "title": "Los CEOs de IA ya participan como actores geopoliticos en el G7",
+      "source": {
+        "name": "Axios",
+        "url": "https://www.axios.com/2026/06/20/ai-tech-moguls-g7",
+        "publishedAt": "2026-06-20",
+        "retrievedAt": "2026-06-20"
+      },
+      "evidence": [
+        "Lideres de OpenAI, Google DeepMind, Anthropic y otros participaron en discusiones con lideres del G7.",
+        "Las conversaciones se centraron en reglas, estandares, riesgos y seguridad de IA.",
+        "Sam Altman pidio que ningun laboratorio tome decisiones globales por si solo."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La gobernanza de IA se desplaza hacia negociacion diplomatica y puede influir en estandares internacionales."
+      },
+      "action": "Seguir estandares internacionales emergentes y mapear riesgos regulatorios por mercado.",
+      "status": "confirmed",
+      "tags": [
+        "governance",
+        "g7",
+        "standards",
+        "policy"
+      ]
+    },
+    {
+      "id": "2026-06-20-deepmind-agent-controls",
+      "title": "DeepMind prepara controles para agentes autonomos",
+      "source": {
+        "name": "Axios",
+        "url": "https://www.axios.com/2026/06/18/google-deepmind-prepares-for-rogue-ai-agents",
+        "publishedAt": "2026-06-18",
+        "retrievedAt": "2026-06-20"
+      },
+      "evidence": [
+        "Google DeepMind publico una hoja de ruta de AI Control para agentes mas capaces.",
+        "El enfoque propone monitoreo, alertas, limites de acceso y apagado en tiempo real.",
+        "DeepMind afirma haber analizado un millon de tareas de agentes de codigo para construir monitores."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Los agentes autonomos requieren observabilidad, permisos minimos y mecanismos de contencion antes de usarse en flujos criticos."
+      },
+      "action": "Disenar agentes con logs, permisos minimos, revision humana y kill-switch.",
+      "status": "actionable",
+      "tags": [
+        "agents",
+        "safety",
+        "deepmind",
+        "observability"
+      ]
+    },
+    {
+      "id": "2026-06-20-europe-ai-sovereignty",
+      "title": "Europa reacciona ante dependencia de IA de Estados Unidos",
+      "source": {
+        "name": "The Guardian",
+        "url": "https://www.theguardian.com/technology/2026/jun/20/europe-sleepwalking-ai-disaster-us-china",
+        "publishedAt": "2026-06-20",
+        "retrievedAt": "2026-06-20"
+      },
+      "evidence": [
+        "El escenario Europe 2031 se volvio viral entre responsables politicos europeos.",
+        "La discusion se intensifico tras restricciones estadounidenses al acceso extranjero a modelos de Anthropic.",
+        "Legisladores europeos debaten soberania tecnologica, datacenters e infraestructura propia."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Puede acelerar inversion europea en compute, modelos locales, proveedores soberanos y regulacion de infraestructura."
+      },
+      "action": "Evaluar proveedores europeos o soberanos si el producto opera en la Union Europea.",
+      "status": "debated",
+      "tags": [
+        "europe",
+        "sovereignty",
+        "compute",
+        "infrastructure"
+      ]
+    },
+    {
+      "id": "2026-06-20-john-jumper-anthropic",
+      "title": "La guerra por talento IA se intensifica: John Jumper pasa de DeepMind a Anthropic",
+      "source": {
+        "name": "Business Insider",
+        "url": "https://www.businessinsider.com/alphafold-john-jumper-leaves-google-deepmind-anthropic-demis-hassabis-nobel-2026-6",
+        "publishedAt": "2026-06-19",
+        "retrievedAt": "2026-06-20"
+      },
+      "evidence": [
+        "John Jumper, figura clave de AlphaFold, anuncio que deja Google DeepMind por Anthropic.",
+        "Jumper compartio el Nobel de Quimica 2024 por su trabajo en AlphaFold.",
+        "AlphaFold ofrece mas de 200 millones de predicciones de estructuras de proteinas."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Anthropic refuerza su capacidad de investigacion cientifica y safety, mientras Google pierde talento tecnico excepcional."
+      },
+      "action": "Vigilar si Anthropic lanza nuevas capacidades en IA cientifica, biologia computacional o evaluaciones de safety.",
+      "status": "confirmed",
+      "tags": [
+        "talent",
+        "deepmind",
+        "anthropic",
+        "ai-for-science"
+      ]
+    }
+  ]
+}

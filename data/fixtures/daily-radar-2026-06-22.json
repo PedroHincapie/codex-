@@ -1,0 +1,145 @@
+{
+  "$schema": "../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-22",
+  "generatedAt": "2026-06-22T06:45:54-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-22-nvidia-water-efficient-ai-cooling",
+      "title": "Nvidia propone enfriamiento recirculado para reducir el consumo de agua en centros de datos de IA",
+      "source": {
+        "name": "Axios",
+        "url": "https://www.axios.com/2026/06/22/nvidia-data-center-water-solution",
+        "publishedAt": "2026-06-22",
+        "retrievedAt": "2026-06-22"
+      },
+      "evidence": [
+        "Nvidia presento durante London Climate Week un sistema de enfriamiento con liquido recirculado para centros de datos de IA.",
+        "El sistema opera con liquido a 113 grados Fahrenheit, reduciendo dependencia de equipos tradicionales de enfriamiento.",
+        "La nota advierte que el uso indirecto de agua en generacion electrica sigue siendo un problema ambiental separado."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La infraestructura de IA esta bajo presion por agua y energia; mejoras de enfriamiento pueden cambiar requisitos de capacidad, costos y permisos, aunque no eliminan el impacto total."
+      },
+      "action": "Agregar metricas de agua, energia y enfriamiento al seguimiento de proveedores cloud y datacenter.",
+      "status": "evolving",
+      "tags": [
+        "infrastructure",
+        "datacenters",
+        "sustainability",
+        "nvidia"
+      ]
+    },
+    {
+      "id": "2026-06-22-amazon-discloses-datacenter-water-use",
+      "title": "Amazon expone el consumo de agua de sus centros de datos mientras crece el escrutinio por IA",
+      "source": {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/tech/948534/amazon-data-centers-water-use",
+        "publishedAt": "2026-06-15",
+        "retrievedAt": "2026-06-22"
+      },
+      "evidence": [
+        "Amazon reporto que sus centros de datos usaron 2.5 mil millones de galones de agua en 2025.",
+        "La cifra bajo 2% frente al ano anterior pese a la expansion de operaciones.",
+        "El reporte no incluye toda el agua indirecta asociada a electricidad, construccion u otros insumos."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La transparencia ambiental de cloud se vuelve criterio de compra y riesgo reputacional para productos intensivos en IA."
+      },
+      "action": "Comparar proveedores por consumo de agua reportado, ubicacion regional y compromisos verificables antes de escalar cargas de IA.",
+      "status": "confirmed",
+      "tags": [
+        "cloud",
+        "datacenters",
+        "sustainability",
+        "aws"
+      ]
+    },
+    {
+      "id": "2026-06-22-europe-ai-sovereignty-policy",
+      "title": "Francia y Alemania elevan la soberania de IA a prioridad estrategica europea",
+      "source": {
+        "name": "El Pais",
+        "url": "https://elpais.com/internacional/2026-06-17/francia-y-alemania-reclaman-una-soberania-europea-en-ia-frente-al-dominio-tecnologico-de-ee-uu-y-china.html",
+        "publishedAt": "2026-06-17",
+        "retrievedAt": "2026-06-22"
+      },
+      "evidence": [
+        "Francia y Alemania pidieron una politica europea de soberania digital centrada en IA, nube y semiconductores.",
+        "El documento politico vincula la dependencia tecnologica con riesgos de seguridad estrategica y vulnerabilidad geopolitica.",
+        "El debate se acelero tras restricciones estadounidenses de acceso extranjero a modelos avanzados de Anthropic."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Equipos que venden en Europa pueden enfrentar mas demanda de proveedores soberanos, despliegues regionales y trazabilidad de dependencias."
+      },
+      "action": "Mapear dependencias de modelos, nube y chips por jurisdiccion; preparar opciones europeas o hibridas para clientes regulados.",
+      "status": "evolving",
+      "tags": [
+        "europe",
+        "sovereignty",
+        "regulation",
+        "cloud"
+      ]
+    },
+    {
+      "id": "2026-06-22-us-controls-china-open-ai-ecosystems",
+      "title": "Investigadores advierten que controles de EE UU pueden acelerar ecosistemas abiertos de IA en China",
+      "source": {
+        "name": "arXiv",
+        "url": "https://arxiv.org/abs/2606.15999",
+        "publishedAt": "2026-06-14",
+        "retrievedAt": "2026-06-22"
+      },
+      "evidence": [
+        "El paper analiza como politicas estadounidenses de control de chips y compute aumentaron el valor estrategico de sistemas abiertos y adaptables en China.",
+        "Los autores reportan mayor engagement de desarrolladores chinos con repositorios open-source de LLM tras shocks de controles de exportacion.",
+        "El trabajo sostiene que modelos chinos abiertos se difundieron en comunidades open-source e investigacion cientifica internacional."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La estrategia de proveedores y modelos debe considerar que restricciones geopoliticas pueden fortalecer alternativas abiertas fuera de Estados Unidos."
+      },
+      "action": "Incluir modelos abiertos chinos y no estadounidenses en benchmarks internos, evaluando licencia, seguridad, provenance y riesgo regulatorio.",
+      "status": "candidate",
+      "tags": [
+        "open-source",
+        "china",
+        "export-controls",
+        "geopolitics"
+      ]
+    },
+    {
+      "id": "2026-06-22-apple-ai-wearables-strategy",
+      "title": "Apple prepara wearables con IA visual para competir con Meta en hardware contextual",
+      "source": {
+        "name": "New York Post",
+        "url": "https://nypost.com/2026/06/16/business/apple-to-launch-ai-juiced-airpods-and-sunglasses-going-head-to-head-with-meta/",
+        "publishedAt": "2026-06-16",
+        "retrievedAt": "2026-06-22"
+      },
+      "evidence": [
+        "Apple estaria preparando AirPods con camaras orientadas a vision computacional para enriquecer capacidades de Siri.",
+        "La compania tambien planea gafas inteligentes N50 para competir con dispositivos de Meta.",
+        "El reporte indica que las luces externas senalizarian cuando los datos se transmitan a la nube."
+      ],
+      "impact": {
+        "level": "medium",
+        "summary": "Los asistentes de IA se estan moviendo hacia hardware contextual, lo que abre casos de uso nuevos pero tambien requisitos de privacidad y consentimiento."
+      },
+      "action": "Seguir APIs de vision contextual y definir criterios de privacidad para experiencias que capturen senales del entorno.",
+      "status": "candidate",
+      "tags": [
+        "wearables",
+        "apple",
+        "computer-vision",
+        "privacy"
+      ]
+    }
+  ]
+}

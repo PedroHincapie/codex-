@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Radar Ranking Engine"
+  short_description: "Define scoring y ranking de señales."
+  default_prompt: "Use $ai-radar-ranking-engine to score and rank AI Radar signals by novelty, evidence, impact, reliability, and actionability."

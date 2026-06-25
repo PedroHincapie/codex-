@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Radar Test Fixture Builder"
+  short_description: "Crea fixtures y pruebas estables."
+  default_prompt: "Use $ai-radar-test-fixture-builder to create stable AI Radar fixtures and unittest coverage for parsing, normalization, deduplication, ranking, and scoring."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Radar Source Normalizer"
+  short_description: "Normaliza fuentes y candidatos de IA."
+  default_prompt: "Use $ai-radar-source-normalizer to normalize AI news, papers, repos, and product links into comparable source records."

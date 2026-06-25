@@ -1,0 +1,206 @@
+{
+  "generatedAt": "2026-06-23T19:29:51-05:00",
+  "reviewedSnapshot": "data/fixtures/daily-radar-2026-06-24.json",
+  "candidateSource": "data/fixtures/source-candidates-2026-06-24.json",
+  "radarDate": "2026-06-24",
+  "scoringVersion": "0.1.0",
+  "weights": {
+    "novelty": 0.15,
+    "evidence": 0.2,
+    "impact": 0.25,
+    "reliability": 0.15,
+    "actionability": 0.2,
+    "strategicFit": 0.05
+  },
+  "audit": {
+    "schema": {
+      "status": "passed",
+      "notes": [
+        "El snapshot diario y el fixture de candidatos son JSON parseables.",
+        "El contrato diario no incluye campos de scoring, por eso el ranking se guarda en un artefacto separado."
+      ]
+    },
+    "duplicates": [
+      {
+        "type": "overlap",
+        "signals": [
+          "2026-06-24-google-deepmind-talent-wars",
+          "2026-06-24-ai-talent-consolidation"
+        ],
+        "recommendation": "Conservar ambas si el producto quiere distinguir impacto por laboratorio y tendencia de consolidacion; fusionarlas si el radar diario debe ser mas compacto."
+      },
+      {
+        "type": "overlap-with-previous-snapshot",
+        "signals": [
+          "2026-06-24-deepmind-agent-control-roadmap",
+          "2026-06-20-deepmind-agent-controls"
+        ],
+        "recommendation": "Conservar solo la version 2026-06-24 como snapshot de ventana amplia; evitar duplicarla en vistas acumuladas."
+      },
+      {
+        "type": "overlap-with-previous-snapshot",
+        "signals": [
+          "2026-06-24-ai-ceos-g7-standards",
+          "2026-06-20-ai-ceos-g7"
+        ],
+        "recommendation": "Tratar como la misma senal historica en ranking acumulado."
+      },
+      {
+        "type": "overlap-with-previous-snapshot",
+        "signals": [
+          "2026-06-24-amazon-datacenter-water-transparency",
+          "2026-06-22-amazon-discloses-datacenter-water-use"
+        ],
+        "recommendation": "Tratar como duplicado fuerte si se comparan snapshots por evento."
+      }
+    ],
+    "editorialFindings": [
+      {
+        "severity": "medium",
+        "signalId": "2026-06-24-ai-talent-consolidation",
+        "finding": "Solapa con la senal de Google DeepMind, pero aporta angulo distinto sobre consolidacion y acqui-hires.",
+        "recommendation": "Mantener status `evolving`; en una vista compacta, agrupar con la senal de talento principal."
+      },
+      {
+        "severity": "medium",
+        "signalId": "2026-06-24-meta-ai-glasses-fashion-platform",
+        "finding": "La evidencia es concreta, pero el impacto inmediato para builders es menor que infraestructura, agentes o regulacion.",
+        "recommendation": "Mantener `impact.level` en `medium`; no subir a `medium-high` sin APIs o cambios de plataforma mas claros."
+      },
+      {
+        "severity": "low",
+        "signalId": "2026-06-24-nvidia-rubin-liquid-cooling",
+        "finding": "La senal es accionable, pero depende de claims de proveedor y falta informacion de costos.",
+        "recommendation": "Mantener `status` en `actionable`, pero conservar la advertencia sobre costos y adopcion."
+      }
+    ]
+  },
+  "rankedSignals": [
+    {
+      "rank": 1,
+      "signalId": "2026-06-24-deepmind-agent-control-roadmap",
+      "score": 4.6,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 5,
+        "actionability": 5,
+        "strategicFit": 5,
+        "risk": 5
+      },
+      "reason": "Alta evidencia, accion tecnica clara y riesgo directo para despliegues de agentes autonomos."
+    },
+    {
+      "rank": 2,
+      "signalId": "2026-06-24-trump-shadow-ai-policy",
+      "score": 4.4,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 5,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 5
+      },
+      "reason": "Afecta regulacion, procurement, seguridad nacional y acceso a modelos; requiere seguimiento de compliance."
+    },
+    {
+      "rank": 3,
+      "signalId": "2026-06-24-ai-ceos-g7-standards",
+      "score": 4.25,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 5,
+        "actionability": 3,
+        "strategicFit": 5,
+        "risk": 4
+      },
+      "reason": "Senal geopolitica fuerte para estandares, aunque la accion practica es mas de monitoreo que implementacion inmediata."
+    },
+    {
+      "rank": 4,
+      "signalId": "2026-06-24-nvidia-rubin-liquid-cooling",
+      "score": 4.2,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 4,
+        "impact": 5,
+        "reliability": 4,
+        "actionability": 5,
+        "strategicFit": 4,
+        "risk": 4
+      },
+      "reason": "Muy accionable para decisiones de infraestructura IA, con cautela por costos y dependencia de claims de proveedor."
+    },
+    {
+      "rank": 5,
+      "signalId": "2026-06-24-google-deepmind-talent-wars",
+      "score": 4.15,
+      "dimensions": {
+        "novelty": 5,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 4,
+        "actionability": 3,
+        "strategicFit": 5,
+        "risk": 3
+      },
+      "reason": "Movimiento de talento altamente relevante para capacidad futura de laboratorios frontier, pero con accion directa limitada."
+    },
+    {
+      "rank": 6,
+      "signalId": "2026-06-24-amazon-datacenter-water-transparency",
+      "score": 4.05,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 5,
+        "actionability": 5,
+        "strategicFit": 4,
+        "risk": 4
+      },
+      "reason": "Fuerte para evaluacion de proveedores cloud y criterios ambientales, aunque menos novedosa que cambios de agentes o politica."
+    },
+    {
+      "rank": 7,
+      "signalId": "2026-06-24-ai-talent-consolidation",
+      "score": 3.95,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 4,
+        "impact": 4,
+        "reliability": 5,
+        "actionability": 3,
+        "strategicFit": 5,
+        "risk": 3
+      },
+      "reason": "Buen contexto de mercado y consolidacion, pero parcialmente solapado con la senal principal de talento."
+    },
+    {
+      "rank": 8,
+      "signalId": "2026-06-24-meta-ai-glasses-fashion-platform",
+      "score": 3.65,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 4,
+        "impact": 3,
+        "reliability": 4,
+        "actionability": 3,
+        "strategicFit": 4,
+        "risk": 3
+      },
+      "reason": "Senal util sobre hardware contextual, pero menos urgente para builders hasta que existan APIs o distribucion mas clara."
+    }
+  ],
+  "recommendations": [
+    "Mantener el snapshot diario sin campos de scoring para respetar el contrato actual.",
+    "Usar este artefacto como base para un futuro contrato de ranking si el scoring empieza a ser parte del producto.",
+    "Agrupar duplicados entre snapshots por evento antes de mostrar rankings acumulados.",
+    "Priorizar agentes, politica/regulacion e infraestructura en la vista principal del radar."
+  ]
+}
