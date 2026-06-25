@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT_DIR))
 
 from src.radar_store import (  # noqa: E402
   DEFAULT_LIST_FIELDS,
+  audit_signals,
   filter_signals,
   join_ranking_with_signals,
   load_daily_signals,
@@ -37,6 +38,8 @@ def main(argv: list[str] | None = None) -> int:
     return print_ranking(args)
   if args.command == "validate":
     return validate_snapshot(args)
+  if args.command == "audit":
+    return audit(args)
 
   parser.print_help()
   return 0
@@ -67,6 +70,10 @@ def build_parser() -> argparse.ArgumentParser:
   validate_parser = subparsers.add_parser("validate", help="Valida snapshots diarios locales.")
   validate_parser.add_argument("--date", help="Valida solo data/fixtures/daily-radar-YYYY-MM-DD.json.")
   validate_parser.add_argument("--format", choices=["json", "tsv"], default="tsv")
+
+  audit_parser = subparsers.add_parser("audit", help="Audita senales: duplicados, evidencias, estados y fuentes.")
+  add_signal_filters(audit_parser)
+  audit_parser.add_argument("--format", choices=["json"], default="json")
 
   return parser
 
@@ -158,6 +165,12 @@ def validate_snapshot(args: argparse.Namespace) -> int:
     write_records(results, "tsv")
 
   return 0 if all(result["valid"] for result in results) else 1
+
+
+def audit(args: argparse.Namespace) -> int:
+  signals = filter_signals(load_daily_signals(), vars(args))
+  write_json(audit_signals(signals))
+  return 0
 
 
 def split_csv(value: str) -> list[str]:

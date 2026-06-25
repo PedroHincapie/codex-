@@ -48,7 +48,12 @@ de ejecutadores de paquete para estas consultas internas.
 
 ```bash
 python3 scripts/airadar.py validate --date YYYY-MM-DD
+python3 scripts/airadar.py audit --date YYYY-MM-DD
 ```
+
+Usar `audit` cuando la tarea sea repetible, deterministica y validable:
+detectar duplicados, contar estados, revisar evidencia vacia y listar fuentes
+principales no requiere razonamiento del modelo.
 
 ## Estructura Del Archivo Diario
 

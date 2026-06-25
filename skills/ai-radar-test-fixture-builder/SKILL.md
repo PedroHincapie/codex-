@@ -34,6 +34,7 @@ Aceptar:
    - Deteccion de duplicados.
    - Ranking y scoring.
    - Validacion de contrato diario.
+   - Auditorias deterministicas con `python3 scripts/airadar.py audit`.
 
 3. **Disenar fixtures**
    - Mantener archivos pequenos y revisables.
@@ -108,6 +109,7 @@ Usar segun aplique:
 ```bash
 jq empty data/fixtures/<file>.json
 python3 -m unittest tests/<file>.py
+python3 scripts/airadar.py audit --date YYYY-MM-DD
 ```
 
 No agregar ejecutadores de paquete para pruebas o scripts internos salvo que el

@@ -84,6 +84,84 @@ def summarize_signals(signals: list[dict[str, Any]]) -> dict[str, Any]:
   }
 
 
+def audit_signals(signals: list[dict[str, Any]]) -> dict[str, Any]:
+  return {
+    "totalSignals": len(signals),
+    "statusCounts": _count_by(signals, lambda signal: signal.get("status", "")),
+    "emptyEvidence": find_empty_evidence(signals),
+    "duplicateGroups": find_duplicate_groups(signals),
+    "primarySources": list_primary_sources(signals)
+  }
+
+
+def find_empty_evidence(signals: list[dict[str, Any]]) -> list[dict[str, Any]]:
+  return [
+    _signal_reference(signal)
+    for signal in signals
+    if not _has_evidence(signal)
+  ]
+
+
+def find_duplicate_groups(signals: list[dict[str, Any]]) -> list[dict[str, Any]]:
+  candidates = {
+    "id": {},
+    "url": {},
+    "title": {}
+  }
+
+  for signal in signals:
+    values = {
+      "id": signal.get("id", ""),
+      "url": signal.get("source", {}).get("url", ""),
+      "title": _normalize(signal.get("title", ""))
+    }
+
+    for field, value in values.items():
+      if not value:
+        continue
+      candidates[field].setdefault(value, []).append(signal)
+
+  duplicate_groups = []
+  for field, groups in candidates.items():
+    for value, items in sorted(groups.items()):
+      if len(items) > 1:
+        duplicate_groups.append({
+          "field": field,
+          "value": value,
+          "signals": [_signal_reference(signal) for signal in items]
+        })
+
+  return duplicate_groups
+
+
+def list_primary_sources(signals: list[dict[str, Any]]) -> list[dict[str, Any]]:
+  sources: dict[str, dict[str, Any]] = {}
+
+  for signal in signals:
+    source = signal.get("source", {})
+    name = source.get("name", "")
+    if not name:
+      continue
+
+    item = sources.setdefault(name, {
+      "source": name,
+      "count": 0,
+      "urls": set()
+    })
+    item["count"] += 1
+    if source.get("url"):
+      item["urls"].add(source["url"])
+
+  return [
+    {
+      "source": item["source"],
+      "count": item["count"],
+      "urls": sorted(item["urls"])
+    }
+    for item in sorted(sources.values(), key=lambda item: (-item["count"], item["source"]))
+  ]
+
+
 def pick_fields(signal: dict[str, Any], fields: list[str]) -> dict[str, Any]:
   return {field: get_field(signal, field) for field in fields}
 
@@ -209,6 +287,24 @@ def _matches_query(signal: dict[str, Any], query: str) -> bool:
     *signal.get("evidence", [])
   ])
   return _normalize(query) in _normalize(haystack)
+
+
+def _has_evidence(signal: dict[str, Any]) -> bool:
+  evidence = signal.get("evidence")
+  if not isinstance(evidence, list):
+    return False
+  return any(str(item).strip() for item in evidence)
+
+
+def _signal_reference(signal: dict[str, Any]) -> dict[str, str]:
+  return {
+    "id": signal.get("id", ""),
+    "radarDate": signal.get("radarDate", ""),
+    "title": signal.get("title", ""),
+    "source": signal.get("source", {}).get("name", ""),
+    "url": signal.get("source", {}).get("url", ""),
+    "snapshot": signal.get("snapshotFile", "")
+  }
 
 
 def _normalize(value: Any) -> str:

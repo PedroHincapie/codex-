@@ -21,6 +21,7 @@ Los comandos futuros deben ser simples:
 - `python3 -m unittest`: ejecuta pruebas de dominio con `unittest`.
 - `python3 scripts/airadar.py <command>`: ejecuta flujos internos usados por skills.
 - `python3 scripts/airadar.py validate --date YYYY-MM-DD`: valida snapshots diarios.
+- `python3 scripts/airadar.py audit --date YYYY-MM-DD`: audita duplicados, evidencia vacia, estados y fuentes.
 
 ## Estilo de Código y Convenciones de Nombres
 

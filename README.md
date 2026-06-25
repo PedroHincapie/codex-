@@ -68,6 +68,13 @@ Antes de implementar, Codex debe distinguir:
 
 Codex no debe inventar archivos, comandos, servicios ni integraciones como si ya existieran.
 
+## Documentacion Operativa
+
+El modelo operativo completo, con diagramas de flujo, arquitectura, criterios
+para crear tools y capacidades actuales, esta en:
+
+- [docs/ai-radar-operating-model.md](docs/ai-radar-operating-model.md)
+
 ## Herramientas Locales
 
 El repositorio incluye scripts Python internos para consultar fixtures sin
@@ -80,6 +87,7 @@ python3 scripts/airadar.py summary --from 2026-06-15
 python3 scripts/airadar.py ranking --limit 3
 python3 scripts/airadar.py show 2026-06-24-deepmind-agent-control-roadmap --fields title,action,url
 python3 scripts/airadar.py validate --date 2026-06-20
+python3 scripts/airadar.py audit --date 2026-06-20
 ```
 
 Comandos disponibles:
@@ -91,6 +99,8 @@ Comandos disponibles:
   `signal-review-ranking-YYYY-MM-DD.json`.
 - `validate`: valida estructura minima, ids, evidencias y tags de snapshots
   diarios.
+- `audit`: detecta duplicados, evidencia vacia, conteos por estado y fuentes
+  principales.
 
 Filtros utiles:
 
@@ -123,3 +133,21 @@ las senales contra el contrato diario y se guarda o actualiza
 La regla practica es: local primero, web solo cuando falte informacion, y toda
 curacion nueva debe quedar versionada en `data/fixtures/` salvo que se pida
 explicitamente una respuesta exploratoria sin persistencia.
+
+## Criterio Para Crear Tools
+
+Una tarea debe convertirse en herramienta cuando sea repetible, deterministica
+y validable. En AI Radar, las skills deben usar `scripts/airadar.py` para
+operaciones que siguen siempre la misma logica:
+
+```bash
+python3 scripts/airadar.py audit --date 2026-06-20
+```
+
+La auditoria local cubre cuatro capacidades que no requieren razonamiento del
+modelo:
+
+- detectar senales duplicadas por `id`, URL o titulo normalizado,
+- contar senales por estado,
+- detectar evidencia vacia,
+- listar fuentes principales y su frecuencia.

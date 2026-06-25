@@ -98,6 +98,8 @@ presentadas como nuevas.
    - Validar el schema JSON con `jq empty <schema>`.
    - Si existe el CLI Python, ejecutar
      `python3 scripts/airadar.py validate --date YYYY-MM-DD`.
+   - Para controles repetibles de calidad editorial, ejecutar
+     `python3 scripts/airadar.py audit --date YYYY-MM-DD`.
    - Si existe un validador de JSON Schema en el repo, usarlo.
    - Revisar que cada senal tenga fuente, evidencia, impacto, accion y estado.
 

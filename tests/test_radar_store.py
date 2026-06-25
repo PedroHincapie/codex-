@@ -1,8 +1,12 @@
 import unittest
 
 from src.radar_store import (
+  audit_signals,
   filter_signals,
+  find_duplicate_groups,
+  find_empty_evidence,
   join_ranking_with_signals,
+  list_primary_sources,
   load_daily_signals,
   load_daily_snapshot,
   load_ranking,
@@ -48,6 +52,56 @@ class RadarStoreTest(unittest.TestCase):
     snapshot = load_daily_snapshot("2026-06-20")["snapshot"]
 
     self.assertEqual(validate_daily_snapshot(snapshot), [])
+
+  def test_audits_status_counts_empty_evidence_duplicates_and_sources(self):
+    signals = [
+      {
+        "id": "2026-06-20-alpha",
+        "title": "Alpha signal",
+        "radarDate": "2026-06-20",
+        "status": "confirmed",
+        "source": {"name": "Primary Lab", "url": "https://example.com/alpha"},
+        "evidence": ["Fact"],
+        "impact": {"level": "high"}
+      },
+      {
+        "id": "2026-06-20-beta",
+        "title": "Beta signal",
+        "radarDate": "2026-06-20",
+        "status": "candidate",
+        "source": {"name": "Primary Lab", "url": "https://example.com/beta"},
+        "evidence": [""],
+        "impact": {"level": "medium"}
+      },
+      {
+        "id": "2026-06-20-beta",
+        "title": "Beta signal",
+        "radarDate": "2026-06-20",
+        "status": "candidate",
+        "source": {"name": "Other Source", "url": "https://example.com/beta"},
+        "evidence": ["Another fact"],
+        "impact": {"level": "medium"}
+      }
+    ]
+
+    audit = audit_signals(signals)
+
+    self.assertEqual(audit["statusCounts"], {"confirmed": 1, "candidate": 2})
+    self.assertEqual(len(audit["emptyEvidence"]), 1)
+    self.assertEqual(audit["primarySources"][0]["source"], "Primary Lab")
+    self.assertEqual(audit["primarySources"][0]["count"], 2)
+    self.assertEqual(
+      [(group["field"], group["value"]) for group in audit["duplicateGroups"]],
+      [
+        ("id", "2026-06-20-beta"),
+        ("url", "https://example.com/beta"),
+        ("title", "beta signal")
+      ]
+    )
+
+    self.assertEqual(find_empty_evidence(signals), audit["emptyEvidence"])
+    self.assertEqual(find_duplicate_groups(signals), audit["duplicateGroups"])
+    self.assertEqual(list_primary_sources(signals), audit["primarySources"])
 
 
 if __name__ == "__main__":
