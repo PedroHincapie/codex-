@@ -1,0 +1,64 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-15",
+  "generatedAt": "2026-06-23T19:25:49-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-15-amazon-discloses-datacenter-water-use",
+      "title": "Amazon expone el consumo de agua de sus centros de datos mientras crece el escrutinio por IA",
+      "source": {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/tech/948534/amazon-data-centers-water-use",
+        "publishedAt": "2026-06-15",
+        "retrievedAt": "2026-06-22"
+      },
+      "evidence": [
+        "Amazon reporto que sus centros de datos usaron 2.5 mil millones de galones de agua en 2025.",
+        "La cifra bajo 2% frente al ano anterior pese a la expansion de operaciones.",
+        "El reporte no incluye toda el agua indirecta asociada a electricidad, construccion u otros insumos."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La transparencia ambiental de cloud se vuelve criterio de compra y riesgo reputacional para productos intensivos en IA."
+      },
+      "action": "Comparar proveedores por consumo de agua reportado, ubicacion regional y compromisos verificables antes de escalar cargas de IA.",
+      "status": "confirmed",
+      "tags": [
+        "cloud",
+        "datacenters",
+        "sustainability",
+        "aws"
+      ]
+    },
+    {
+      "id": "2026-06-15-amazon-datacenter-water-transparency",
+      "title": "Amazon reporta consumo de agua de datacenters en medio del escrutinio por infraestructura de IA",
+      "source": {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/tech/948534/amazon-data-centers-water-use",
+        "publishedAt": "2026-06-15",
+        "retrievedAt": "2026-06-24"
+      },
+      "evidence": [
+        "The Verge reporto que Amazon declaro 2.5 mil millones de galones de agua usados por sus datacenters en 2025.",
+        "La cifra bajo 2% frente al ano anterior pese a expansion de operaciones.",
+        "El reporte excluye agua indirecta asociada a electricidad, construccion y otros insumos."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La transparencia ambiental se vuelve parte de la seleccion de infraestructura IA y puede impactar ventas a clientes con criterios ESG o restricciones locales."
+      },
+      "action": "Exigir metricas ambientales comparables a proveedores cloud antes de escalar workloads intensivos en IA.",
+      "status": "confirmed",
+      "tags": [
+        "cloud",
+        "datacenters",
+        "sustainability",
+        "aws"
+      ]
+    }
+  ]
+}

@@ -25,8 +25,10 @@ flowchart LR
   Agent --> Skills[Skills AI Radar]
   Skills --> Tools[Scripts Python]
   Tools --> Store[src/radar_store.py]
-  Store --> Fixtures[data/fixtures/*.json]
-  Fixtures --> Contract[docs/contracts/ai-radar-daily.schema.json]
+  Store --> Daily[data/signals/daily/*.json]
+  Store --> Reviews[data/reviews/rankings/*.json]
+  Store --> Sources[data/sources/candidates/*.json]
+  Daily --> Contract[docs/contracts/ai-radar-daily.schema.json]
   Tools --> Report[Salida JSON o TSV]
   Agent --> Response[Respuesta al usuario]
   Report --> Agent
@@ -44,7 +46,7 @@ empezar en la base local.
 ```mermaid
 flowchart TD
   A[Solicitud del usuario] --> B[Normalizar fecha y filtros]
-  B --> C[Consultar fixtures con scripts/airadar.py]
+  B --> C[Consultar datos locales con scripts/airadar.py]
   C --> D{Hay suficientes senales?}
   D -- Si --> E[Responder desde snapshot local]
   D -- No --> F[Buscar fuentes externas]
@@ -68,7 +70,7 @@ sequenceDiagram
   participant A as Agente
   participant S as Skill ai-radar-signals
   participant T as scripts/airadar.py
-  participant F as data/fixtures
+  participant F as data/signals/daily
   participant W as Web/Fuentes externas
 
   U->>A: Lista senales de una fecha
@@ -123,7 +125,7 @@ Ejemplos que ya son tool:
 
 | Capacidad | Comando | Uso |
 |---|---|---|
-| Listar senales | `python3 scripts/airadar.py list --date YYYY-MM-DD` | Consultar fixtures antes de buscar fuera. |
+| Listar senales | `python3 scripts/airadar.py list --date YYYY-MM-DD` | Consultar datos locales antes de buscar fuera. |
 | Resumir radar | `python3 scripts/airadar.py summary --from YYYY-MM-DD` | Obtener conteos por fecha, impacto, estado, fuente y tags. |
 | Mostrar senal | `python3 scripts/airadar.py show SIGNAL_ID` | Revisar una senal completa o campos puntuales. |
 | Ranking | `python3 scripts/airadar.py ranking --date YYYY-MM-DD` | Consultar ranking editorial si existe fixture. |
@@ -154,12 +156,13 @@ siguiente paso editorial.
 ```mermaid
 flowchart TD
   A[docs/] --> A1[Contratos y modelo operativo]
-  B[data/fixtures/] --> B1[Snapshots diarios]
-  B --> B2[Rankings y candidatos]
-  C[src/] --> C1[Logica reusable Python]
-  D[scripts/] --> D1[Tools llamadas por skills]
-  E[skills/] --> E1[Instrucciones especializadas]
-  F[tests/] --> F1[Pruebas unittest]
+  B[data/signals/daily/] --> B1[Snapshots diarios]
+  C[data/reviews/rankings/] --> C1[Rankings y auditorias]
+  G[data/sources/candidates/] --> G1[Fuentes candidatas]
+  D[src/] --> D1[Logica reusable Python]
+  E[scripts/] --> E1[Tools llamadas por skills]
+  H[skills/] --> H1[Instrucciones especializadas]
+  I[tests/] --> I1[Pruebas unittest]
 ```
 
 ## Reglas De Trabajo
@@ -169,7 +172,7 @@ flowchart TD
 - Usar scripts Python directamente desde skills.
 - Convertir tareas mecanicas en tools.
 - Probar tools con `unittest`.
-- Validar JSON con `jq` cuando se editen fixtures o contratos.
+- Validar JSON con `jq` cuando se editen datos locales o contratos.
 - No guardar articulos completos, secretos ni salidas generadas no revisadas.
 
 ## Camino De Evolucion

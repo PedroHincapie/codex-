@@ -48,7 +48,8 @@ Usar esta forma cuando no exista un contrato mas especifico:
 ## Workflow
 
 1. **Reconocer contratos existentes**
-   - Revisar `docs/contracts/` y `data/fixtures/`.
+   - Revisar `docs/contracts/`, `data/signals/daily/` y
+     `data/sources/candidates/`.
    - No crear un contrato nuevo si el usuario solo pidio una normalizacion
      conversacional.
 
@@ -80,7 +81,7 @@ Usar esta forma cuando no exista un contrato mas especifico:
 6. **Preparar salida**
    - Si el destino es una senal diaria, adaptar los campos al contrato
      `ai-radar-daily`.
-   - Si el destino son fixtures, mantener entradas pequenas y estables.
+   - Si el destino son candidatos versionados, mantener entradas pequenas y estables.
    - No guardar articulos completos ni citas extensas.
 
 ## Reglas

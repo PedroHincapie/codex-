@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-17",
+  "generatedAt": "2026-06-22T06:45:54-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-17-europe-ai-sovereignty-policy",
+      "title": "Francia y Alemania elevan la soberania de IA a prioridad estrategica europea",
+      "source": {
+        "name": "El Pais",
+        "url": "https://elpais.com/internacional/2026-06-17/francia-y-alemania-reclaman-una-soberania-europea-en-ia-frente-al-dominio-tecnologico-de-ee-uu-y-china.html",
+        "publishedAt": "2026-06-17",
+        "retrievedAt": "2026-06-22"
+      },
+      "evidence": [
+        "Francia y Alemania pidieron una politica europea de soberania digital centrada en IA, nube y semiconductores.",
+        "El documento politico vincula la dependencia tecnologica con riesgos de seguridad estrategica y vulnerabilidad geopolitica.",
+        "El debate se acelero tras restricciones estadounidenses de acceso extranjero a modelos avanzados de Anthropic."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Equipos que venden en Europa pueden enfrentar mas demanda de proveedores soberanos, despliegues regionales y trazabilidad de dependencias."
+      },
+      "action": "Mapear dependencias de modelos, nube y chips por jurisdiccion; preparar opciones europeas o hibridas para clientes regulados.",
+      "status": "evolving",
+      "tags": [
+        "europe",
+        "sovereignty",
+        "regulation",
+        "cloud"
+      ]
+    }
+  ]
+}

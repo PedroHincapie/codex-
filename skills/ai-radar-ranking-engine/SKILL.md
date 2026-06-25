@@ -15,7 +15,7 @@ convertirse despues en codigo y pruebas.
 
 Aceptar:
 
-- Senales en `data/fixtures/daily-radar-*.json`.
+- Senales en `data/signals/daily/daily-radar-*.json`.
 - Candidatos normalizados por `ai-radar-source-normalizer`.
 - Reglas de producto o criterios editoriales nuevos.
 - Solicitudes de scoring, desempate, priorizacion o comparacion.
@@ -90,7 +90,7 @@ o compliance.
   accionable.
 - No crear pesos nuevos sin decir por que.
 - Mantener reglas deterministas si se van a convertir en pruebas.
-- Guardar scoring en fixtures solo si el contrato lo permite o si se crea un
+- Guardar scoring en `data/reviews/rankings/` solo si el contrato lo permite o si se crea un
   contrato nuevo de forma explicita.
 
 ## Validaciones

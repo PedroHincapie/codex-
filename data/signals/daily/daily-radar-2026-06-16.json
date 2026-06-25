@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-16",
+  "generatedAt": "2026-06-22T06:45:54-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-16-apple-ai-wearables-strategy",
+      "title": "Apple prepara wearables con IA visual para competir con Meta en hardware contextual",
+      "source": {
+        "name": "New York Post",
+        "url": "https://nypost.com/2026/06/16/business/apple-to-launch-ai-juiced-airpods-and-sunglasses-going-head-to-head-with-meta/",
+        "publishedAt": "2026-06-16",
+        "retrievedAt": "2026-06-22"
+      },
+      "evidence": [
+        "Apple estaria preparando AirPods con camaras orientadas a vision computacional para enriquecer capacidades de Siri.",
+        "La compania tambien planea gafas inteligentes N50 para competir con dispositivos de Meta.",
+        "El reporte indica que las luces externas senalizarian cuando los datos se transmitan a la nube."
+      ],
+      "impact": {
+        "level": "medium",
+        "summary": "Los asistentes de IA se estan moviendo hacia hardware contextual, lo que abre casos de uso nuevos pero tambien requisitos de privacidad y consentimiento."
+      },
+      "action": "Seguir APIs de vision contextual y definir criterios de privacidad para experiencias que capturen senales del entorno.",
+      "status": "candidate",
+      "tags": [
+        "wearables",
+        "apple",
+        "computer-vision",
+        "privacy"
+      ]
+    }
+  ]
+}

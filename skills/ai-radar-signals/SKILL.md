@@ -44,12 +44,12 @@ presentadas como nuevas.
 2. **Consultar la base local primero**
    - Revisar si existen `docs/contracts/ai-radar-daily.schema.json`,
      `docs/contracts/ai-radar-daily.md` y archivos diarios en
-     `data/fixtures/`.
+     `data/signals/daily/`.
    - Si existe CLI local, usarlo para consultar antes de buscar en internet:
      `python3 scripts/airadar.py list --date YYYY-MM-DD --limit N --format json`.
    - Llamar los scripts Python directamente desde la skill; no depender de
      ejecutadores de paquete.
-   - Si hay suficientes senales locales, responder desde esos fixtures y no
+   - Si hay suficientes senales locales, responder desde esos datos y no
      hacer busqueda externa.
    - No asumir comandos, APIs, dashboard o base de datos si no existen.
 
@@ -84,7 +84,7 @@ presentadas como nuevas.
      `docs/contracts/ai-radar-daily.md`.
 
 7. **Guardar snapshot diario**
-   - Crear `data/fixtures/daily-radar-YYYY-MM-DD.json`.
+   - Crear `data/signals/daily/daily-radar-YYYY-MM-DD.json`.
    - Si el archivo ya existe, agregar o actualizar solo las senales necesarias,
      evitando duplicados por `id`, URL o evento equivalente.
    - Incluir `$schema`, `contractVersion`, `radarDate`, `generatedAt`,
@@ -104,7 +104,7 @@ presentadas como nuevas.
    - Revisar que cada senal tenga fuente, evidencia, impacto, accion y estado.
 
 9. **Responder desde el estado persistido**
-   - Si las senales venian de fixtures existentes, indicarlo.
+   - Si las senales venian de datos locales existentes, indicarlo.
    - Si se curaron senales nuevas, responder despues de guardar y validar el
      snapshot diario.
    - Usar el formato de conversacion solicitado por el usuario, pero mantener
@@ -123,10 +123,10 @@ presentadas como nuevas.
 - No copiar articulos completos ni citas extensas.
 - No usar una fuente como evidencia si no fue consultada o provista.
 - No presentar una inferencia como hecho; marcarla como inferencia si aplica.
-- No buscar en internet sin consultar primero los fixtures locales cuando la
+- No buscar en internet sin consultar primero los datos locales cuando la
   solicitud sea por fecha, tag, fuente, estado, impacto o texto consultable.
 - No dejar informacion curada solo en la conversacion cuando falte en la base
-  local; guardarla como fixture diario salvo instruccion explicita en contra.
+  local; guardarla como snapshot diario salvo instruccion explicita en contra.
 - Preferir ASCII en archivos nuevos salvo que el repo ya use otro criterio.
 - Mantener nombres de archivos en `kebab-case`.
 - Usar fechas absolutas en formato ISO cuando haya ambiguedad temporal.
@@ -139,7 +139,7 @@ El flujo puede generar o actualizar:
 
 - `docs/contracts/ai-radar-daily.schema.json`: contrato JSON Schema.
 - `docs/contracts/ai-radar-daily.md`: explicacion humana del contrato.
-- `data/fixtures/daily-radar-YYYY-MM-DD.json`: snapshot diario de senales.
+- `data/signals/daily/daily-radar-YYYY-MM-DD.json`: snapshot diario de senales.
 - Opcionalmente, pruebas futuras bajo `tests/` cuando el repo tenga tooling.
 
 ## Validaciones
@@ -148,7 +148,7 @@ Validar como minimo:
 
 ```bash
 jq empty docs/contracts/ai-radar-daily.schema.json
-jq empty data/fixtures/daily-radar-YYYY-MM-DD.json
+jq empty data/signals/daily/daily-radar-YYYY-MM-DD.json
 ```
 
 Revisar manualmente:

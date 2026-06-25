@@ -1,0 +1,91 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-23",
+  "generatedAt": "2026-06-23T19:25:49-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-23-google-deepmind-talent-wars",
+      "title": "Google DeepMind pierde figuras clave mientras se intensifica la guerra por talento de IA",
+      "source": {
+        "name": "Business Insider",
+        "url": "https://www.businessinsider.com/google-ai-talent-wars-anthropic-jumper-shazeer-karpathy-openai-2026-6",
+        "publishedAt": "2026-06-23",
+        "retrievedAt": "2026-06-24"
+      },
+      "evidence": [
+        "Noam Shazeer dejo Google para unirse a OpenAI.",
+        "John Jumper, figura central de AlphaFold y Nobel de Quimica 2024, dejo Google DeepMind para unirse a Anthropic.",
+        "Business Insider reporto que las acciones de Google cayeron hasta cerca de 7% el primer dia de mercado tras los anuncios."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "El movimiento de talento puede afectar la velocidad de ejecucion de los laboratorios lideres y refuerza a OpenAI y Anthropic en areas estrategicas como investigacion y coding."
+      },
+      "action": "Monitorear cambios de liderazgo tecnico en laboratorios frontier y ajustar benchmarks por proveedor cuando haya cambios relevantes de equipo.",
+      "status": "confirmed",
+      "tags": [
+        "talent",
+        "deepmind",
+        "openai",
+        "anthropic"
+      ]
+    },
+    {
+      "id": "2026-06-23-ai-talent-consolidation",
+      "title": "La consolidacion de talento frontier se extiende a startups y laboratorios grandes",
+      "source": {
+        "name": "Axios",
+        "url": "https://www.axios.com/2026/06/23/ai-lab-agi-google-deepmind-departures",
+        "publishedAt": "2026-06-23",
+        "retrievedAt": "2026-06-24"
+      },
+      "evidence": [
+        "Axios reporto una semana de salidas de alto perfil en laboratorios de IA, con Google DeepMind como el caso mas golpeado.",
+        "Noam Shazeer y John Jumper fueron descritos como deserciones directas entre laboratorios.",
+        "Nvidia tambien acqui-hired el equipo detras de Essential AI, incluyendo a Ashish Vaswani."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La concentracion de investigadores clave puede cambiar ventajas competitivas, atraer mas contrataciones y acelerar consolidacion de startups de IA."
+      },
+      "action": "Registrar movimientos de personal clave como senales de capacidad futura, especialmente cuando involucren arquitectura de modelos, agentes o tooling de codigo.",
+      "status": "evolving",
+      "tags": [
+        "talent",
+        "consolidation",
+        "frontier-models",
+        "nvidia"
+      ]
+    },
+    {
+      "id": "2026-06-23-meta-ai-glasses-fashion-platform",
+      "title": "Meta posiciona gafas de IA como plataforma wearable donde moda y funcion pesan igual",
+      "source": {
+        "name": "Business Insider",
+        "url": "https://www.businessinsider.com/mark-zuckerberg-meta-glasses-style-comfort-tech-wearable-fashion-2026-6",
+        "publishedAt": "2026-06-23",
+        "retrievedAt": "2026-06-24"
+      },
+      "evidence": [
+        "Meta presento una nueva linea de gafas inteligentes desde 299 dolares.",
+        "Mark Zuckerberg dijo que cada modelo debe equilibrar apariencia, comodidad, funcionalidad y precio.",
+        "Business Insider reporto que las gafas fueron desarrolladas con EssilorLuxottica, pero sin marca Ray-Ban u Oakley."
+      ],
+      "impact": {
+        "level": "medium",
+        "summary": "Los asistentes de IA se estan moviendo hacia hardware contextual y de uso diario, donde privacidad, diseno industrial y precio afectan adopcion."
+      },
+      "action": "Monitorear APIs y patrones de interaccion para wearables de IA antes de disenar experiencias basadas en camara, audio o contexto ambiental.",
+      "status": "confirmed",
+      "tags": [
+        "wearables",
+        "meta",
+        "computer-vision",
+        "privacy"
+      ]
+    }
+  ]
+}

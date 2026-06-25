@@ -1,6 +1,6 @@
 ---
 name: ai-radar-test-fixture-builder
-description: Create and maintain stable AI Radar fixtures and unittest coverage for parsing, normalization, deduplication, ranking, scoring, and contract validation. Use when Codex needs to add data/fixtures examples, expected outputs, tests under tests/, or minimal domain modules that turn AI Radar editorial rules into executable behavior.
+description: Create and maintain stable AI Radar fixtures and unittest coverage for parsing, normalization, deduplication, ranking, scoring, and contract validation. Use when Codex needs to add local data examples, expected outputs, tests under tests/, or minimal domain modules that turn AI Radar editorial rules into executable behavior.
 ---
 
 # AI Radar Test Fixture Builder
@@ -16,14 +16,14 @@ antes de conectar servicios externos.
 Aceptar:
 
 - Reglas editoriales o contratos existentes.
-- Snapshots diarios en `data/fixtures/`.
+- Snapshots diarios en `data/signals/daily/`.
 - Ejemplos de URLs, articulos, papers, repos o lanzamientos.
 - Solicitudes de pruebas con `unittest`.
 
 ## Workflow
 
 1. **Reconocer estado del proyecto**
-   - Revisar `README.md`, `AGENTS.md`, `docs/contracts/` y `data/fixtures/`.
+   - Revisar `README.md`, `AGENTS.md`, `docs/contracts/` y `data/`.
    - Usar Python y `unittest` salvo que el repo introduzca otro toolchain.
    - No asumir ejecutadores de paquete; preferir `python3 -m unittest` y
      scripts Python llamados directamente.
@@ -107,7 +107,7 @@ if __name__ == "__main__":
 Usar segun aplique:
 
 ```bash
-jq empty data/fixtures/<file>.json
+jq empty data/signals/daily/<file>.json
 python3 -m unittest tests/<file>.py
 python3 scripts/airadar.py audit --date YYYY-MM-DD
 ```

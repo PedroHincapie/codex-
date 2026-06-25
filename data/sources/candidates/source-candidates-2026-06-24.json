@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-06-23T19:28:09-05:00",
-  "retrievedFrom": "data/fixtures/daily-radar-2026-06-24.json",
+  "retrievedFrom": "data/signals/daily/",
   "topic": "artificial-intelligence",
   "locale": "es",
   "candidates": [

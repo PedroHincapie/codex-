@@ -6,14 +6,16 @@ from pathlib import Path
 from typing import Any
 
 
-FIXTURE_DIR = Path.cwd() / "data" / "fixtures"
+DATA_DIR = Path.cwd() / "data"
+DAILY_SIGNAL_DIR = DATA_DIR / "signals" / "daily"
+REVIEW_RANKING_DIR = DATA_DIR / "reviews" / "rankings"
 DAILY_FILE_PREFIX = "daily-radar-"
 RANKING_FILE_PREFIX = "signal-review-ranking-"
 DEFAULT_LIST_FIELDS = ["id", "publishedAt", "source", "impact", "status", "title"]
 
 
-def load_daily_signals(fixture_dir: Path | str = FIXTURE_DIR) -> list[dict[str, Any]]:
-  root = Path(fixture_dir)
+def load_daily_signals(data_dir: Path | str = DATA_DIR) -> list[dict[str, Any]]:
+  root = _daily_signal_dir(Path(data_dir))
   signals: list[dict[str, Any]] = []
 
   for path in sorted(root.glob(f"{DAILY_FILE_PREFIX}[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].json")):
@@ -29,8 +31,8 @@ def load_daily_signals(fixture_dir: Path | str = FIXTURE_DIR) -> list[dict[str, 
   return signals
 
 
-def load_ranking(date: str | None = None, fixture_dir: Path | str = FIXTURE_DIR) -> dict[str, Any] | None:
-  root = Path(fixture_dir)
+def load_ranking(date: str | None = None, data_dir: Path | str = DATA_DIR) -> dict[str, Any] | None:
+  root = _review_ranking_dir(Path(data_dir))
   paths = sorted(root.glob(f"{RANKING_FILE_PREFIX}[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].json"))
   if date:
     paths = [path for path in paths if date in path.name]
@@ -46,8 +48,8 @@ def load_ranking(date: str | None = None, fixture_dir: Path | str = FIXTURE_DIR)
   }
 
 
-def load_daily_snapshot(date: str, fixture_dir: Path | str = FIXTURE_DIR) -> dict[str, Any] | None:
-  path = Path(fixture_dir) / f"{DAILY_FILE_PREFIX}{date}.json"
+def load_daily_snapshot(date: str, data_dir: Path | str = DATA_DIR) -> dict[str, Any] | None:
+  path = _daily_signal_dir(Path(data_dir)) / f"{DAILY_FILE_PREFIX}{date}.json"
   if not path.exists():
     return None
   return {
@@ -313,3 +315,19 @@ def _normalize(value: Any) -> str:
 
 def _count_by(items: list[dict[str, Any]], selector) -> dict[str, int]:
   return dict(Counter(selector(item) for item in items))
+
+
+def _daily_signal_dir(data_dir: Path) -> Path:
+  if data_dir.name == "daily":
+    return data_dir
+  if data_dir.name == "fixtures":
+    return data_dir
+  return data_dir / "signals" / "daily"
+
+
+def _review_ranking_dir(data_dir: Path) -> Path:
+  if data_dir.name == "rankings":
+    return data_dir
+  if data_dir.name == "fixtures":
+    return data_dir
+  return data_dir / "reviews" / "rankings"

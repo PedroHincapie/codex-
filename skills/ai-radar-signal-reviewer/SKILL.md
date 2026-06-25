@@ -1,6 +1,6 @@
 ---
 name: ai-radar-signal-reviewer
-description: Review, compare, deduplicate, and improve AI Radar daily signal snapshots. Use when Codex needs to audit existing data/fixtures/daily-radar-*.json files, validate editorial quality, detect duplicate or weak signals, compare signals across dates, or recommend changes to impact, status, evidence, tags, and actions.
+description: Review, compare, deduplicate, and improve AI Radar daily signal snapshots. Use when Codex needs to audit existing data/signals/daily/daily-radar-*.json files, validate editorial quality, detect duplicate or weak signals, compare signals across dates, or recommend changes to impact, status, evidence, tags, and actions.
 ---
 
 # AI Radar Signal Reviewer
@@ -11,14 +11,14 @@ Auditar snapshots diarios de AI Radar para mejorar calidad editorial,
 consistencia y accionabilidad sin convertir la revision en una nueva busqueda
 de noticias.
 
-Usar esta skill sobre archivos existentes en `data/fixtures/` y el contrato en
+Usar esta skill sobre archivos existentes en `data/signals/daily/` y el contrato en
 `docs/contracts/ai-radar-daily.schema.json`.
 
 ## Inputs
 
 Aceptar uno o varios de estos inputs:
 
-- Un archivo `data/fixtures/daily-radar-YYYY-MM-DD.json`.
+- Un archivo `data/signals/daily/daily-radar-YYYY-MM-DD.json`.
 - Varios snapshots diarios para comparar.
 - Una lista de senales candidatas ya estructuradas.
 - Una solicitud de auditoria editorial, deduplicacion o mejora de scoring.
@@ -31,7 +31,7 @@ solo para confirmar fuentes puntuales. No reemplazar el trabajo de
 
 1. **Reconocer el estado del repo**
    - Leer el contrato diario si existe.
-   - Leer los snapshots indicados o los mas recientes en `data/fixtures/`.
+   - Leer los snapshots indicados o los mas recientes en `data/signals/daily/`.
    - No asumir CLI, base de datos, dashboard ni validador si no existen.
 
 2. **Validar estructura**
@@ -86,7 +86,7 @@ Ejecutar como minimo:
 
 ```bash
 jq empty docs/contracts/ai-radar-daily.schema.json
-jq empty data/fixtures/daily-radar-YYYY-MM-DD.json
+jq empty data/signals/daily/daily-radar-YYYY-MM-DD.json
 ```
 
 Si existe un validador JSON Schema o pruebas del proyecto, usarlo despues de

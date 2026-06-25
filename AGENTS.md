@@ -10,7 +10,9 @@ Usa estas ubicaciones cuando el proyecto crezca:
 - `public/` o `app/`: HTML, CSS y JS del navegador.
 - `scripts/`: automatización con Python.
 - `tests/`: pruebas con `unittest` y specs de Playwright cuando exista UI.
-- `data/fixtures/`: entradas de ejemplo versionadas.
+- `data/signals/daily/`: snapshots diarios curados, un archivo por fecha.
+- `data/reviews/rankings/`: rankings, auditorias y scoring editorial.
+- `data/sources/candidates/`: fuentes candidatas antes de curacion final.
 
 ## Comandos de Build, Prueba y Desarrollo
 

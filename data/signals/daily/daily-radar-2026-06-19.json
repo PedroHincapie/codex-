@@ -1,0 +1,64 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-19",
+  "generatedAt": "2026-06-20T00:00:00-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-19-anthropic-national-security",
+      "title": "Gobiernos empiezan a tratar modelos frontier como asunto de seguridad nacional",
+      "source": {
+        "name": "Axios",
+        "url": "https://www.axios.com/2026/06/19/trump-anthropic-national-security-the-axios-show",
+        "publishedAt": "2026-06-19",
+        "retrievedAt": "2026-06-20"
+      },
+      "evidence": [
+        "Trump dijo que Anthropic fue vista como posible amenaza de seguridad nacional.",
+        "Estados Unidos restringio acceso extranjero a modelos avanzados de Anthropic.",
+        "La administracion y Anthropic trabajan en estandares para evaluar jailbreaks."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Puede cambiar el acceso internacional a modelos, APIs y requisitos de compliance para productos que dependen de proveedores frontier."
+      },
+      "action": "Monitorear dependencias de modelos por pais y preparar fallback multi-provider.",
+      "status": "evolving",
+      "tags": [
+        "regulation",
+        "national-security",
+        "frontier-models",
+        "anthropic"
+      ]
+    },
+    {
+      "id": "2026-06-19-john-jumper-anthropic",
+      "title": "La guerra por talento IA se intensifica: John Jumper pasa de DeepMind a Anthropic",
+      "source": {
+        "name": "Business Insider",
+        "url": "https://www.businessinsider.com/alphafold-john-jumper-leaves-google-deepmind-anthropic-demis-hassabis-nobel-2026-6",
+        "publishedAt": "2026-06-19",
+        "retrievedAt": "2026-06-20"
+      },
+      "evidence": [
+        "John Jumper, figura clave de AlphaFold, anuncio que deja Google DeepMind por Anthropic.",
+        "Jumper compartio el Nobel de Quimica 2024 por su trabajo en AlphaFold.",
+        "AlphaFold ofrece mas de 200 millones de predicciones de estructuras de proteinas."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Anthropic refuerza su capacidad de investigacion cientifica y safety, mientras Google pierde talento tecnico excepcional."
+      },
+      "action": "Vigilar si Anthropic lanza nuevas capacidades en IA cientifica, biologia computacional o evaluaciones de safety.",
+      "status": "confirmed",
+      "tags": [
+        "talent",
+        "deepmind",
+        "anthropic",
+        "ai-for-science"
+      ]
+    }
+  ]
+}

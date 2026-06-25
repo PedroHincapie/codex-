@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-14",
+  "generatedAt": "2026-06-22T06:45:54-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-14-us-controls-china-open-ai-ecosystems",
+      "title": "Investigadores advierten que controles de EE UU pueden acelerar ecosistemas abiertos de IA en China",
+      "source": {
+        "name": "arXiv",
+        "url": "https://arxiv.org/abs/2606.15999",
+        "publishedAt": "2026-06-14",
+        "retrievedAt": "2026-06-22"
+      },
+      "evidence": [
+        "El paper analiza como politicas estadounidenses de control de chips y compute aumentaron el valor estrategico de sistemas abiertos y adaptables en China.",
+        "Los autores reportan mayor engagement de desarrolladores chinos con repositorios open-source de LLM tras shocks de controles de exportacion.",
+        "El trabajo sostiene que modelos chinos abiertos se difundieron en comunidades open-source e investigacion cientifica internacional."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La estrategia de proveedores y modelos debe considerar que restricciones geopoliticas pueden fortalecer alternativas abiertas fuera de Estados Unidos."
+      },
+      "action": "Incluir modelos abiertos chinos y no estadounidenses en benchmarks internos, evaluando licencia, seguridad, provenance y riesgo regulatorio.",
+      "status": "candidate",
+      "tags": [
+        "open-source",
+        "china",
+        "export-controls",
+        "geopolitics"
+      ]
+    }
+  ]
+}

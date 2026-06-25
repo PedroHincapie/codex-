@@ -1,0 +1,91 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-20",
+  "generatedAt": "2026-06-23T19:25:49-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-20-ai-ceos-g7",
+      "title": "Los CEOs de IA ya participan como actores geopoliticos en el G7",
+      "source": {
+        "name": "Axios",
+        "url": "https://www.axios.com/2026/06/20/ai-tech-moguls-g7",
+        "publishedAt": "2026-06-20",
+        "retrievedAt": "2026-06-20"
+      },
+      "evidence": [
+        "Lideres de OpenAI, Google DeepMind, Anthropic y otros participaron en discusiones con lideres del G7.",
+        "Las conversaciones se centraron en reglas, estandares, riesgos y seguridad de IA.",
+        "Sam Altman pidio que ningun laboratorio tome decisiones globales por si solo."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La gobernanza de IA se desplaza hacia negociacion diplomatica y puede influir en estandares internacionales."
+      },
+      "action": "Seguir estandares internacionales emergentes y mapear riesgos regulatorios por mercado.",
+      "status": "confirmed",
+      "tags": [
+        "governance",
+        "g7",
+        "standards",
+        "policy"
+      ]
+    },
+    {
+      "id": "2026-06-20-europe-ai-sovereignty",
+      "title": "Europa reacciona ante dependencia de IA de Estados Unidos",
+      "source": {
+        "name": "The Guardian",
+        "url": "https://www.theguardian.com/technology/2026/jun/20/europe-sleepwalking-ai-disaster-us-china",
+        "publishedAt": "2026-06-20",
+        "retrievedAt": "2026-06-20"
+      },
+      "evidence": [
+        "El escenario Europe 2031 se volvio viral entre responsables politicos europeos.",
+        "La discusion se intensifico tras restricciones estadounidenses al acceso extranjero a modelos de Anthropic.",
+        "Legisladores europeos debaten soberania tecnologica, datacenters e infraestructura propia."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Puede acelerar inversion europea en compute, modelos locales, proveedores soberanos y regulacion de infraestructura."
+      },
+      "action": "Evaluar proveedores europeos o soberanos si el producto opera en la Union Europea.",
+      "status": "debated",
+      "tags": [
+        "europe",
+        "sovereignty",
+        "compute",
+        "infrastructure"
+      ]
+    },
+    {
+      "id": "2026-06-20-ai-ceos-g7-standards",
+      "title": "CEOs de IA participan en el G7 y empujan coordinacion global de estandares",
+      "source": {
+        "name": "Axios",
+        "url": "https://www.axios.com/2026/06/20/ai-tech-moguls-g7",
+        "publishedAt": "2026-06-20",
+        "retrievedAt": "2026-06-24"
+      },
+      "evidence": [
+        "Axios reporto participacion de lideres de OpenAI, Google DeepMind, Anthropic y otros en discusiones con lideres del G7.",
+        "Las conversaciones incluyeron reglas, estandares, riesgos y seguridad de IA.",
+        "El debate del G7 se conecto con preocupaciones por soberania tecnologica y dependencia de modelos estadounidenses."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La gobernanza de IA esta pasando de decisiones tecnicas internas a negociacion geopolitica, con posibles efectos en compliance y acceso internacional."
+      },
+      "action": "Seguir foros de estandares y mapear requisitos emergentes por mercado para productos que usen modelos frontier.",
+      "status": "confirmed",
+      "tags": [
+        "governance",
+        "g7",
+        "standards",
+        "policy"
+      ]
+    }
+  ]
+}

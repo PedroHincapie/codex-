@@ -16,7 +16,7 @@ from src.radar_store import (
 
 
 class RadarStoreTest(unittest.TestCase):
-  def test_loads_daily_radar_signals_from_fixtures(self):
+  def test_loads_daily_radar_signals_from_local_data(self):
     signals = load_daily_signals()
 
     self.assertGreaterEqual(len(signals), 8)

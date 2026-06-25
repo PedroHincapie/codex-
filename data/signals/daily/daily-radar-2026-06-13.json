@@ -1,0 +1,145 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-13",
+  "generatedAt": "2026-06-25T00:00:00-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-13-apex-self-evolving-production-agents",
+      "title": "APEX propone agentes de produccion que evolucionan su harness, principios y flujo de trabajo",
+      "source": {
+        "name": "arXiv",
+        "url": "https://arxiv.org/abs/2606.15363",
+        "publishedAt": "2026-06-13",
+        "retrievedAt": "2026-06-25"
+      },
+      "evidence": [
+        "El paper presenta APEX como un framework de co-evolucion de tres capas para agentes de produccion.",
+        "APEX modifica harness, principios de comportamiento y topologia de workflow usando trazas operativas.",
+        "La evaluacion reporta 114 trazas reales durante 18 dias y una mejora de APEX Health Score de 0.300 a 0.570."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La generacion de agentes pasa de prompts estaticos a ciclos de mejora basados en trazas; esto cambia como se disenian, evalúan y actualizan agentes en produccion."
+      },
+      "action": "Agregar almacenamiento de trazas, clasificacion de fallos y revision periodica de workflow antes de permitir auto-mejora en agentes internos.",
+      "status": "candidate",
+      "tags": [
+        "agents",
+        "self-improvement",
+        "production-agents",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "2026-06-13-coagent-concurrency-control",
+      "title": "CoAgent aplica control de concurrencia a sistemas multiagente que modifican estado compartido",
+      "source": {
+        "name": "arXiv",
+        "url": "https://arxiv.org/abs/2606.15376",
+        "publishedAt": "2026-06-13",
+        "retrievedAt": "2026-06-25"
+      },
+      "evidence": [
+        "El paper aborda agentes de codigo, devops y documentos que trabajan en paralelo sobre repositorios, clusters o documentos compartidos.",
+        "Propone MTPO, un protocolo donde el runtime notifica conflictos y el agente repara las operaciones afectadas.",
+        "La evaluacion reporta resultados cercanos a la correccion serial con 1.4x de speedup en cargas contenciosas."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La generacion de agentes multiagente necesita mecanismos de aislamiento, reparacion y undo; sin esto, varios agentes pueden corromper el mismo estado."
+      },
+      "action": "No lanzar agentes paralelos sobre el mismo repo o entorno sin contratos de herramienta, operaciones reversibles y deteccion de conflictos.",
+      "status": "candidate",
+      "tags": [
+        "multi-agent",
+        "concurrency",
+        "tooling",
+        "devops"
+      ]
+    },
+    {
+      "id": "2026-06-13-claybuddy-coding-agent-failures",
+      "title": "ClayBuddy clasifica y mitiga fallos destructivos en agentes de codigo",
+      "source": {
+        "name": "arXiv",
+        "url": "https://arxiv.org/abs/2606.19380",
+        "publishedAt": "2026-06-13",
+        "retrievedAt": "2026-06-25"
+      },
+      "evidence": [
+        "El paper estudia fallos de agentes de codigo por subespecificacion, errores de capacidad y errores del harness.",
+        "La evaluacion cubre 8 pruebas, 20 entornos de codigo y 59 plantillas sinteticas de transcript.",
+        "Propone un harness con contexto editable, clasificador de comandos y guardrails deterministas."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La generacion de agentes de software debe tratar el harness como producto de seguridad, no solo como prompt; los agentes necesitan limites ejecutables antes de tocar codigo o despliegues."
+      },
+      "action": "Definir politicas deterministas para comandos destructivos, permisos por tarea y evidencias obligatorias antes de integrar agentes de codigo en flujos productivos.",
+      "status": "candidate",
+      "tags": [
+        "coding-agents",
+        "safety",
+        "guardrails",
+        "harness"
+      ]
+    },
+    {
+      "id": "2026-06-13-risk-aware-geospatial-agents",
+      "title": "Un framework geoespacial usa agentes especializados con guardrails para consultas a APIs externas",
+      "source": {
+        "name": "arXiv",
+        "url": "https://arxiv.org/abs/2606.15077",
+        "publishedAt": "2026-06-13",
+        "retrievedAt": "2026-06-25"
+      },
+      "evidence": [
+        "El sistema convierte consultas en lenguaje natural en llamadas estructuradas a catalogos geoespaciales cloud.",
+        "La arquitectura separa agentes Guardrail, General-QA y Recommender-Analyst.",
+        "Las pruebas adversariales muestran que las instrucciones de seguridad ayudan, pero persisten fallos raros de alto impacto en manipulacion de APIs."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La generacion de agentes conectados a APIs reales requiere agentes de control e interceptores, porque el prompt por si solo no contiene acciones peligrosas."
+      },
+      "action": "Separar agentes de interpretacion, recomendacion y guardrail cuando el agente traduzca lenguaje natural a llamadas API con impacto externo.",
+      "status": "candidate",
+      "tags": [
+        "agents",
+        "guardrails",
+        "apis",
+        "geospatial"
+      ]
+    },
+    {
+      "id": "2026-06-13-pepti-agent-domain-specific-design",
+      "title": "Pepti-Agent muestra un patron de agente cientifico con herramientas MCP inspeccionables",
+      "source": {
+        "name": "arXiv",
+        "url": "https://arxiv.org/abs/2606.15422",
+        "publishedAt": "2026-06-13",
+        "retrievedAt": "2026-06-25"
+      },
+      "evidence": [
+        "El paper presenta un agente cerrado para diseno y optimizacion de peptidos terapeuticos.",
+        "El agente expone generacion, prediccion de propiedades y mutacion de residuos como herramientas MCP inspeccionables.",
+        "El controlador consulta predictores vivos entre llamadas y registra trazas por paso de decisiones y mutaciones aceptadas."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La generacion de agentes verticales se orienta a toolchains explicitas, trazables y evaluables; esto reduce dependencia de razonamiento libre del LLM en dominios cientificos."
+      },
+      "action": "Para agentes de dominio, modelar cada capacidad como herramienta inspeccionable y guardar trazas paso a paso para auditoria y benchmarking.",
+      "status": "candidate",
+      "tags": [
+        "domain-agents",
+        "mcp",
+        "ai-for-science",
+        "tool-use"
+      ]
+    }
+  ]
+}

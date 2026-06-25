@@ -1,0 +1,64 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.0.0",
+  "radarDate": "2026-06-22",
+  "generatedAt": "2026-06-23T19:25:49-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-22-nvidia-water-efficient-ai-cooling",
+      "title": "Nvidia propone enfriamiento recirculado para reducir el consumo de agua en centros de datos de IA",
+      "source": {
+        "name": "Axios",
+        "url": "https://www.axios.com/2026/06/22/nvidia-data-center-water-solution",
+        "publishedAt": "2026-06-22",
+        "retrievedAt": "2026-06-22"
+      },
+      "evidence": [
+        "Nvidia presento durante London Climate Week un sistema de enfriamiento con liquido recirculado para centros de datos de IA.",
+        "El sistema opera con liquido a 113 grados Fahrenheit, reduciendo dependencia de equipos tradicionales de enfriamiento.",
+        "La nota advierte que el uso indirecto de agua en generacion electrica sigue siendo un problema ambiental separado."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La infraestructura de IA esta bajo presion por agua y energia; mejoras de enfriamiento pueden cambiar requisitos de capacidad, costos y permisos, aunque no eliminan el impacto total."
+      },
+      "action": "Agregar metricas de agua, energia y enfriamiento al seguimiento de proveedores cloud y datacenter.",
+      "status": "evolving",
+      "tags": [
+        "infrastructure",
+        "datacenters",
+        "sustainability",
+        "nvidia"
+      ]
+    },
+    {
+      "id": "2026-06-22-nvidia-rubin-liquid-cooling",
+      "title": "Nvidia impulsa diseno de datacenters de IA con enfriamiento liquido y menor uso de agua",
+      "source": {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/tech/954139/nvidia-data-centers-rubin-liquid-cooling",
+        "publishedAt": "2026-06-22",
+        "retrievedAt": "2026-06-24"
+      },
+      "evidence": [
+        "The Verge reporto que el diseno Rubin usa enfriamiento 100% liquido y servidores operando hasta 113 grados Fahrenheit.",
+        "Nvidia afirma que el diseno reduce el uso de agua de enfriamiento de 2.6 millones de galones por megavatio al ano a casi cero.",
+        "La nota advierte que el anuncio no resuelve costos de construccion ni impactos de energia y construccion."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La infraestructura fisica de IA se esta convirtiendo en criterio de seleccion de proveedor por agua, energia, costos y permisos locales."
+      },
+      "action": "Incluir eficiencia de enfriamiento, agua y energia en evaluaciones de cloud, colocacion y proveedores de infraestructura IA.",
+      "status": "actionable",
+      "tags": [
+        "infrastructure",
+        "datacenters",
+        "sustainability",
+        "nvidia"
+      ]
+    }
+  ]
+}

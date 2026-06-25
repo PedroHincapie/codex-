@@ -33,9 +33,10 @@ primer paso operativo es usar el store local o el CLI:
 python3 scripts/airadar.py list --date YYYY-MM-DD --limit N --format json
 ```
 
-Si hay suficientes senales locales, la respuesta debe salir de esos fixtures.
+Si hay suficientes senales locales, la respuesta debe salir de esos datos.
 Si no existen o son insuficientes, se pueden buscar fuentes externas, pero la
-curacion resultante debe persistirse como `data/fixtures/daily-radar-YYYY-MM-DD.json`
+curacion resultante debe persistirse como
+`data/signals/daily/daily-radar-YYYY-MM-DD.json`
 antes de responder. La unica excepcion es una instruccion explicita del usuario
 para obtener una respuesta exploratoria o descartable sin guardar.
 
@@ -175,6 +176,6 @@ titulo.
 ## Relacion Con El Proyecto
 
 Este contrato es la primera base operativa de AI Radar. Permite empezar con
-fixtures locales antes de conectar APIs, bases de datos o dashboards. Las
-capas futuras del proyecto pueden usar estos archivos para probar parsing,
+datos locales versionados antes de conectar APIs, bases de datos o dashboards.
+Las capas futuras del proyecto pueden usar estos archivos para probar parsing,
 normalizacion, ranking, deduplicacion y visualizacion.

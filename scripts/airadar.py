@@ -48,7 +48,7 @@ def main(argv: list[str] | None = None) -> int:
 def build_parser() -> argparse.ArgumentParser:
   parser = argparse.ArgumentParser(
     prog="airadar",
-    description="Consulta fixtures locales de AI Radar."
+    description="Consulta datos locales de AI Radar."
   )
   subparsers = parser.add_subparsers(dest="command")
 
@@ -68,7 +68,7 @@ def build_parser() -> argparse.ArgumentParser:
   add_output_options(ranking_parser, default_fields="rank,signalId,score,risk,impact,status,title")
 
   validate_parser = subparsers.add_parser("validate", help="Valida snapshots diarios locales.")
-  validate_parser.add_argument("--date", help="Valida solo data/fixtures/daily-radar-YYYY-MM-DD.json.")
+  validate_parser.add_argument("--date", help="Valida solo data/signals/daily/daily-radar-YYYY-MM-DD.json.")
   validate_parser.add_argument("--format", choices=["json", "tsv"], default="tsv")
 
   audit_parser = subparsers.add_parser("audit", help="Audita senales: duplicados, evidencias, estados y fuentes.")
@@ -123,7 +123,7 @@ def show_signal(args: argparse.Namespace) -> int:
 def print_ranking(args: argparse.Namespace) -> int:
   ranking_result = load_ranking(date=args.date)
   if not ranking_result:
-    raise SystemExit("No signal-review-ranking fixture found")
+    raise SystemExit("No signal-review-ranking data file found")
 
   rows = apply_limit(join_ranking_with_signals(ranking_result["ranking"], load_daily_signals()), args.limit)
   fields = split_csv(args.fields)
