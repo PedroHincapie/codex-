@@ -1,6 +1,6 @@
 {
   "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "radarDate": "2026-06-18",
   "generatedAt": "2026-06-23T19:25:49-05:00",
   "topic": "artificial-intelligence",
@@ -31,7 +31,8 @@
         "safety",
         "deepmind",
         "observability"
-      ]
+      ],
+      "sourceType": "news"
     },
     {
       "id": "2026-06-18-trump-shadow-ai-policy",
@@ -58,7 +59,8 @@
         "policy",
         "procurement",
         "national-security"
-      ]
+      ],
+      "sourceType": "news"
     },
     {
       "id": "2026-06-18-deepmind-agent-control-roadmap",
@@ -85,7 +87,8 @@
         "safety",
         "deepmind",
         "observability"
-      ]
+      ],
+      "sourceType": "news"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "radarDate": "2026-06-19",
   "generatedAt": "2026-06-20T00:00:00-05:00",
   "topic": "artificial-intelligence",
@@ -31,7 +31,8 @@
         "national-security",
         "frontier-models",
         "anthropic"
-      ]
+      ],
+      "sourceType": "news"
     },
     {
       "id": "2026-06-19-john-jumper-anthropic",
@@ -58,7 +59,8 @@
         "deepmind",
         "anthropic",
         "ai-for-science"
-      ]
+      ],
+      "sourceType": "news"
     }
   ]
 }

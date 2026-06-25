@@ -79,6 +79,7 @@ Cada senal debe incluir:
   `2026-06-20-deepmind-agent-controls`.
 - `title`: resumen corto de la senal en lenguaje claro.
 - `source`: fuente principal usada para sostener la senal.
+- `sourceType`: clasificacion opcional de la fuente principal.
 - `evidence`: lista de hechos verificables extraidos o inferidos de la fuente.
 - `impact`: nivel y resumen del posible efecto.
 - `action`: recomendacion practica para un builder, equipo o producto.
@@ -98,6 +99,24 @@ Si una senal depende de varias fuentes, el contrato actual guarda solo la
 fuente principal. Las fuentes secundarias deben incorporarse como evidencia
 solo si son necesarias. Si esto se vuelve frecuente, el contrato debe
 evolucionar a `sources`.
+
+`sourceType` fue introducido en `contractVersion` 1.1.0. Permite filtrar por
+clase de fuente sin depender del texto de `source.name`. Es opcional para
+mantener compatibilidad con snapshots antiguos.
+Valores permitidos:
+
+- `official`: anuncio de empresa, laboratorio, gobierno u organizacion.
+- `repo`: repositorio tecnico, release o changelog en GitHub/GitLab.
+- `paper`: paper, preprint, DOI o arXiv.
+- `news`: medio periodistico o cobertura secundaria.
+- `product`: pagina de producto o changelog fuera de repositorio.
+- `social`: comunidad o red social usada como pista.
+
+Para listar repositorios tecnicos desde el CLI:
+
+```bash
+python3 scripts/airadar.py list --date YYYY-MM-DD --source-type repo
+```
 
 ## Evidencias
 

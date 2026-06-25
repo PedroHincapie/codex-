@@ -1,6 +1,6 @@
 {
   "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "radarDate": "2026-06-23",
   "generatedAt": "2026-06-23T19:25:49-05:00",
   "topic": "artificial-intelligence",
@@ -31,7 +31,8 @@
         "deepmind",
         "openai",
         "anthropic"
-      ]
+      ],
+      "sourceType": "news"
     },
     {
       "id": "2026-06-23-ai-talent-consolidation",
@@ -58,7 +59,8 @@
         "consolidation",
         "frontier-models",
         "nvidia"
-      ]
+      ],
+      "sourceType": "news"
     },
     {
       "id": "2026-06-23-meta-ai-glasses-fashion-platform",
@@ -85,7 +87,8 @@
         "meta",
         "computer-vision",
         "privacy"
-      ]
+      ],
+      "sourceType": "news"
     }
   ]
 }

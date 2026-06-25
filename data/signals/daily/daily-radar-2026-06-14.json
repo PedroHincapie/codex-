@@ -1,6 +1,6 @@
 {
   "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "radarDate": "2026-06-14",
   "generatedAt": "2026-06-22T06:45:54-05:00",
   "topic": "artificial-intelligence",
@@ -31,7 +31,8 @@
         "china",
         "export-controls",
         "geopolitics"
-      ]
+      ],
+      "sourceType": "paper"
     }
   ]
 }

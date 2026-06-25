@@ -1,0 +1,300 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-06-25",
+  "generatedAt": "2026-06-25T07:26:27-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-06-25-openai-broadcom-jalapeno-inference-chip",
+      "title": "OpenAI verticaliza inferencia con el chip Jalapeno junto a Broadcom",
+      "source": {
+        "name": "OpenAI",
+        "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip/",
+        "publishedAt": "2026-06-24",
+        "retrievedAt": "2026-06-25"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "OpenAI y Broadcom anunciaron Jalapeno, un acelerador orientado a inferencia LLM.",
+        "OpenAI reporto que las muestras ya ejecutan cargas de machine learning en laboratorio.",
+        "El despliegue inicial esta previsto hacia finales de 2026."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La integracion vertical de modelos, serving y hardware puede cambiar costos, latencia y disponibilidad de APIs y agentes."
+      },
+      "action": "Preparar benchmarks de costo y latencia por proveedor, y monitorear metricas publicas de performance por watt.",
+      "status": "evolving",
+      "tags": [
+        "openai",
+        "broadcom",
+        "inference",
+        "hardware-ai",
+        "llmops"
+      ]
+    },
+    {
+      "id": "2026-06-25-anthropic-claude-tag-slack-agents",
+      "title": "Claude Tag convierte Slack en superficie colaborativa para agentes",
+      "source": {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com/news/introducing-claude-tag",
+        "publishedAt": "2026-06-23",
+        "retrievedAt": "2026-06-25"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "Claude Tag esta en beta para Claude Enterprise y Claude Team.",
+        "La primera superficie anunciada es Slack.",
+        "Anthropic describio controles administrativos para limitar gasto, auditar logs y restringir acceso a canales, herramientas, datos y codebases."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Los agentes empresariales pasan de chats individuales a trabajo de equipo persistente, con permisos y tareas asincronas."
+      },
+      "action": "Probar un canal piloto con permisos minimos, logging y limites de gasto antes de conectar repositorios o datos sensibles.",
+      "status": "actionable",
+      "tags": [
+        "anthropic",
+        "agents",
+        "slack",
+        "enterprise-ai",
+        "permissions"
+      ]
+    },
+    {
+      "id": "2026-06-25-openai-patch-the-planet-open-source-security",
+      "title": "OpenAI lanza Patch the Planet para seguridad open source asistida por IA",
+      "source": {
+        "name": "OpenAI",
+        "url": "https://openai.com/index/patch-the-planet/",
+        "publishedAt": "2026-06-22",
+        "retrievedAt": "2026-06-25"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "La iniciativa incluye a Trail of Bits, HackerOne y Calif.",
+        "Los participantes iniciales incluyen cURL, NATS, pyca/cryptography, Sigstore, aiohttp, Go, Python y python.org.",
+        "El enfoque combina investigacion asistida por IA con revision humana."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "El valor de la IA en seguridad se desplaza de detectar vulnerabilidades a validar, parchar, probar y coordinar disclosure en proyectos criticos."
+      },
+      "action": "Auditar dependencias criticas y preparar un proceso interno para consumir advisories y parches con mayor frecuencia.",
+      "status": "actionable",
+      "tags": [
+        "openai",
+        "security",
+        "open-source",
+        "vulnerability-management",
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "2026-06-25-vercel-ai-sdk-agent-observability",
+      "title": "Vercel AI SDK agrega soporte multi-modelo y trazabilidad de agentes",
+      "source": {
+        "name": "GitHub Releases: vercel/ai",
+        "url": "https://github.com/vercel/ai/releases",
+        "publishedAt": "2026-06-24",
+        "retrievedAt": "2026-06-25"
+      },
+      "sourceType": "repo",
+      "evidence": [
+        "La release de @ai-sdk/xai agrego nuevos identificadores de modelos xAI y soporte de reasoning effort.",
+        "La beta de ai@7 etiqueta requests salientes con ai-sdk-agent para atribucion de uso en loops de herramientas y workflows.",
+        "Los cambios apuntan a compatibilidad multi-modelo y mejor observabilidad de agentes en apps JavaScript y TypeScript."
+      ],
+      "impact": {
+        "level": "medium",
+        "summary": "La trazabilidad por agente se vuelve un requisito practico para medir costos, uso y comportamiento por proveedor."
+      },
+      "action": "Probar el beta en un flujo agentico aislado y validar tracking de costos y uso por provider antes de adoptarlo.",
+      "status": "actionable",
+      "tags": [
+        "vercel",
+        "ai-sdk",
+        "agents",
+        "observability",
+        "typescript"
+      ]
+    },
+    {
+      "id": "2026-06-25-vllm-serving-kv-cache-tool-parsers",
+      "title": "vLLM 0.23 mejora serving, KV cache y parsers para reasoning y tool calls",
+      "source": {
+        "name": "GitHub Releases: vllm-project/vllm",
+        "url": "https://github.com/vllm-project/vllm/releases",
+        "publishedAt": "2026-06-15",
+        "retrievedAt": "2026-06-25"
+      },
+      "sourceType": "repo",
+      "evidence": [
+        "La release v0.23.0 incluye cientos de commits y cambios de multiples contribuidores.",
+        "Model Runner V2 se amplio a mas modelos densos.",
+        "La release incluye Rust frontend con streaming, LoRA dinamico, cache KV multi-tier y parser unificado para reasoning y tool calls."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La infraestructura open source de serving reduce friccion para modelos recientes, tool calling y contextos largos."
+      },
+      "action": "Evaluar upgrade en staging con pruebas de latencia, memoria KV y compatibilidad de parsers antes de produccion.",
+      "status": "confirmed",
+      "tags": [
+        "vllm",
+        "inference",
+        "serving",
+        "tool-calling",
+        "kv-cache"
+      ]
+    },
+    {
+      "id": "2026-06-25-google-genai-python-sdk-mcp-computer-use",
+      "title": "Google GenAI Python SDK expone MCP, Computer Use y video generation",
+      "source": {
+        "name": "GitHub Releases: googleapis/python-genai",
+        "url": "https://github.com/googleapis/python-genai/releases",
+        "publishedAt": "2026-06-24",
+        "retrievedAt": "2026-06-25"
+      },
+      "sourceType": "repo",
+      "evidence": [
+        "La version v2.10.0 agrego Agent Platform MCP en async generate_content_stream.",
+        "La release incorporo campos para ComputerUse.disabled_safety_policies.",
+        "Tambien agrego usage por steps y parametros para generacion y formato de respuesta de video."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Los SDKs oficiales estan convergiendo agentes, MCP, uso de computadora y generacion multimodal en una misma superficie."
+      },
+      "action": "Revisar contratos de seguridad antes de habilitar Computer Use y capturar usage por step en observabilidad.",
+      "status": "actionable",
+      "tags": [
+        "google-genai",
+        "mcp",
+        "computer-use",
+        "video-generation",
+        "python-sdk"
+      ]
+    },
+    {
+      "id": "2026-06-25-desktopmcp-linux-desktop-agents",
+      "title": "DesktopMCP lleva agentes MCP a automatizacion de escritorio Linux",
+      "source": {
+        "name": "GitHub: varbhat/desktopmcp",
+        "url": "https://github.com/varbhat/desktopmcp",
+        "publishedAt": "2026-06-24",
+        "retrievedAt": "2026-06-25"
+      },
+      "sourceType": "repo",
+      "evidence": [
+        "El repositorio Rust expone acceso al escritorio Linux mediante MCP.",
+        "El proyecto usa XDG Portals, AT-SPI y D-Bus.",
+        "La documentacion declara herramientas para pantalla, interfaz, input y servicios del sistema."
+      ],
+      "impact": {
+        "level": "medium",
+        "summary": "MCP se esta moviendo de integraciones de herramientas a automatizacion local de escritorio, con riesgos de permisos, input injection y control del entorno."
+      },
+      "action": "Probar solo en una VM o sandbox Linux, revisar permisos XDG Portal y definir allowlist de herramientas.",
+      "status": "candidate",
+      "tags": [
+        "mcp",
+        "desktop-agents",
+        "linux",
+        "security",
+        "automation"
+      ]
+    },
+    {
+      "id": "2026-06-25-figma-agents-motion-shaders-design-canvas",
+      "title": "Figma integra agentes, motion y shaders en el canvas de diseno",
+      "source": {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/tech/955831/figma-code-design-tools-config-2026-announcements",
+        "publishedAt": "2026-06-24",
+        "retrievedAt": "2026-06-25"
+      },
+      "sourceType": "news",
+      "evidence": [
+        "Figma anuncio code layers, motion con prompts y shaders basados en WebGPU.",
+        "La cobertura reporto workflows Weave, agent skills, conectores, busqueda web y plugins generativos.",
+        "Las novedades colocan capacidades agenticas dentro del flujo de diseno y prototipado."
+      ],
+      "impact": {
+        "level": "medium",
+        "summary": "El diseno de producto se acerca a un IDE visual con agentes, lo que puede reducir handoff o introducir deuda si el codigo generado no se valida."
+      },
+      "action": "Probar una tarea pequena de diseno, animacion y sincronizacion a repo; medir si reduce handoff y revisar la deuda tecnica generada.",
+      "status": "actionable",
+      "tags": [
+        "figma",
+        "design-tools",
+        "agents",
+        "prototyping",
+        "webgpu"
+      ]
+    },
+    {
+      "id": "2026-06-25-nist-sandboxaq-ai-materials-chips",
+      "title": "NIST y Commerce financian a SandboxAQ para descubrimiento de materiales con IA",
+      "source": {
+        "name": "NIST",
+        "url": "https://www.nist.gov/news-events/news/2026/06/department-commerce-announces-definitive-agreement-sandboxaq-500-million",
+        "publishedAt": "2026-06-17",
+        "retrievedAt": "2026-06-25"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "El Department of Commerce anuncio un acuerdo definitivo por 500 millones de dolares bajo CHIPS.",
+        "El financiamiento apunta a una plataforma de SandboxAQ para materiales semiconductores.",
+        "Las areas mencionadas incluyen alternativas PFAS, catalizadores, imanes sin tierras raras y baterias."
+      ],
+      "impact": {
+        "level": "medium",
+        "summary": "Refuerza IA aplicada a ciencia y materiales como area de demanda para pipelines que combinan fisica, optimizacion, screening y validacion experimental."
+      },
+      "action": "Mapear oportunidades de producto en simulacion, experiment tracking, data provenance y validacion para AI-for-science.",
+      "status": "confirmed",
+      "tags": [
+        "nist",
+        "sandboxaq",
+        "ai-for-science",
+        "semiconductors",
+        "chips-act"
+      ]
+    },
+    {
+      "id": "2026-06-25-anthropic-model-access-export-controls",
+      "title": "Controles regulatorios pueden cortar acceso a modelos frontier en produccion",
+      "source": {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com/news/fable-mythos-access",
+        "publishedAt": "2026-06-12",
+        "retrievedAt": "2026-06-25"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "Anthropic afirmo que recibio una directiva de export control del gobierno de Estados Unidos.",
+        "La empresa suspendio el acceso a Fable 5 y Mythos 5 para todos los clientes.",
+        "Anthropic indico que otros modelos no fueron afectados."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Los productos que dependen de un unico modelo frontier enfrentan riesgo operativo si una accion regulatoria cambia el acceso despues del despliegue comercial."
+      },
+      "action": "Disenar fallback multi-modelo, degradacion funcional y clausulas de continuidad para clientes afectados por cambios de acceso.",
+      "status": "evolving",
+      "tags": [
+        "anthropic",
+        "regulation",
+        "model-access",
+        "export-controls",
+        "risk"
+      ]
+    }
+  ]
+}

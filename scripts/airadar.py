@@ -86,6 +86,7 @@ def add_signal_filters(parser: argparse.ArgumentParser) -> None:
   parser.add_argument("--impact")
   parser.add_argument("--status")
   parser.add_argument("--source")
+  parser.add_argument("--source-type", dest="source_type")
   parser.add_argument("--q")
 
 

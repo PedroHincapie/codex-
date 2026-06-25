@@ -1,6 +1,6 @@
 {
   "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "radarDate": "2026-06-20",
   "generatedAt": "2026-06-23T19:25:49-05:00",
   "topic": "artificial-intelligence",
@@ -31,7 +31,8 @@
         "g7",
         "standards",
         "policy"
-      ]
+      ],
+      "sourceType": "news"
     },
     {
       "id": "2026-06-20-europe-ai-sovereignty",
@@ -58,7 +59,8 @@
         "sovereignty",
         "compute",
         "infrastructure"
-      ]
+      ],
+      "sourceType": "news"
     },
     {
       "id": "2026-06-20-ai-ceos-g7-standards",
@@ -85,7 +87,8 @@
         "g7",
         "standards",
         "policy"
-      ]
+      ],
+      "sourceType": "news"
     }
   ]
 }

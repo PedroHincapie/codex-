@@ -96,6 +96,17 @@
             }
           }
         },
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "news",
+            "official",
+            "paper",
+            "repo",
+            "product",
+            "social"
+          ]
+        },
         "evidence": {
           "type": "array",
           "minItems": 1,

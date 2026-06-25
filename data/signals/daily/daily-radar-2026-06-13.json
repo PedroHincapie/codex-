@@ -1,6 +1,6 @@
 {
   "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "radarDate": "2026-06-13",
   "generatedAt": "2026-06-25T00:00:00-05:00",
   "topic": "artificial-intelligence",
@@ -31,7 +31,8 @@
         "self-improvement",
         "production-agents",
         "evaluation"
-      ]
+      ],
+      "sourceType": "paper"
     },
     {
       "id": "2026-06-13-coagent-concurrency-control",
@@ -58,7 +59,8 @@
         "concurrency",
         "tooling",
         "devops"
-      ]
+      ],
+      "sourceType": "paper"
     },
     {
       "id": "2026-06-13-claybuddy-coding-agent-failures",
@@ -85,7 +87,8 @@
         "safety",
         "guardrails",
         "harness"
-      ]
+      ],
+      "sourceType": "paper"
     },
     {
       "id": "2026-06-13-risk-aware-geospatial-agents",
@@ -112,7 +115,8 @@
         "guardrails",
         "apis",
         "geospatial"
-      ]
+      ],
+      "sourceType": "paper"
     },
     {
       "id": "2026-06-13-pepti-agent-domain-specific-design",
@@ -139,7 +143,8 @@
         "mcp",
         "ai-for-science",
         "tool-use"
-      ]
+      ],
+      "sourceType": "paper"
     }
   ]
 }

@@ -12,6 +12,7 @@ REVIEW_RANKING_DIR = DATA_DIR / "reviews" / "rankings"
 DAILY_FILE_PREFIX = "daily-radar-"
 RANKING_FILE_PREFIX = "signal-review-ranking-"
 DEFAULT_LIST_FIELDS = ["id", "publishedAt", "source", "impact", "status", "title"]
+SOURCE_TYPES = ["news", "official", "paper", "repo", "product", "social"]
 
 
 def load_daily_signals(data_dir: Path | str = DATA_DIR) -> list[dict[str, Any]]:
@@ -236,6 +237,7 @@ def get_field(signal: dict[str, Any], field: str) -> Any:
     "publishedAt": signal.get("source", {}).get("publishedAt", ""),
     "retrievedAt": signal.get("source", {}).get("retrievedAt", ""),
     "source": signal.get("source", {}).get("name", ""),
+    "sourceType": get_source_type(signal),
     "impact": signal.get("impact", {}).get("level", ""),
     "status": signal.get("status", ""),
     "tags": ",".join(signal.get("tags", [])),
@@ -268,7 +270,10 @@ def _matches_filters(signal: dict[str, Any], filters: dict[str, Any]) -> bool:
   if filters.get("status") and signal.get("status") != filters["status"]:
     return False
 
-  if filters.get("source") and _normalize(source.get("name", "")) != _normalize(filters["source"]):
+  if filters.get("source") and _normalize(filters["source"]) not in _normalize(source.get("name", "")):
+    return False
+
+  if filters.get("source_type") and get_source_type(signal) != _normalize(filters["source_type"]):
     return False
 
   if filters.get("q") and not _matches_query(signal, filters["q"]):
@@ -277,11 +282,36 @@ def _matches_filters(signal: dict[str, Any], filters: dict[str, Any]) -> bool:
   return True
 
 
+def get_source_type(signal: dict[str, Any]) -> str:
+  explicit_type = _normalize(signal.get("sourceType", ""))
+  if explicit_type:
+    return explicit_type
+  return infer_source_type(signal.get("source", {}))
+
+
+def infer_source_type(source: dict[str, Any]) -> str:
+  name = _normalize(source.get("name", ""))
+  url = _normalize(source.get("url", ""))
+
+  if "github" in name or "github.com" in url or "gitlab" in name or "gitlab.com" in url:
+    return "repo"
+  if "arxiv" in name or "arxiv.org" in url or "doi.org" in url:
+    return "paper"
+  if "releases" in name or "/releases" in url or "changelog" in name:
+    return "product"
+  if any(marker in name for marker in ["reddit", "hacker news", "x.com", "twitter"]):
+    return "social"
+  if any(marker in name for marker in ["openai", "anthropic", "nist", "google", "microsoft", "meta"]):
+    return "official"
+  return "news"
+
+
 def _matches_query(signal: dict[str, Any], query: str) -> bool:
   haystack = " ".join([
     signal.get("id", ""),
     signal.get("title", ""),
     signal.get("source", {}).get("name", ""),
+    get_source_type(signal),
     signal.get("impact", {}).get("summary", ""),
     signal.get("action", ""),
     signal.get("status", ""),

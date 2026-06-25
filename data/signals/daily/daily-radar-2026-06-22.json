@@ -1,6 +1,6 @@
 {
   "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "radarDate": "2026-06-22",
   "generatedAt": "2026-06-23T19:25:49-05:00",
   "topic": "artificial-intelligence",
@@ -31,7 +31,8 @@
         "datacenters",
         "sustainability",
         "nvidia"
-      ]
+      ],
+      "sourceType": "news"
     },
     {
       "id": "2026-06-22-nvidia-rubin-liquid-cooling",
@@ -58,7 +59,8 @@
         "datacenters",
         "sustainability",
         "nvidia"
-      ]
+      ],
+      "sourceType": "news"
     }
   ]
 }

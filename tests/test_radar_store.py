@@ -5,6 +5,7 @@ from src.radar_store import (
   filter_signals,
   find_duplicate_groups,
   find_empty_evidence,
+  get_source_type,
   join_ranking_with_signals,
   list_primary_sources,
   load_daily_signals,
@@ -30,6 +31,8 @@ class RadarStoreTest(unittest.TestCase):
     self.assertTrue(all(signal["impact"]["level"] == "high" for signal in filter_signals(signals, {"impact": "high"})))
     self.assertTrue(all(signal["status"] == "actionable" for signal in filter_signals(signals, {"status": "actionable"})))
     self.assertTrue(all(signal["source"]["name"] == "Axios" for signal in filter_signals(signals, {"source": "Axios"})))
+    self.assertGreaterEqual(len(filter_signals(signals, {"date": "2026-06-25", "source": "GitHub"})), 1)
+    self.assertTrue(all(get_source_type(signal) == "repo" for signal in filter_signals(signals, {"date": "2026-06-25", "source_type": "repo"})))
     self.assertTrue(any("DeepMind" in signal["title"] for signal in filter_signals(signals, {"q": "DeepMind"})))
 
   def test_summarizes_filtered_signals(self):
