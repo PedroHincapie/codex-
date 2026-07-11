@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-01",
+  "generatedAt": "2026-07-07T23:00:00-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-01-google-june-ai-product-roundup",
+      "title": "Google consolida Gemini 3.5, Gemma 4 y agentes locales en su actualización mensual",
+      "source": {"name": "Google", "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-june-2026/", "publishedAt": "2026-07-01", "retrievedAt": "2026-07-07"},
+      "sourceType": "official",
+      "evidence": ["Google resumió lanzamientos de Gemini 3.5 Live Translate, Android 17 y Google Home con Gemini.", "El resumen incluye Gemma 4 12B local y computer use en Gemini 3.5 Flash."],
+      "impact": {"level": "medium-high", "summary": "La combinación de modelos locales, multimodales y computer use amplía opciones para productos híbridos y agentes."},
+      "action": "Comparar Gemma 4 local y Gemini 3.5 Flash en un flujo con datos sensibles y uso de herramientas.",
+      "status": "actionable",
+      "tags": ["google", "gemini", "gemma", "agents", "local-ai"]
+    },
+    {
+      "id": "2026-07-01-hugging-face-cerebras-realtime-voice",
+      "title": "Hugging Face y Cerebras publican una arquitectura abierta de voz en tiempo real",
+      "source": {"name": "Hugging Face", "url": "https://huggingface.co/blog/cerebras-gemma4-voice-ai", "publishedAt": "2026-07-01", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["La arquitectura speech-to-speech combina Parakeet, Gemma 4 31B sobre Cerebras y Qwen3TTS.", "La tubería publica demo y repositorio y ya se usa en más de 9.000 robots Reachy Mini."],
+      "impact": {"level": "medium-high", "summary": "Una pila modular reduce la dependencia de APIs cerradas para interfaces de voz de baja latencia."},
+      "action": "Medir latencia, costo y calidad de la tubería abierta frente a una API de voz administrada.",
+      "status": "actionable",
+      "tags": ["voice-ai", "cerebras", "hugging-face", "open-models", "robotics"]
+    },
+    {
+      "id": "2026-07-01-microsoft-surface-local-ai",
+      "title": "Microsoft lleva cargas avanzadas de IA local a nuevos Surface con Snapdragon X2",
+      "source": {"name": "Microsoft", "url": "https://news.microsoft.com/source/asia/2026/07/01/microsoft-unveils-in-thailand-next-gen-surface-pro-and-surface-laptop-built-for-peak-performance-versatility-and-advanced-ai-workloads/", "publishedAt": "2026-07-01", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["Microsoft anunció Surface Pro y Surface Laptop con Snapdragon X2 y NPU.", "Los equipos están orientados a flujos híbridos y ejecución local de modelos."],
+      "impact": {"level": "medium", "summary": "Más capacidad NPU en equipos cliente favorece inferencia privada y experiencias desconectadas."},
+      "action": "Definir qué tareas del producto pueden migrar de cloud a NPU sin degradar calidad.",
+      "status": "confirmed",
+      "tags": ["microsoft", "surface", "npu", "edge-ai", "hardware-ai"]
+    },
+    {
+      "id": "2026-07-01-cloudflare-pay-per-use-ai-crawlers",
+      "title": "Cloudflare extiende el cobro a crawlers de IA hacia un modelo de pago por uso",
+      "source": {"name": "TechCrunch", "url": "https://techcrunch.com/2026/07/01/cloudflares-new-policy-pushes-ai-companies-to-pay-for-publishers-content/", "publishedAt": "2026-07-01", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Cloudflare anunció que bloqueará por defecto crawlers de uso mixto en páginas con publicidad desde el 15 de septiembre.", "La empresa amplía Pay Per Crawl hacia Pay Per Use con Ceramic.ai y You.com como socios iniciales."],
+      "impact": {"level": "high", "summary": "El cambio puede alterar costos y permisos de adquisición de contenido para buscadores, RAG y entrenamiento."},
+      "action": "Auditar crawlers propios, propósito declarado, licencias y costos potenciales bajo Pay Per Use.",
+      "status": "evolving",
+      "tags": ["cloudflare", "ai-crawlers", "publishers", "copyright", "web-infrastructure"]
+    },
+    {
+      "id": "2026-07-01-anthropic-fable-mythos-global-release",
+      "title": "Anthropic relanza globalmente Fable 5 y Mythos 5 tras reforzar controles de seguridad",
+      "source": {"name": "Ars Technica", "url": "https://arstechnica.com/tech-policy/2026/07/after-spooking-trump-into-safety-testing-anthropic-ai-models-get-global-release/", "publishedAt": "2026-07-01", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Estados Unidos levantó restricciones de exportación sobre Fable 5 y Mythos 5.", "Anthropic reforzó clasificadores, red teaming y monitoreo permanente de jailbreaks."],
+      "impact": {"level": "high", "summary": "La reapertura cambia disponibilidad de modelos frontier y muestra cómo controles públicos pueden condicionar despliegues globales."},
+      "action": "Reevaluar disponibilidad regional, salvaguardas y alternativas de proveedor para cargas basadas en Anthropic.",
+      "status": "evolving",
+      "tags": ["anthropic", "frontier-models", "export-controls", "ai-safety", "cybersecurity"]
+    }
+  ]
+}

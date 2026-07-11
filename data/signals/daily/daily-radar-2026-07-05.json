@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-05",
+  "generatedAt": "2026-07-07T23:45:00-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-05-aegis-urdu-tts-cpu",
+      "title": "Aegis comprime una voz TTS urdu a 61 MB para inferencia en CPU",
+      "source": {"name": "Mahwiz Khalil / Hugging Face", "url": "https://huggingface.co/blog/mahwizzzz/distilling-omnivoice-into-aegis", "publishedAt": "2026-07-05", "retrievedAt": "2026-07-07"},
+      "sourceType": "official",
+      "evidence": ["La autora publicó una voz TTS femenina urdu de unos 61 MB en ONNX para CPU, destilada desde OmniVoice.", "El corpus retuvo 33.288 de 41.514 audios tras aplicar filtros, pero aún no publica CER, WER ni RTF."],
+      "impact": {"level": "medium", "summary": "El tamaño favorece voz local en dispositivos modestos, aunque faltan métricas para juzgar calidad y velocidad."},
+      "action": "Medir inteligibilidad, naturalidad y tiempo real en CPU antes de usar el modelo en producto.",
+      "status": "candidate",
+      "tags": ["tts", "urdu", "distillation", "edge-ai", "onnx"]
+    },
+    {
+      "id": "2026-07-05-invokeai-qwen-image-fix",
+      "title": "InvokeAI corrige un crash de Qwen Image en su versión 6.13.6",
+      "source": {"name": "InvokeAI / GitHub Releases", "url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.13.6", "publishedAt": "2026-07-05", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["InvokeAI publicó el patch 6.13.6 el 5 de julio.", "La versión corrige un dictionary key error de Qwen Image y Qwen Image Edit con el encoder Qwen 2.2 VL single-file."],
+      "impact": {"level": "medium", "summary": "El parche elimina un bloqueo concreto para flujos locales de generación y edición con Qwen Image."},
+      "action": "Actualizar en staging y reproducir los flujos Qwen Image antes de promover el parche.",
+      "status": "actionable",
+      "tags": ["invokeai", "qwen", "image-generation", "bugfix", "open-source"]
+    },
+    {
+      "id": "2026-07-05-exist-multimodal-sexism-classification",
+      "title": "Un sistema jerárquico lidera una tarea de clasificación multimodal de sexismo en EXIST 2026",
+      "source": {"name": "arXiv", "url": "https://arxiv.org/abs/2607.04410", "publishedAt": "2026-07-05", "retrievedAt": "2026-07-07"},
+      "sourceType": "paper",
+      "evidence": ["El preprint registra publicación el 5 de julio y presenta aprendizaje jerárquico soft-label.", "El sistema quedó primero en Task 2.3 y cuarto en Tasks 2.1 y 2.2 de EXIST 2026 y libera código."],
+      "impact": {"level": "medium", "summary": "La jerarquía y etiquetas blandas ofrecen una referencia reproducible para moderación multimodal con categorías ambiguas."},
+      "action": "Revisar datos, métricas por subgrupo y código antes de adaptar el enfoque a moderación propia.",
+      "status": "confirmed",
+      "tags": ["multimodal", "responsible-ai", "content-moderation", "benchmark", "research"]
+    },
+    {
+      "id": "2026-07-05-langchain-mistralai-citations-stop",
+      "title": "LangChain MistralAI expone citas y añade secuencias stop",
+      "source": {"name": "PyPI / langchain-mistralai", "url": "https://pypi.org/project/langchain-mistralai/1.1.6/", "publishedAt": "2026-07-05", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["La versión 1.1.6 expone citation metadata en las respuestas de chat.", "La integración añade stop sequences y versión del paquete en metadatos de tracing."],
+      "impact": {"level": "medium", "summary": "Citas y trazabilidad de versión mejoran auditoría de respuestas y diagnóstico de integraciones Mistral."},
+      "action": "Actualizar pruebas de serialización para conservar citas y confirmar que stop funciona en streaming.",
+      "status": "actionable",
+      "tags": ["langchain", "mistral", "citations", "observability", "llm-integrations"]
+    },
+    {
+      "id": "2026-07-05-langchain-openrouter-custom-headers",
+      "title": "LangChain OpenRouter permite cabeceras HTTP personalizadas por defecto",
+      "source": {"name": "PyPI / langchain-openrouter", "url": "https://pypi.org/project/langchain-openrouter/0.2.6/", "publishedAt": "2026-07-05", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["La versión 0.2.6 añadió default_headers para inyectar cabeceras HTTP personalizadas.", "El release también actualizó perfiles de modelos utilizados por la integración."],
+      "impact": {"level": "medium", "summary": "Cabeceras configurables facilitan identificación, routing y políticas de gateway sin modificar el cliente."},
+      "action": "Usar cabeceras solo para metadatos no sensibles y añadir pruebas que impidan registrar secretos.",
+      "status": "actionable",
+      "tags": ["langchain", "openrouter", "sdk", "llm-routing", "developer-tools"]
+    }
+  ]
+}

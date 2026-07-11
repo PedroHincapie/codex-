@@ -1,0 +1,500 @@
+{
+  "generatedAt": "2026-06-25T00:00:00Z",
+  "reviewedSnapshot": "data/signals/daily/",
+  "radarDate": "2026-06-25",
+  "scoringVersion": "1.0.0",
+  "weights": {
+    "novelty": 0.15,
+    "evidence": 0.2,
+    "impact": 0.25,
+    "reliability": 0.15,
+    "actionability": 0.2,
+    "strategicFit": 0.05
+  },
+  "audit": {
+    "inputSignals": 33,
+    "rankedSignals": 30,
+    "duplicateGroups": [
+      {
+        "keptSignalId": "2026-06-15-amazon-discloses-datacenter-water-use",
+        "mergedSignalIds": [
+          "2026-06-15-amazon-datacenter-water-transparency"
+        ],
+        "matchedBy": [
+          "url"
+        ]
+      },
+      {
+        "keptSignalId": "2026-06-18-deepmind-agent-controls",
+        "mergedSignalIds": [
+          "2026-06-18-deepmind-agent-control-roadmap"
+        ],
+        "matchedBy": [
+          "url"
+        ]
+      },
+      {
+        "keptSignalId": "2026-06-20-ai-ceos-g7-standards",
+        "mergedSignalIds": [
+          "2026-06-20-ai-ceos-g7"
+        ],
+        "matchedBy": [
+          "url"
+        ]
+      }
+    ],
+    "skippedSignals": []
+  },
+  "rankedSignals": [
+    {
+      "rank": 1,
+      "signalId": "2026-06-18-deepmind-agent-controls",
+      "score": 4.7,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 4,
+        "actionability": 5,
+        "strategicFit": 5,
+        "risk": 5
+      },
+      "reason": "Prioridad determinada por impact=5 y actionability=5; risk=5 requiere revision separada."
+    },
+    {
+      "rank": 2,
+      "signalId": "2026-06-25-anthropic-claude-tag-slack-agents",
+      "score": 4.6,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 5,
+        "actionability": 5,
+        "strategicFit": 5,
+        "risk": 3
+      },
+      "reason": "Prioridad determinada por actionability=5 y evidence=5; risk=3 requiere revision separada."
+    },
+    {
+      "rank": 3,
+      "signalId": "2026-06-25-openai-patch-the-planet-open-source-security",
+      "score": 4.6,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 5,
+        "actionability": 5,
+        "strategicFit": 5,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por actionability=5 y evidence=5; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 4,
+      "signalId": "2026-06-25-openai-broadcom-jalapeno-inference-chip",
+      "score": 4.6,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 5,
+        "actionability": 4,
+        "strategicFit": 4,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por impact=5 y evidence=5; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 5,
+      "signalId": "2026-06-13-apex-self-evolving-production-agents",
+      "score": 4.5,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 5,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por impact=5 y evidence=5; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 6,
+      "signalId": "2026-06-17-europe-ai-sovereignty-policy",
+      "score": 4.5,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 4,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 5
+      },
+      "reason": "Prioridad determinada por impact=5 y evidence=5; risk=5 requiere revision separada."
+    },
+    {
+      "rank": 7,
+      "signalId": "2026-06-18-trump-shadow-ai-policy",
+      "score": 4.5,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 4,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 5
+      },
+      "reason": "Prioridad determinada por impact=5 y evidence=5; risk=5 requiere revision separada."
+    },
+    {
+      "rank": 8,
+      "signalId": "2026-06-19-anthropic-national-security",
+      "score": 4.5,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 4,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 5
+      },
+      "reason": "Prioridad determinada por impact=5 y evidence=5; risk=5 requiere revision separada."
+    },
+    {
+      "rank": 9,
+      "signalId": "2026-06-22-nvidia-rubin-liquid-cooling",
+      "score": 4.45,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 4,
+        "actionability": 5,
+        "strategicFit": 5,
+        "risk": 3
+      },
+      "reason": "Prioridad determinada por actionability=5 y evidence=5; risk=3 requiere revision separada."
+    },
+    {
+      "rank": 10,
+      "signalId": "2026-06-25-google-genai-python-sdk-mcp-computer-use",
+      "score": 4.45,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 4,
+        "actionability": 5,
+        "strategicFit": 5,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por actionability=5 y evidence=5; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 11,
+      "signalId": "2026-06-25-anthropic-model-access-export-controls",
+      "score": 4.4,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 5,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 12,
+      "signalId": "2026-06-13-claybuddy-coding-agent-failures",
+      "score": 4.3,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 5,
+        "actionability": 3,
+        "strategicFit": 5,
+        "risk": 5
+      },
+      "reason": "Prioridad determinada por impact=5 y evidence=5; risk=5 requiere revision separada."
+    },
+    {
+      "rank": 13,
+      "signalId": "2026-06-13-pepti-agent-domain-specific-design",
+      "score": 4.25,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 5,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 14,
+      "signalId": "2026-06-20-europe-ai-sovereignty",
+      "score": 4.25,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 4,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 15,
+      "signalId": "2026-06-13-coagent-concurrency-control",
+      "score": 4.25,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 5,
+        "actionability": 3,
+        "strategicFit": 4,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por impact=5 y evidence=5; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 16,
+      "signalId": "2026-06-25-figma-agents-motion-shaders-design-canvas",
+      "score": 4.2,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 3,
+        "reliability": 4,
+        "actionability": 5,
+        "strategicFit": 5,
+        "risk": 2
+      },
+      "reason": "Prioridad determinada por actionability=5 y evidence=5; risk=2 requiere revision separada."
+    },
+    {
+      "rank": 17,
+      "signalId": "2026-06-25-vercel-ai-sdk-agent-observability",
+      "score": 4.2,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 3,
+        "reliability": 4,
+        "actionability": 5,
+        "strategicFit": 5,
+        "risk": 2
+      },
+      "reason": "Prioridad determinada por actionability=5 y evidence=5; risk=2 requiere revision separada."
+    },
+    {
+      "rank": 18,
+      "signalId": "2026-06-14-us-controls-china-open-ai-ecosystems",
+      "score": 4.2,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 5,
+        "actionability": 4,
+        "strategicFit": 4,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 19,
+      "signalId": "2026-06-20-ai-ceos-g7-standards",
+      "score": 4.15,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 5,
+        "reliability": 4,
+        "actionability": 3,
+        "strategicFit": 5,
+        "risk": 5
+      },
+      "reason": "Prioridad determinada por impact=5 y evidence=5; risk=5 requiere revision separada."
+    },
+    {
+      "rank": 20,
+      "signalId": "2026-06-15-amazon-discloses-datacenter-water-use",
+      "score": 4.1,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 4,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 21,
+      "signalId": "2026-06-19-john-jumper-anthropic",
+      "score": 4.1,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 4,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 4
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=4 requiere revision separada."
+    },
+    {
+      "rank": 22,
+      "signalId": "2026-06-23-google-deepmind-talent-wars",
+      "score": 4.05,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 4,
+        "actionability": 4,
+        "strategicFit": 4,
+        "risk": 3
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=3 requiere revision separada."
+    },
+    {
+      "rank": 23,
+      "signalId": "2026-06-25-vllm-serving-kv-cache-tool-parsers",
+      "score": 4.05,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 4,
+        "actionability": 4,
+        "strategicFit": 4,
+        "risk": 3
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=3 requiere revision separada."
+    },
+    {
+      "rank": 24,
+      "signalId": "2026-06-13-risk-aware-geospatial-agents",
+      "score": 4.05,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 5,
+        "actionability": 3,
+        "strategicFit": 5,
+        "risk": 3
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=3 requiere revision separada."
+    },
+    {
+      "rank": 25,
+      "signalId": "2026-06-22-nvidia-water-efficient-ai-cooling",
+      "score": 4.05,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 4,
+        "actionability": 3,
+        "strategicFit": 5,
+        "risk": 3
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=3 requiere revision separada."
+    },
+    {
+      "rank": 26,
+      "signalId": "2026-06-23-ai-talent-consolidation",
+      "score": 4.05,
+      "dimensions": {
+        "novelty": 4,
+        "evidence": 5,
+        "impact": 4,
+        "reliability": 4,
+        "actionability": 3,
+        "strategicFit": 5,
+        "risk": 3
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=4; risk=3 requiere revision separada."
+    },
+    {
+      "rank": 27,
+      "signalId": "2026-06-25-nist-sandboxaq-ai-materials-chips",
+      "score": 4.0,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 3,
+        "reliability": 5,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 2
+      },
+      "reason": "Prioridad determinada por evidence=5 y actionability=4; risk=2 requiere revision separada."
+    },
+    {
+      "rank": 28,
+      "signalId": "2026-06-25-desktopmcp-linux-desktop-agents",
+      "score": 3.85,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 3,
+        "reliability": 4,
+        "actionability": 4,
+        "strategicFit": 5,
+        "risk": 3
+      },
+      "reason": "Prioridad determinada por evidence=5 y actionability=4; risk=3 requiere revision separada."
+    },
+    {
+      "rank": 29,
+      "signalId": "2026-06-23-meta-ai-glasses-fashion-platform",
+      "score": 3.8,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 3,
+        "reliability": 4,
+        "actionability": 4,
+        "strategicFit": 4,
+        "risk": 3
+      },
+      "reason": "Prioridad determinada por evidence=5 y actionability=4; risk=3 requiere revision separada."
+    },
+    {
+      "rank": 30,
+      "signalId": "2026-06-16-apple-ai-wearables-strategy",
+      "score": 3.6,
+      "dimensions": {
+        "novelty": 3,
+        "evidence": 5,
+        "impact": 3,
+        "reliability": 4,
+        "actionability": 3,
+        "strategicFit": 4,
+        "risk": 3
+      },
+      "reason": "Prioridad determinada por evidence=5 y impact=3; risk=3 requiere revision separada."
+    }
+  ]
+}

@@ -54,6 +54,8 @@ presentadas como nuevas.
    - No asumir comandos, APIs, dashboard o base de datos si no existen.
 
 3. **Recolectar candidatos solo si falta informacion local**
+   - Antes de usar internet, comunicar que se consulto el estado local y la
+     razon concreta por la que resulta insuficiente o requiere verificacion.
    - Reunir noticias de IA recientes desde inputs del usuario o busqueda web.
    - Priorizar fuentes primarias u organizaciones periodisticas confiables.
    - Capturar URL, fuente, fecha de publicacion y fecha de consulta.
@@ -125,6 +127,8 @@ presentadas como nuevas.
 - No presentar una inferencia como hecho; marcarla como inferencia si aplica.
 - No buscar en internet sin consultar primero los datos locales cuando la
   solicitud sea por fecha, tag, fuente, estado, impacto o texto consultable.
+- No iniciar una busqueda externa sin informar antes que se reviso la base
+  local y por que no basta para responder.
 - No dejar informacion curada solo en la conversacion cuando falte en la base
   local; guardarla como snapshot diario salvo instruccion explicita en contra.
 - Preferir ASCII en archivos nuevos salvo que el repo ya use otro criterio.

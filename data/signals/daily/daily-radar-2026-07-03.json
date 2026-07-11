@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-03",
+  "generatedAt": "2026-07-07T23:35:00-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-03-mistral-vibe-worktrees-acp-rewind",
+      "title": "Mistral Vibe añade worktrees aislados y rewind mediante ACP",
+      "source": {"name": "Mistral AI / GitHub Releases", "url": "https://github.com/mistralai/mistral-vibe/releases/tag/v2.19.0", "publishedAt": "2026-07-03", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["Mistral Vibe 2.19.0 añadió --worktree para crear o reutilizar un Git worktree y ejecutar el agente dentro de él.", "La versión incorporó rewind sobre Agent Client Protocol tanto para agente como para host."],
+      "impact": {"level": "medium-high", "summary": "El aislamiento por worktree y la reversión reducen colisiones y facilitan recuperar sesiones de coding agents."},
+      "action": "Probar tareas paralelas en worktrees y verificar que rewind restaura código y estado del agente.",
+      "status": "actionable",
+      "tags": ["mistral", "coding-agents", "git", "agent-client-protocol", "developer-tools"]
+    },
+    {
+      "id": "2026-07-03-memos-preference-memory-skills",
+      "title": "MemOS mejora memoria de preferencias y promoción automática de skills",
+      "source": {"name": "MemTensor / GitHub Releases", "url": "https://github.com/MemTensor/MemOS/releases/tag/v2.0.22", "publishedAt": "2026-07-03", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["MemOS 2.0.22 añadió configuración independiente de modelo para preference memory y promoción de skills candidatas.", "La versión corrigió contaminación entre sesiones, fallos de auto-recall y bloqueos en bridges de agentes."],
+      "impact": {"level": "medium-high", "summary": "La memoria persistente aporta valor a agentes, pero los fallos entre sesiones muestran riesgos de aislamiento y privacidad."},
+      "action": "Ejecutar pruebas de separación entre usuarios y sesiones antes de habilitar memoria y promoción automática.",
+      "status": "actionable",
+      "tags": ["memos", "agent-memory", "skills", "privacy", "agents"]
+    },
+    {
+      "id": "2026-07-03-agent-skills-quantization-robustness",
+      "title": "Un experimento encuentra que skills agentic ajustadas resisten mejor la cuantización que el conocimiento",
+      "source": {"name": "Gürkan Özkan / Hugging Face", "url": "https://huggingface.co/blog/GurkanOz/quench-finetune-survives-4bit", "publishedAt": "2026-07-03", "retrievedAt": "2026-07-07"},
+      "sourceType": "official",
+      "evidence": ["El autor ajustó Qwen3-8B para recuperar fallos de herramientas y comparó FP8 con NVFP4.", "El experimento publica artefactos y reporta mayor resistencia a 4 bits de habilidades agentic que de conocimiento."],
+      "impact": {"level": "medium", "summary": "La evidencia sugiere que agentes especializados pueden reducir memoria sin perder toda su conducta entrenada, pero requiere replicación."},
+      "action": "Replicar la prueba con una skill interna y medir éxito de herramientas, conocimiento y latencia por separado.",
+      "status": "candidate",
+      "tags": ["quantization", "qwen", "agents", "fine-tuning", "evaluation"]
+    },
+    {
+      "id": "2026-07-03-alibaba-bans-claude-code",
+      "title": "Alibaba prohíbe Claude Code internamente por preocupaciones de rastreo y seguridad",
+      "source": {"name": "South China Morning Post", "url": "https://www.scmp.com/tech/big-tech/article/3359375/alibaba-bans-staff-using-claude-code-over-anthropic-spyware-concerns", "publishedAt": "2026-07-03", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Alibaba clasificó Claude Code como software de alto riesgo y prohibió su uso laboral desde el 10 de julio.", "La decisión respondió a código oculto que identificaba ubicación y posibles vínculos con laboratorios chinos."],
+      "impact": {"level": "high", "summary": "El caso convierte telemetría opaca y geolocalización en factores de veto para herramientas agentic empresariales."},
+      "action": "Auditar telemetría y código distribuido de coding agents antes de aprobarlos para repositorios corporativos.",
+      "status": "evolving",
+      "tags": ["alibaba", "anthropic", "claude-code", "enterprise-security", "privacy"]
+    },
+    {
+      "id": "2026-07-03-china-graduate-jobs-ai-skills",
+      "title": "Cuatro de cada diez vacantes chinas para graduados ya requieren habilidades de IA",
+      "source": {"name": "South China Morning Post", "url": "https://www.scmp.com/economy/china-economy/article/3359328/ai-skills-required-4-out-10-graduate-jobs-china-says-recruitment-portal", "publishedAt": "2026-07-03", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Maimai reportó que casi cuatro de cada diez vacantes para recién graduados estaban relacionadas con IA.", "En Pekín la proporción alcanzó cinco de cada diez, frente a tres de cada diez a escala nacional un año antes."],
+      "impact": {"level": "medium-high", "summary": "El cambio en demanda laboral señala que alfabetización y herramientas de IA pasan a ser competencias base para nuevos equipos."},
+      "action": "Actualizar perfiles junior y planes de formación para evaluar uso responsable y verificable de herramientas de IA.",
+      "status": "confirmed",
+      "tags": ["china", "ai-jobs", "skills", "workforce", "education"]
+    }
+  ]
+}

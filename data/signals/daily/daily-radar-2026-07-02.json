@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-02",
+  "generatedAt": "2026-07-07T23:10:00-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-02-anthropic-fable-jailbreak-framework",
+      "title": "Anthropic publica un marco para medir jailbreaks y detalla salvaguardas de Fable 5",
+      "source": {"name": "Anthropic", "url": "https://www.anthropic.com/news/fable-safeguards-jailbreak-framework", "publishedAt": "2026-07-02", "retrievedAt": "2026-07-07"},
+      "sourceType": "official",
+      "evidence": ["Anthropic detalló clasificadores de ciberseguridad de Fable 5 con cuatro categorías de uso.", "Publicó un borrador de marco de severidad para jailbreaks y abrió reportes mediante HackerOne."],
+      "impact": {"level": "high", "summary": "Una taxonomía compartida permite comparar fallos de seguridad y priorizar remediación entre modelos frontier."},
+      "action": "Adaptar el marco a las pruebas internas de jailbreak y registrar severidad junto con reproducibilidad.",
+      "status": "actionable",
+      "tags": ["anthropic", "jailbreaks", "ai-safety", "cybersecurity", "evaluation"]
+    },
+    {
+      "id": "2026-07-02-microsoft-frontier-company",
+      "title": "Microsoft crea Frontier Company con 2.500 millones de dólares para despliegues empresariales de IA",
+      "source": {"name": "Microsoft", "url": "https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/", "publishedAt": "2026-07-02", "retrievedAt": "2026-07-07"},
+      "sourceType": "official",
+      "evidence": ["Microsoft comprometió 2.500 millones de dólares y 6.000 especialistas integrados con clientes.", "La unidad ofrece ingeniería e implantación sobre una plataforma multimodelo con protección de datos e IP."],
+      "impact": {"level": "high", "summary": "Microsoft pasa de vender herramientas a integrar equipos de ejecución, elevando presión competitiva sobre consultoras y proveedores cloud."},
+      "action": "Comparar el modelo comercial y los compromisos de portabilidad antes de contratar despliegues integrados.",
+      "status": "evolving",
+      "tags": ["microsoft", "enterprise-ai", "investment", "consulting", "multi-model"]
+    },
+    {
+      "id": "2026-07-02-google-ai-energy-growth",
+      "title": "El despliegue de IA eleva 37% el consumo eléctrico anual de Google",
+      "source": {"name": "Ars Technica", "url": "https://arstechnica.com/ai/2026/07/googles-ai-buildout-drove-37-increase-in-electricity-use-in-2025/", "publishedAt": "2026-07-02", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Google informó un aumento anual de 37% en consumo eléctrico durante 2025.", "Sus centros de datos consumieron más de 42 millones de MWh y las emisiones totales aumentaron 18%."],
+      "impact": {"level": "high", "summary": "El crecimiento energético de IA afecta costos, disponibilidad de infraestructura y criterios ambientales de selección cloud."},
+      "action": "Incorporar energía, emisiones y región a la evaluación de proveedores y cargas intensivas de inferencia.",
+      "status": "confirmed",
+      "tags": ["google", "datacenters", "energy", "emissions", "ai-infrastructure"]
+    },
+    {
+      "id": "2026-07-02-x-grok-privacy-ftc",
+      "title": "Organizaciones piden a la FTC mantener auditorías sobre X por riesgos de privacidad ligados a Grok",
+      "source": {"name": "Ars Technica", "url": "https://arstechnica.com/tech-policy/2026/07/musks-x-poses-serious-risk-to-americans-privacy-advocates-warn-ftc/", "publishedAt": "2026-07-02", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Quince organizaciones solicitaron a la FTC rechazar el fin de las auditorías de manejo de datos de X.", "La petición cita entrenamiento de Grok con publicaciones y controles de exclusión poco visibles."],
+      "impact": {"level": "medium-high", "summary": "El caso refuerza obligaciones de consentimiento y transparencia al reutilizar contenido de usuarios para entrenamiento."},
+      "action": "Revisar consentimiento, exclusión y trazabilidad de cualquier dato de usuario reutilizado por modelos.",
+      "status": "evolving",
+      "tags": ["x", "grok", "privacy", "training-data", "regulation"]
+    },
+    {
+      "id": "2026-07-02-openai-us-public-stake-talks",
+      "title": "OpenAI conversa con Estados Unidos sobre una posible participación pública del 5%",
+      "source": {"name": "Ars Technica", "url": "https://arstechnica.com/tech-policy/2026/07/openai-floats-giving-us-5-stake-to-win-over-ai-haters/", "publishedAt": "2026-07-02", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Sam Altman mantenía conversaciones iniciales con la administración Trump sobre una participación pública de 5%.", "La propuesta difiere del esquema legislativo de participación pública planteado por Bernie Sanders."],
+      "impact": {"level": "high", "summary": "Una participación estatal alteraría gobernanza, incentivos y percepción de neutralidad de un proveedor frontier."},
+      "action": "Monitorear términos vinculantes y evaluar riesgo de concentración política antes de cambiar arquitectura.",
+      "status": "candidate",
+      "tags": ["openai", "ai-policy", "governance", "public-ownership", "united-states"]
+    }
+  ]
+}

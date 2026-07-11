@@ -22,6 +22,7 @@ from src.radar_store import (  # noqa: E402
   summarize_signals,
   validate_daily_snapshot
 )
+from src.ranking_engine import build_ranking, write_ranking  # noqa: E402
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -65,6 +66,7 @@ def build_parser() -> argparse.ArgumentParser:
 
   ranking_parser = subparsers.add_parser("ranking", help="Muestra ranking editorial.")
   ranking_parser.add_argument("--date")
+  ranking_parser.add_argument("--generate", action="store_true", help="Genera y guarda el ranking acumulado hasta --date.")
   add_output_options(ranking_parser, default_fields="rank,signalId,score,risk,impact,status,title")
 
   validate_parser = subparsers.add_parser("validate", help="Valida snapshots diarios locales.")
@@ -122,6 +124,13 @@ def show_signal(args: argparse.Namespace) -> int:
 
 
 def print_ranking(args: argparse.Namespace) -> int:
+  if args.generate:
+    if not args.date:
+      raise SystemExit("--generate requires --date YYYY-MM-DD")
+    ranking = build_ranking(load_daily_signals(), args.date)
+    output_path = ROOT_DIR / "data" / "reviews" / "rankings" / f"signal-review-ranking-{args.date}.json"
+    write_ranking(ranking, output_path)
+
   ranking_result = load_ranking(date=args.date)
   if not ranking_result:
     raise SystemExit("No signal-review-ranking data file found")

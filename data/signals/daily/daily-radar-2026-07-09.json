@@ -1,0 +1,290 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-09",
+  "generatedAt": "2026-07-09T09:57:48Z",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-09-illinois-ai-safety-measures-act",
+      "title": "Illinois firma una ley estatal de seguridad para modelos frontier",
+      "source": {
+        "name": "Illinois General Assembly",
+        "url": "https://www.ilga.gov/Legislation/BillStatus/FullText?DocName=10400SB0315enr&DocNum=315&DocTypeID=SB&GAID=18&LegDocId=197587&LegID=157797&Session=&SessionID=114&SpecSess=",
+        "publishedAt": "2026-07-08",
+        "retrievedAt": "2026-07-09"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "El texto enrolado define obligaciones para desarrolladores de modelos frontier sobre riesgos catastroficos, auditorias y reportes de incidentes.",
+        "La cobertura local reporta que el gobernador firmo la Artificial Intelligence Safety Measures Act el 2026-07-08 y que las obligaciones empiezan en 2028."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La regulacion estatal puede fragmentar compliance de modelos frontier en Estados Unidos antes de que exista un marco federal uniforme."
+      },
+      "action": "Comparar frameworks internos de safety, auditoria independiente y reporte de incidentes contra los requisitos de Illinois.",
+      "status": "evolving",
+      "tags": [
+        "illinois",
+        "regulation",
+        "frontier-models",
+        "ai-safety",
+        "audits"
+      ]
+    },
+    {
+      "id": "2026-07-09-github-copilot-enterprise-observability",
+      "title": "GitHub vuelve administrables la telemetria y configuracion enterprise de Copilot",
+      "source": {
+        "name": "GitHub Changelog",
+        "url": "https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/",
+        "publishedAt": "2026-07-08",
+        "retrievedAt": "2026-07-09"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "GitHub anuncio exportacion OpenTelemetry administrada para Copilot en VS Code y Copilot CLI hacia colectores aprobados por la organizacion.",
+        "Otro changelog del mismo dia hizo GA los settings administrados por MDM, archivo local o canal server-managed para Copilot CLI y VS Code."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La adopcion enterprise de agentes de codigo depende cada vez mas de observabilidad, control centralizado de permisos, modelos y plugins."
+      },
+      "action": "Definir una politica corporativa para telemetria, prompts, herramientas, modelos permitidos y bypass de permisos antes de ampliar Copilot CLI.",
+      "status": "actionable",
+      "tags": [
+        "github",
+        "copilot",
+        "observability",
+        "enterprise",
+        "agents"
+      ]
+    },
+    {
+      "id": "2026-07-09-agentic-botnets-hallusquatting",
+      "title": "Un paper muestra ataques de supply chain contra agentes mediante nombres alucinados",
+      "source": {
+        "name": "arXiv",
+        "url": "https://arxiv.org/abs/2607.07433",
+        "publishedAt": "2026-07-08",
+        "retrievedAt": "2026-07-09"
+      },
+      "sourceType": "paper",
+      "evidence": [
+        "El paper propone adversarial hallucination squatting: registrar recursos que los LLM tienden a inventar para servir prompts o payloads adversarios.",
+        "Reporta alucinaciones altas en clonacion de repos e instalacion de skills, incluyendo escenarios con ejecucion remota en apps con terminal integrada."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Los agentes que instalan repositorios, skills o herramientas desde nombres sugeridos por el modelo exponen una superficie directa de supply chain."
+      },
+      "action": "Agregar allowlists, verificacion de origen, firmas y bloqueo de instalaciones no confirmadas antes de permitir acciones autonomas de setup.",
+      "status": "actionable",
+      "tags": [
+        "agents",
+        "supply-chain",
+        "security",
+        "promptware",
+        "tool-use"
+      ]
+    },
+    {
+      "id": "2026-07-09-pre-release-llm-safety-simulation",
+      "title": "Investigadores proponen predecir safety post-release simulando despliegues con logs reales",
+      "source": {
+        "name": "arXiv",
+        "url": "https://arxiv.org/abs/2607.07184",
+        "publishedAt": "2026-07-08",
+        "retrievedAt": "2026-07-09"
+      },
+      "sourceType": "paper",
+      "evidence": [
+        "El trabajo regenera respuestas desde prefijos de conversaciones reales desidentificadas para estimar seguridad antes del lanzamiento.",
+        "Los autores reportan que la simulacion predice mejor la mala conducta post-deployment que evaluaciones tradicionales."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Los logs reales pueden convertirse en suites de regresion de safety para modelos y agentes antes de exponerlos a usuarios finales."
+      },
+      "action": "Construir un conjunto desidentificado de prefijos reales y medir regresiones de safety antes de cada cambio de modelo o policy.",
+      "status": "actionable",
+      "tags": [
+        "model-evaluation",
+        "ai-safety",
+        "deployment",
+        "red-teaming",
+        "logs"
+      ]
+    },
+    {
+      "id": "2026-07-09-meta-super-sensing-glasses",
+      "title": "Meta prueba gafas de IA con captura contextual siempre activa",
+      "source": {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/tech/963138/meta-smart-glasses-recording-super-sensing-ai",
+        "publishedAt": "2026-07-08",
+        "retrievedAt": "2026-07-09"
+      },
+      "sourceType": "news",
+      "evidence": [
+        "The Verge reporto prototipos de gafas Meta con audio continuo y fotos frecuentes para alimentar consultas contextuales con Meta AI.",
+        "La nota cubre metadata, privacidad e indicadores visuales como parte del diseno de captura."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Las interfaces always-on mueven el riesgo desde el modelo hacia consentimiento, retencion, entrenamiento y senalizacion fisica de captura."
+      },
+      "action": "Disenar politicas explicitas de consentimiento, retencion y exclusion de entrenamiento para cualquier experiencia contextual con sensores continuos.",
+      "status": "evolving",
+      "tags": [
+        "meta",
+        "wearables",
+        "privacy",
+        "multimodal",
+        "contextual-ai"
+      ]
+    },
+    {
+      "id": "2026-07-09-amazon-moonraker-agentic-alexa",
+      "title": "Amazon desarrolla Moonraker para llevar Alexa+ hacia flujos agentic",
+      "source": {
+        "name": "Business Insider",
+        "url": "https://www.businessinsider.com/amazon-moonraker-project-alexa-agentic-cost-2026-7",
+        "publishedAt": "2026-07-08",
+        "retrievedAt": "2026-07-09"
+      },
+      "sourceType": "news",
+      "evidence": [
+        "Business Insider reporto documentos internos sobre flujos multiaccion en Alexa+, como pedir transporte y enviar mensajes.",
+        "La cobertura indica pruebas con modelos de Anthropic y Nvidia y un presupuesto de GPU superior a 100 millones de dolares en 2026."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Los asistentes domesticos agentic validan workflows multi-step, pero tambien exponen el costo de inferencia y evaluacion como restricciones de producto."
+      },
+      "action": "Medir costo por tarea completa, tasa de intervencion humana y fallos por accion externa antes de escalar asistentes multiaccion.",
+      "status": "candidate",
+      "tags": [
+        "amazon",
+        "alexa",
+        "agents",
+        "consumer-ai",
+        "inference-costs"
+      ]
+    },
+    {
+      "id": "2026-07-09-ai-chip-pipeline-bottleneck",
+      "title": "La carrera por chips propios de IA sigue concentrada en la misma cadena avanzada",
+      "source": {
+        "name": "Axios",
+        "url": "https://www.axios.com/2026/07/08/nvidia-ai-custom-chips-supply-chain",
+        "publishedAt": "2026-07-08",
+        "retrievedAt": "2026-07-09"
+      },
+      "sourceType": "news",
+      "evidence": [
+        "Axios reporto que grandes actores exploran chips propios pero compiten por TSMC, HBM, packaging avanzado y equipos ASML.",
+        "La nota senala que incluso quienes disenan chips internos siguen comprando GPUs Nvidia."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Disenar chips propios no elimina dependencia de la cadena de fabricacion y memoria, por lo que el riesgo de suministro sigue siendo compartido."
+      },
+      "action": "Planificar costos, regiones y proveedores de inferencia suponiendo escasez persistente de HBM, packaging y capacidad avanzada.",
+      "status": "confirmed",
+      "tags": [
+        "ai-chips",
+        "nvidia",
+        "supply-chain",
+        "inference",
+        "datacenters"
+      ]
+    },
+    {
+      "id": "2026-07-09-india-ai-energy-demand",
+      "title": "India proyecta mayor demanda electrica por data centers, IA y vehiculos electricos",
+      "source": {
+        "name": "The Economic Times",
+        "url": "https://economictimes.indiatimes.com/industry/energy/power/data-centres-ai-evs-to-drive-peak-power-demand-to-300-gw-in-27-electricity-minister/articleshow/132271633.cms",
+        "publishedAt": "2026-07-09",
+        "retrievedAt": "2026-07-09"
+      },
+      "sourceType": "news",
+      "evidence": [
+        "The Economic Times reporto que el ministro de Energia de India vinculo data centers, IA y vehiculos electricos con una demanda pico esperada de 300 GW en 2027.",
+        "La nota cita necesidades de almacenamiento electrico de largo plazo para sostener el crecimiento de demanda."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La disponibilidad electrica y el almacenamiento se vuelven variables de arquitectura para despliegues de IA en mercados de alto crecimiento."
+      },
+      "action": "Incluir energia, resiliencia regional y latencia en la seleccion de regiones cloud y partners de inferencia en India.",
+      "status": "confirmed",
+      "tags": [
+        "india",
+        "energy",
+        "datacenters",
+        "infrastructure",
+        "cloud"
+      ]
+    },
+    {
+      "id": "2026-07-09-prime-intellect-open-superintelligence-stack",
+      "title": "Prime Intellect levanta 130 millones de dolares para una pila abierta de entrenamiento y agentes",
+      "source": {
+        "name": "Prime Intellect",
+        "url": "https://www.primeintellect.ai/blog/series-a",
+        "publishedAt": "2026-07-08",
+        "retrievedAt": "2026-07-09"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "Prime Intellect anuncio una Serie A de 130 millones de dolares liderada por Radical Ventures.",
+        "La compania describe una pila que cubre compute, reinforcement learning, sandboxes, evaluaciones, inference y deployment."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "El financiamiento refuerza la demanda de alternativas abiertas para entrenar, evaluar y desplegar agentes fuera de los labs frontier dominantes."
+      },
+      "action": "Evaluar si la pila abierta cubre necesidades reales de reproducibilidad, ownership de datos y costos frente a proveedores frontier administrados.",
+      "status": "confirmed",
+      "tags": [
+        "prime-intellect",
+        "open-models",
+        "training",
+        "agents",
+        "funding"
+      ]
+    },
+    {
+      "id": "2026-07-09-litellm-mcp-observability-guardrails",
+      "title": "LiteLLM amplia MCP, routing, guardrails y observabilidad en una prerelease",
+      "source": {
+        "name": "GitHub Releases: BerriAI/litellm",
+        "url": "https://github.com/BerriAI/litellm/releases/tag/v1.93.0-dev.1",
+        "publishedAt": "2026-07-08",
+        "retrievedAt": "2026-07-09"
+      },
+      "sourceType": "repo",
+      "evidence": [
+        "La prerelease v1.93.0-dev.1 incluye cambios en MCP OAuth/token exchange, rate limits por deployment, errores de streaming, guardrails y OpenTelemetry.",
+        "El release tambien agrega soporte para Vertex AI Speech-to-Text Chirp 3."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Los gateways multi-modelo se estan convirtiendo en capa de control para agentes, seguridad, observabilidad y routing de produccion."
+      },
+      "action": "Probar los cambios de MCP y guardrails en staging antes de adoptar la prerelease en gateways compartidos.",
+      "status": "actionable",
+      "tags": [
+        "litellm",
+        "mcp",
+        "observability",
+        "guardrails",
+        "gateway"
+      ]
+    }
+  ]
+}

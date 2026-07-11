@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-04",
+  "generatedAt": "2026-07-07T23:40:00-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-04-github-copilot-cli-mcp-autopilot",
+      "title": "GitHub Copilot CLI amplía gestión MCP y controles de autopilot",
+      "source": {"name": "GitHub / GitHub Releases", "url": "https://github.com/github/copilot-cli/releases/tag/v1.0.69-1", "publishedAt": "2026-07-04", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["Copilot CLI añadió /mcp list y acceso al administrador MCP mientras el agente trabaja.", "La versión incorporó auto allow-all gobernado por un juez LLM y persistencia opcional de autopilot."],
+      "impact": {"level": "high", "summary": "Más autonomía y permisos automáticos aceleran flujos, pero elevan el riesgo de decisiones incorrectas del juez LLM."},
+      "action": "Mantener allow-all desactivado en producción y probar el juez con herramientas destructivas simuladas.",
+      "status": "actionable",
+      "tags": ["github-copilot", "coding-agents", "mcp", "autopilot", "permissions"]
+    },
+    {
+      "id": "2026-07-04-litellm-gemini-agents-signed-images",
+      "title": "LiteLLM añade Gemini 3.5 Flash, agentes administrados y firma de imágenes",
+      "source": {"name": "LiteLLM / GitHub Releases", "url": "https://github.com/BerriAI/litellm/releases/tag/v1.91.0", "publishedAt": "2026-07-04", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["LiteLLM 1.91.0 añadió soporte para Gemini 3.5 Flash y agentes administrados de Gemini.", "La versión firma todas sus imágenes Docker con cosign y documenta verificación por hash o tag protegido."],
+      "impact": {"level": "medium-high", "summary": "El gateway facilita adopción temprana de modelos y mejora procedencia de la cadena de suministro."},
+      "action": "Verificar firmas cosign en CI y ejecutar pruebas de compatibilidad antes de actualizar el gateway.",
+      "status": "actionable",
+      "tags": ["litellm", "gemini", "ai-gateway", "supply-chain-security", "agents"]
+    },
+    {
+      "id": "2026-07-04-tuetoken-rust-tokenizer",
+      "title": "tuetoken propone tokenización BPE en Rust compatible con AutoTokenizer",
+      "source": {"name": "Vadim Borisov / Hugging Face", "url": "https://huggingface.co/blog/vdmbrsv/tuetoken-fastest-llm-tokenizer", "publishedAt": "2026-07-04", "retrievedAt": "2026-07-07"},
+      "sourceType": "official",
+      "evidence": ["tuetoken implementa BPE en Rust y exige salida byte-identical o fallo explícito frente a AutoTokenizer.", "El autor reporta entre 7 y 40 veces más velocidad y hasta 85% más throughput de vLLM en pruebas propias."],
+      "impact": {"level": "medium", "summary": "La tokenización puede ser un cuello de botella relevante en serving, aunque los resultados todavía son del autor."},
+      "action": "Comparar compatibilidad byte a byte y throughput con prompts reales antes de reemplazar el tokenizer.",
+      "status": "candidate",
+      "tags": ["tokenization", "rust", "vllm", "inference", "performance"]
+    },
+    {
+      "id": "2026-07-04-celeberty-domain-small-model",
+      "title": "NeuML libera CeleBERTy Small para cultura, arte y entretenimiento",
+      "source": {"name": "NeuML / Hugging Face", "url": "https://huggingface.co/blog/NeuML/celeberty-small", "publishedAt": "2026-07-04", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["NeuML liberó un modelo base de 22,7 millones de parámetros y un modelo de embeddings bajo Apache 2.0.", "Los modelos se entrenaron con artículos de Wikipedia filtrados al dominio de cultura popular, arte y música."],
+      "impact": {"level": "medium", "summary": "Modelos pequeños de dominio pueden reducir costos de clasificación y recuperación frente a modelos generales."},
+      "action": "Evaluar embeddings en un corpus de entretenimiento propio y comparar precisión, latencia y tamaño.",
+      "status": "actionable",
+      "tags": ["small-models", "embeddings", "domain-models", "neuml", "apache-2"]
+    },
+    {
+      "id": "2026-07-04-bytedance-agent-scaling-law-edgebench",
+      "title": "ByteDance propone una ley de escalamiento para agentes de interacción prolongada",
+      "source": {"name": "South China Morning Post", "url": "https://www.scmp.com/tech/big-tech/article/3359373/chinas-bytedance-discovers-new-scaling-law-could-sustain-ai-boom", "publishedAt": "2026-07-04", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Seed AI presentó una ley de escalamiento para agentes que aprenden mediante interacción con entornos.", "El trabajo introdujo EdgeBench con 134 tareas de al menos doce horas en software, ciencia y trabajo profesional."],
+      "impact": {"level": "medium-high", "summary": "Benchmarks de larga duración pueden revelar fallos que las evaluaciones cortas de agentes no observan."},
+      "action": "Incorporar tareas prolongadas, recuperación de errores y costo acumulado a la evaluación interna de agentes.",
+      "status": "evolving",
+      "tags": ["bytedance", "agents", "scaling-laws", "benchmarks", "post-training"]
+    }
+  ]
+}

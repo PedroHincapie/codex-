@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-07",
+  "generatedAt": "2026-07-07T23:30:00-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-07-eu-ai-cybersecurity-action-plan",
+      "title": "La Comisión Europea presenta un plan de ciberseguridad para modelos avanzados de IA",
+      "source": {"name": "European Commission", "url": "https://digital-strategy.ec.europa.eu/en/news/commission-presents-eu-action-plan-cybersecurity-and-artificial-intelligence", "publishedAt": "2026-07-07", "retrievedAt": "2026-07-07"},
+      "sourceType": "official",
+      "evidence": ["El plan coordina Estados miembros, industria y organizaciones europeas frente a riesgos cibernéticos de modelos avanzados.", "Incluye capacidad europea de evaluación de modelos para apoyar las funciones regulatorias de la AI Office."],
+      "impact": {"level": "high", "summary": "La capacidad de evaluación puede convertirse en un requisito práctico de acceso al mercado europeo para modelos avanzados."},
+      "action": "Mapear evaluaciones internas de capacidades y riesgo contra los futuros requisitos de la AI Office.",
+      "status": "evolving",
+      "tags": ["european-union", "cybersecurity", "ai-act", "model-evaluation", "regulation"]
+    },
+    {
+      "id": "2026-07-07-cohere-arabic-transcribe",
+      "title": "Cohere libera un modelo ASR árabe de 2.000 millones de parámetros bajo Apache 2.0",
+      "source": {"name": "Cohere Labs", "url": "https://huggingface.co/blog/CohereLabs/cohere-transcribe-arabic-07-2026-release", "publishedAt": "2026-07-07", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["Cohere publicó un modelo ASR de 2B entrenado para dialectos y code-switching árabe-inglés.", "Reporta WER promedio de 25,87 frente a 28,32 de OmniASR-LLM-7B."],
+      "impact": {"level": "medium-high", "summary": "Un modelo abierto especializado mejora opciones de voz para mercados árabes y despliegues controlados."},
+      "action": "Evaluar WER por dialecto y dominio propio antes de sustituir servicios ASR administrados.",
+      "status": "actionable",
+      "tags": ["cohere", "speech-recognition", "arabic", "open-models", "apache-2"]
+    },
+    {
+      "id": "2026-07-07-lerobot-060-world-models",
+      "title": "LeRobot 0.6 integra world models, VLA y evaluación reproducible",
+      "source": {"name": "Hugging Face", "url": "https://huggingface.co/blog/lerobot-release-v060", "publishedAt": "2026-07-07", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["LeRobot 0.6 incorpora políticas con world models, nuevos VLA y seis benchmarks bajo lerobot-eval.", "La versión añade rollout, correcciones humanas tipo DAgger, FSDP y carga de datos hasta dos veces más rápida."],
+      "impact": {"level": "medium-high", "summary": "La versión reúne entrenamiento, evaluación y corrección humana en una pila abierta para robótica."},
+      "action": "Reproducir un benchmark con lerobot-eval y medir cuánto mejora DAgger con correcciones humanas propias.",
+      "status": "actionable",
+      "tags": ["hugging-face", "lerobot", "robotics", "world-models", "vla"]
+    },
+    {
+      "id": "2026-07-07-claude-cowork-mobile-web",
+      "title": "Claude Cowork extiende agentes de trabajo a web y móviles con ejecución en segundo plano",
+      "source": {"name": "TechCrunch", "url": "https://techcrunch.com/2026/07/07/the-coding-agent-wars-are-spilling-into-the-rest-of-the-office-claude-cowork/", "publishedAt": "2026-07-07", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Claude Cowork llegó a web y móviles para suscriptores Max con ejecución entre dispositivos.", "Anthropic dijo que 33,4% de 1,2 millones de sesiones analizadas eran operaciones de procesos empresariales."],
+      "impact": {"level": "medium-high", "summary": "Los agentes dejan el entorno de código y entran en procesos empresariales persistentes con nuevos riesgos de permisos y continuidad."},
+      "action": "Definir permisos por proceso y revisar acciones de fondo antes de habilitar Cowork sobre datos corporativos.",
+      "status": "evolving",
+      "tags": ["anthropic", "claude-cowork", "agents", "enterprise-workflows", "productivity"]
+    },
+    {
+      "id": "2026-07-07-deepseek-inference-chips",
+      "title": "DeepSeek prepara chips propios de inferencia para reducir dependencia externa",
+      "source": {"name": "Ars Technica", "url": "https://arstechnica.com/ai/2026/07/facing-us-export-controls-chinas-deepseek-plans-to-make-its-own-chips/", "publishedAt": "2026-07-07", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["DeepSeek lleva alrededor de un año preparando su entrada en chips de inferencia para centros de datos.", "La iniciativa busca reducir dependencia de Nvidia y Huawei bajo controles de exportación estadounidenses."],
+      "impact": {"level": "high", "summary": "La integración de modelo y silicio puede cambiar costos de inferencia, disponibilidad regional y competencia en hardware."},
+      "action": "Seguir especificaciones, capacidad de fabricación y compatibilidad de software antes de asumir impacto comercial.",
+      "status": "candidate",
+      "tags": ["deepseek", "inference", "ai-chips", "china", "export-controls"]
+    }
+  ]
+}

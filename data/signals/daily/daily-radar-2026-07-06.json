@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-06",
+  "generatedAt": "2026-07-07T23:20:00-05:00",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-06-nvidia-open-models-icml",
+      "title": "NVIDIA vincula sus modelos abiertos con 74 trabajos aceptados en ICML 2026",
+      "source": {"name": "NVIDIA", "url": "https://blogs.nvidia.com/blog/open-models-icml-2026/", "publishedAt": "2026-07-06", "retrievedAt": "2026-07-07"},
+      "sourceType": "official",
+      "evidence": ["NVIDIA reportó 74 trabajos propios aceptados en ICML 2026.", "La empresa identificó 145 trabajos que citan Nemotron y otros que usan Cosmos, GR00T y BioNeMo."],
+      "impact": {"level": "medium-high", "summary": "La adopción académica muestra que las familias abiertas de NVIDIA están formando una capa común para investigación aplicada."},
+      "action": "Revisar los trabajos reproducibles relevantes antes de elegir bases para robótica, agentes o biomedicina.",
+      "status": "confirmed",
+      "tags": ["nvidia", "icml", "open-models", "research", "nemotron"]
+    },
+    {
+      "id": "2026-07-06-hugging-face-signed-kernels",
+      "title": "Hugging Face convierte kernels en repositorios firmados de primera clase",
+      "source": {"name": "Hugging Face", "url": "https://huggingface.co/blog/revamped-kernels", "publishedAt": "2026-07-06", "retrievedAt": "2026-07-07"},
+      "sourceType": "product",
+      "evidence": ["Hugging Face añadió repositorios específicos para kernels con metadatos de compatibilidad.", "La plataforma incorporó publicadores confiables y firma Sigstore/cosign."],
+      "impact": {"level": "medium-high", "summary": "La firma y procedencia reducen riesgo de ejecutar kernels optimizados distribuidos como código remoto."},
+      "action": "Exigir firma, publicador confiable y compatibilidad declarada antes de cargar kernels desde el Hub.",
+      "status": "actionable",
+      "tags": ["hugging-face", "kernels", "supply-chain-security", "inference", "sigstore"]
+    },
+    {
+      "id": "2026-07-06-alberta-claude-code-security-audit",
+      "title": "Alberta usa 50 agentes Claude Code para revisar 466 millones de líneas",
+      "source": {"name": "Anthropic", "url": "https://www.anthropic.com/news/alberta-government-claude-cybersecurity", "publishedAt": "2026-07-06", "retrievedAt": "2026-07-07"},
+      "sourceType": "official",
+      "evidence": ["El gobierno de Alberta ejecutó unos 50 agentes sobre 3.400 repositorios durante 20 horas.", "Los agentes localizaron fallos y generaron parches y pruebas, pero cada cambio requirió aprobación humana."],
+      "impact": {"level": "high", "summary": "El caso aporta evidencia de escala para auditoría agentic y mantiene revisión humana como control obligatorio."},
+      "action": "Pilotear auditoría paralela en repositorios internos con aprobación humana, métricas de falsos positivos y rollback.",
+      "status": "actionable",
+      "tags": ["anthropic", "claude-code", "cybersecurity", "agents", "government"]
+    },
+    {
+      "id": "2026-07-06-jadepuffer-agentic-ransomware",
+      "title": "JadePuffer automatiza gran parte de una operación de ransomware mediante un agente",
+      "source": {"name": "TechCrunch", "url": "https://techcrunch.com/2026/07/06/the-first-ai-run-ransomware-attack-still-needed-a-human/", "publishedAt": "2026-07-06", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Sysdig documentó un agente que realizó intrusión, movimiento lateral, cifrado y redacción de la nota de rescate.", "Un humano todavía seleccionó la víctima, montó infraestructura y suministró credenciales."],
+      "impact": {"level": "high", "summary": "La automatización reduce el costo operativo de ataques complejos aunque todavía dependa de preparación humana."},
+      "action": "Añadir detecciones de cadenas rápidas de acciones, credenciales efímeras y límites de herramientas para agentes internos.",
+      "status": "actionable",
+      "tags": ["ransomware", "cybersecurity", "agents", "sysdig", "incident-response"]
+    },
+    {
+      "id": "2026-07-06-vercel-agent-deployment-infrastructure",
+      "title": "Vercel atribuye a agentes la mitad de seis millones de despliegues diarios",
+      "source": {"name": "TechCrunch", "url": "https://techcrunch.com/2026/07/06/vercel-ceo-guillermo-rauch-on-the-fight-to-split-off-models-from-agents/", "publishedAt": "2026-07-06", "retrievedAt": "2026-07-07"},
+      "sourceType": "news",
+      "evidence": ["Vercel reportó seis millones de despliegues diarios y afirmó que la mitad son activados por agentes.", "Su gateway procesa más de un billón de tokens diarios y ofrece controles y aislamiento para agentes."],
+      "impact": {"level": "high", "summary": "El volumen indica que agentes de código ya operan infraestructura de producción y requieren controles separados del modelo."},
+      "action": "Separar permisos de modelo y agente, aislar ejecución y registrar cada despliegue automatizado con identidad verificable.",
+      "status": "actionable",
+      "tags": ["vercel", "coding-agents", "deployment", "sandboxes", "developer-infrastructure"]
+    }
+  ]
+}

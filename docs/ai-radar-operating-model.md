@@ -168,12 +168,31 @@ flowchart TD
 ## Reglas De Trabajo
 
 - Consultar local antes de buscar en internet.
+- Informar que se reviso el estado local y justificar la busqueda externa antes
+  de iniciarla.
 - Persistir informacion nueva antes de usarla como respuesta del radar.
 - Usar scripts Python directamente desde skills.
 - Convertir tareas mecanicas en tools.
 - Probar tools con `unittest`.
 - Validar JSON con `jq` cuando se editen datos locales o contratos.
 - No guardar articulos completos, secretos ni salidas generadas no revisadas.
+
+## Sincronizacion De La Skill Activa
+
+La version canonica de `ai-radar-signals` vive en el repositorio, bajo
+`skills/ai-radar-signals/`. Cuando cambie, sincronizarla con la copia activa de
+Codex y reiniciar la aplicacion para que una sesion nueva cargue las
+instrucciones actualizadas:
+
+```bash
+diff -u ~/.codex/skills/ai-radar-signals/SKILL.md \
+  skills/ai-radar-signals/SKILL.md
+cp skills/ai-radar-signals/SKILL.md \
+  ~/.codex/skills/ai-radar-signals/SKILL.md
+```
+
+Despues de copiar, volver a ejecutar `diff`. Una salida vacia confirma que la
+skill instalada coincide con la fuente canonica.
 
 ## Camino De Evolucion
 
