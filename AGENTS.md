@@ -1,61 +1,45 @@
 # Repository Guidelines
 
-## Estructura del Proyecto y Organización de Módulos
+## Estructura del proyecto
 
-AI Radar es un repositorio inicial mínimo. La raíz contiene `README.md` con la visión del producto y decisiones de stack, además de `.gitignore` para archivos generados, datos locales y secretos.
+AI Radar convierte novedades de IA en señales curadas y rankings locales. Distingue la visión en `README.md` de las capacidades implementadas.
 
-Usa estas ubicaciones cuando el proyecto crezca:
+- `src/`: lógica de dominio; `radar_store.py` carga, filtra, valida y audita señales, y `ranking_engine.py` crea rankings deterministas.
+- `scripts/airadar.py`: CLI local del proyecto.
+- `tests/`: pruebas `unittest` para el dominio y el CLI.
+- `data/signals/daily/`: snapshots curados `daily-radar-YYYY-MM-DD.json`.
+- `data/reviews/rankings/`: rankings editoriales `signal-review-ranking-YYYY-MM-DD.json`.
+- `data/sources/candidates/`: fuentes normalizadas antes de la curación final.
+- `docs/contracts/`: contrato y esquema JSON de señales diarias; `docs/ai-radar-operating-model.md` explica el flujo operativo.
+- `skills/`: instrucciones de capacidades de AI Radar.
 
-- `src/`: módulos Python reutilizables del dominio.
-- `public/` o `app/`: HTML, CSS y JS del navegador.
-- `scripts/`: automatización con Python.
-- `tests/`: pruebas con `unittest` y specs de Playwright cuando exista UI.
-- `data/signals/daily/`: snapshots diarios curados, un archivo por fecha.
-- `data/reviews/rankings/`: rankings, auditorias y scoring editorial.
-- `data/sources/candidates/`: fuentes candidatas antes de curacion final.
+## Desarrollo y comandos
 
-## Comandos de Build, Prueba y Desarrollo
+El proyecto usa solo Python y biblioteca estándar; no hay build ni gestor de dependencias. Ejecuta desde la raíz:
 
-No hay comandos de build, prueba o desarrollo implementados. No dependas de comandos hasta que existan los archivos necesarios.
+```bash
+python3 -m unittest
+python3 scripts/airadar.py list --tag agents --fields id,title,action
+python3 scripts/airadar.py validate --date 2026-06-20
+python3 scripts/airadar.py audit --date 2026-06-20
+python3 scripts/airadar.py coverage --from 2026-06-13 --to 2026-07-09
+python3 scripts/airadar.py ranking --generate --date 2026-06-25 --limit 3
+```
 
-Los comandos futuros deben ser simples:
+`list`, `summary` y `show` consultan señales; `validate` verifica contratos; `audit` detecta duplicados y evidencia vacía; `coverage` informa días faltantes. Usa `--format json` para resultados procesables.
 
-- `python3 -m unittest`: ejecuta pruebas de dominio con `unittest`.
-- `python3 scripts/airadar.py <command>`: ejecuta flujos internos usados por skills.
-- `python3 scripts/airadar.py validate --date YYYY-MM-DD`: valida snapshots diarios.
-- `python3 scripts/airadar.py audit --date YYYY-MM-DD`: audita duplicados, evidencia vacia, estados y fuentes.
+## Estilo y datos
 
-## Estilo de Código y Convenciones de Nombres
+Escribe Python y JSON con indentación de 2 espacios, funciones y variables en `snake_case`, y constantes reales en `UPPER_SNAKE_CASE`. Nombra módulos como `radar_store.py` y pruebas como `test_radar_store.py`. Respeta el esquema de `docs/contracts/ai-radar-daily.schema.json`; no modifiques snapshots o rankings sin validar fechas, IDs, URLs, evidencia y tags.
 
-Prefiere Python para dominio, scripts y automatizacion. Usa HTML, CSS y JavaScript planos solo para navegador salvo que el repositorio introduzca un toolchain. Usa indentación de 2 espacios para Python, JSON, CSS y HTML.
+## Pruebas
 
-Usa nombres descriptivos:
+Añade pruebas `unittest` para cambios de parsing, filtrado, validación, auditoría, cobertura o ranking. Mantén fixtures deterministas y cubre casos vacíos, errores y límites. Ejecuta `python3 -m unittest` antes de entregar cambios.
 
-- Archivos Python: `snake_case.py`.
-- Archivos web: `kebab-case.js`, `kebab-case.css` o `kebab-case.html`.
-- Funciones y variables Python: `snake_case`.
-- Constantes: `UPPER_SNAKE_CASE` solo para constantes reales.
-- Pruebas: según la unidad probada, como `test_source_normalizer.py`.
+## Commits y pull requests
 
-## Guías de Pruebas
+Usa Conventional Commits, por ejemplo: `feat: agregar filtro por source type`, `test: cubrir cobertura de snapshots` o `docs: actualizar contrato diario`. El PR debe explicar qué cambió y por qué, incluir evidencia de pruebas y enlazar la tarea o issue. Incluye capturas únicamente cuando exista una interfaz visual.
 
-El framework objetivo para pruebas de dominio es `unittest`. Agrega pruebas para parsing, normalización, duplicados, ranking y scoring antes de conectar servicios externos. Usa fixtures para entradas y salidas esperadas estables.
+## Seguridad y consulta local primero
 
-Usa Playwright solo cuando exista un dashboard visual.
-
-## Guías de Commits y Pull Requests
-
-El historial usa prefijos estilo Conventional Commits, como `docs:` y `chore:`. Mantén ese patrón:
-
-- `docs: actualizar guia de producto`
-- `chore: agregar tooling del proyecto`
-- `feat: agregar normalizacion de fuentes`
-- `test: cubrir reglas de ranking`
-
-Los pull requests deben incluir descripción breve, razón del cambio, evidencia de pruebas y capturas para cambios de UI. Enlaza issues o tareas del curso cuando existan.
-
-## Seguridad y Configuración
-
-Nunca hagas commit de secretos, `.env`, API keys, bases de datos o certificados privados. Mantén fuera de Git salidas generadas como `.airadar/`, reportes, búsquedas, grabaciones y snapshots salvo revisión explícita.
-
-Los agentes deben distinguir el estado actual del repositorio de la visión del producto. No asumas que existen archivos, comandos, APIs, bases de datos o integraciones hasta que estén presentes en el repo.
+No subas secretos, `.env`, claves, certificados ni bases de datos. Para preguntas sobre señales, fechas, tags, fuentes, impacto o estado, consulta primero el CLI y los archivos locales. Recurre a la web solo si los datos son insuficientes o requieren verificación actual; antes, indica qué se revisó localmente. Toda curación persistente debe respetar el contrato y quedar versionada en `data/signals/daily/`.

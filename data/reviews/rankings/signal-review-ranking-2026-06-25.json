@@ -12,43 +12,15 @@
     "strategicFit": 0.05
   },
   "audit": {
-    "inputSignals": 33,
+    "inputSignals": 30,
     "rankedSignals": 30,
-    "duplicateGroups": [
-      {
-        "keptSignalId": "2026-06-15-amazon-discloses-datacenter-water-use",
-        "mergedSignalIds": [
-          "2026-06-15-amazon-datacenter-water-transparency"
-        ],
-        "matchedBy": [
-          "url"
-        ]
-      },
-      {
-        "keptSignalId": "2026-06-18-deepmind-agent-controls",
-        "mergedSignalIds": [
-          "2026-06-18-deepmind-agent-control-roadmap"
-        ],
-        "matchedBy": [
-          "url"
-        ]
-      },
-      {
-        "keptSignalId": "2026-06-20-ai-ceos-g7-standards",
-        "mergedSignalIds": [
-          "2026-06-20-ai-ceos-g7"
-        ],
-        "matchedBy": [
-          "url"
-        ]
-      }
-    ],
+    "duplicateGroups": [],
     "skippedSignals": []
   },
   "rankedSignals": [
     {
       "rank": 1,
-      "signalId": "2026-06-18-deepmind-agent-controls",
+      "signalId": "2026-06-18-deepmind-agent-control-roadmap",
       "score": 4.7,
       "dimensions": {
         "novelty": 4,

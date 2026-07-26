@@ -7,34 +7,6 @@
   "locale": "es",
   "signals": [
     {
-      "id": "2026-06-20-ai-ceos-g7",
-      "title": "Los CEOs de IA ya participan como actores geopoliticos en el G7",
-      "source": {
-        "name": "Axios",
-        "url": "https://www.axios.com/2026/06/20/ai-tech-moguls-g7",
-        "publishedAt": "2026-06-20",
-        "retrievedAt": "2026-06-20"
-      },
-      "evidence": [
-        "Lideres de OpenAI, Google DeepMind, Anthropic y otros participaron en discusiones con lideres del G7.",
-        "Las conversaciones se centraron en reglas, estandares, riesgos y seguridad de IA.",
-        "Sam Altman pidio que ningun laboratorio tome decisiones globales por si solo."
-      ],
-      "impact": {
-        "level": "high",
-        "summary": "La gobernanza de IA se desplaza hacia negociacion diplomatica y puede influir en estandares internacionales."
-      },
-      "action": "Seguir estandares internacionales emergentes y mapear riesgos regulatorios por mercado.",
-      "status": "confirmed",
-      "tags": [
-        "governance",
-        "g7",
-        "standards",
-        "policy"
-      ],
-      "sourceType": "news"
-    },
-    {
       "id": "2026-06-20-europe-ai-sovereignty",
       "title": "Europa reacciona ante dependencia de IA de Estados Unidos",
       "source": {
@@ -74,6 +46,7 @@
       "evidence": [
         "Axios reporto participacion de lideres de OpenAI, Google DeepMind, Anthropic y otros en discusiones con lideres del G7.",
         "Las conversaciones incluyeron reglas, estandares, riesgos y seguridad de IA.",
+        "Sam Altman pidio que ningun laboratorio tome decisiones globales por si solo.",
         "El debate del G7 se conecto con preocupaciones por soberania tecnologica y dependencia de modelos estadounidenses."
       ],
       "impact": {

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from collections import Counter
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -57,6 +58,61 @@ def load_daily_snapshot(date: str, data_dir: Path | str = DATA_DIR) -> dict[str,
     "file": path.name,
     "fullPath": str(path),
     "snapshot": read_json(path)
+  }
+
+
+def list_daily_snapshot_dates(data_dir: Path | str = DATA_DIR) -> list[str]:
+  root = _daily_signal_dir(Path(data_dir))
+  dates = []
+
+  for path in sorted(root.glob(f"{DAILY_FILE_PREFIX}[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].json")):
+    snapshot_date = path.stem.removeprefix(DAILY_FILE_PREFIX)
+    _parse_date(snapshot_date)
+    dates.append(snapshot_date)
+
+  return dates
+
+
+def report_snapshot_coverage(
+  from_date: str | None = None,
+  to_date: str | None = None,
+  data_dir: Path | str = DATA_DIR
+) -> dict[str, Any]:
+  observed_dates = list_daily_snapshot_dates(data_dir)
+  observed_from = observed_dates[0] if observed_dates else ""
+  observed_to = observed_dates[-1] if observed_dates else ""
+
+  coverage_from = from_date or observed_from
+  coverage_to = to_date or observed_to
+
+  if coverage_from:
+    _parse_date(coverage_from)
+  if coverage_to:
+    _parse_date(coverage_to)
+  if coverage_from and coverage_to and coverage_from > coverage_to:
+    raise ValueError("from_date must be before or equal to to_date")
+
+  expected_dates = list(_date_range(coverage_from, coverage_to)) if coverage_from and coverage_to else []
+  snapshots_in_range = [item for item in observed_dates if _date_in_range(item, coverage_from, coverage_to)]
+  missing_dates = [item for item in expected_dates if item not in set(snapshots_in_range)]
+
+  return {
+    "observedRange": {
+      "from": observed_from,
+      "to": observed_to
+    },
+    "coverageRange": {
+      "from": coverage_from,
+      "to": coverage_to
+    },
+    "snapshotDates": snapshots_in_range,
+    "missingDates": missing_dates,
+    "counts": {
+      "observedSnapshots": len(observed_dates),
+      "expectedDays": len(expected_dates),
+      "daysWithSnapshot": len(snapshots_in_range),
+      "missingDays": len(missing_dates)
+    }
   }
 
 
@@ -345,6 +401,26 @@ def _normalize(value: Any) -> str:
 
 def _count_by(items: list[dict[str, Any]], selector) -> dict[str, int]:
   return dict(Counter(selector(item) for item in items))
+
+
+def _date_range(from_date: str, to_date: str):
+  current = _parse_date(from_date)
+  end = _parse_date(to_date)
+
+  while current <= end:
+    yield current.isoformat()
+    current += timedelta(days=1)
+
+
+def _date_in_range(value: str, from_date: str, to_date: str) -> bool:
+  return (not from_date or value >= from_date) and (not to_date or value <= to_date)
+
+
+def _parse_date(value: str) -> date:
+  try:
+    return date.fromisoformat(value)
+  except ValueError as error:
+    raise ValueError(f"invalid date: {value}") from error
 
 
 def _daily_signal_dir(data_dir: Path) -> Path:

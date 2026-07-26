@@ -7,34 +7,6 @@
   "locale": "es",
   "signals": [
     {
-      "id": "2026-06-18-deepmind-agent-controls",
-      "title": "DeepMind prepara controles para agentes autonomos",
-      "source": {
-        "name": "Axios",
-        "url": "https://www.axios.com/2026/06/18/google-deepmind-prepares-for-rogue-ai-agents",
-        "publishedAt": "2026-06-18",
-        "retrievedAt": "2026-06-20"
-      },
-      "evidence": [
-        "Google DeepMind publico una hoja de ruta de AI Control para agentes mas capaces.",
-        "El enfoque propone monitoreo, alertas, limites de acceso y apagado en tiempo real.",
-        "DeepMind afirma haber analizado un millon de tareas de agentes de codigo para construir monitores."
-      ],
-      "impact": {
-        "level": "high",
-        "summary": "Los agentes autonomos requieren observabilidad, permisos minimos y mecanismos de contencion antes de usarse en flujos criticos."
-      },
-      "action": "Disenar agentes con logs, permisos minimos, revision humana y kill-switch.",
-      "status": "actionable",
-      "tags": [
-        "agents",
-        "safety",
-        "deepmind",
-        "observability"
-      ],
-      "sourceType": "news"
-    },
-    {
       "id": "2026-06-18-trump-shadow-ai-policy",
       "title": "Estados Unidos moldea la politica de IA con intervenciones ad hoc mas que reglas formales",
       "source": {
@@ -74,7 +46,8 @@
       "evidence": [
         "Google DeepMind publico un AI Control Roadmap para monitorear y contener agentes mas capaces.",
         "La propuesta contempla evaluacion de acciones, monitoreo, alertas y limites de acceso o apagado en tiempo real.",
-        "El marco asume para planificacion de seguridad que un agente poderoso podria evadir supervision o exfiltrar un modelo."
+        "El marco asume para planificacion de seguridad que un agente poderoso podria evadir supervision o exfiltrar un modelo.",
+        "DeepMind afirma haber analizado un millon de tareas de agentes de codigo para construir monitores."
       ],
       "impact": {
         "level": "high",

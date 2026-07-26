@@ -85,9 +85,11 @@ se mantienen ejecutadores de paquete.
 python3 scripts/airadar.py list --tag agents --fields id,title,action
 python3 scripts/airadar.py summary --from 2026-06-15
 python3 scripts/airadar.py ranking --limit 3
+python3 scripts/airadar.py ranking --generate --date 2026-06-25 --limit 3
 python3 scripts/airadar.py show 2026-06-18-deepmind-agent-control-roadmap --fields title,action,url
 python3 scripts/airadar.py validate --date 2026-06-20
 python3 scripts/airadar.py audit --date 2026-06-20
+python3 scripts/airadar.py coverage --from 2026-06-13 --to 2026-07-09
 ```
 
 Comandos disponibles:
@@ -95,12 +97,15 @@ Comandos disponibles:
 - `list`: filtra senales diarias por fecha, tag, impacto, estado, fuente o texto.
 - `summary`: resume conteos por fecha, impacto, estado, fuente y tags.
 - `show`: muestra una senal especifica por `id`.
-- `ranking`: consulta rankings editoriales en
+- `ranking`: genera rankings deterministas acumulados con `--generate --date`
+  y consulta rankings editoriales en
   `data/reviews/rankings/signal-review-ranking-YYYY-MM-DD.json`.
 - `validate`: valida estructura minima, ids, evidencias y tags de snapshots
   diarios.
 - `audit`: detecta duplicados, evidencia vacia, conteos por estado y fuentes
   principales.
+- `coverage`: reporta rango observado, dias con snapshot, dias faltantes y
+  conteos de cobertura local sin crear snapshots nuevos.
 
 Filtros utiles:
 

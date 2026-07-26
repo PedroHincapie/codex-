@@ -19,6 +19,7 @@ from src.radar_store import (  # noqa: E402
   load_daily_snapshot,
   load_ranking,
   pick_fields,
+  report_snapshot_coverage,
   summarize_signals,
   validate_daily_snapshot
 )
@@ -41,6 +42,8 @@ def main(argv: list[str] | None = None) -> int:
     return validate_snapshot(args)
   if args.command == "audit":
     return audit(args)
+  if args.command == "coverage":
+    return coverage(args)
 
   parser.print_help()
   return 0
@@ -59,6 +62,7 @@ def build_parser() -> argparse.ArgumentParser:
 
   summary_parser = subparsers.add_parser("summary", help="Resume senales filtradas.")
   add_signal_filters(summary_parser)
+  summary_parser.add_argument("--format", choices=["json"], default="json")
 
   show_parser = subparsers.add_parser("show", help="Muestra una senal por id.")
   show_parser.add_argument("signal_id")
@@ -76,6 +80,11 @@ def build_parser() -> argparse.ArgumentParser:
   audit_parser = subparsers.add_parser("audit", help="Audita senales: duplicados, evidencias, estados y fuentes.")
   add_signal_filters(audit_parser)
   audit_parser.add_argument("--format", choices=["json"], default="json")
+
+  coverage_parser = subparsers.add_parser("coverage", help="Reporta gaps de cobertura en snapshots diarios locales.")
+  coverage_parser.add_argument("--from", dest="from_date")
+  coverage_parser.add_argument("--to", dest="to_date")
+  coverage_parser.add_argument("--format", choices=["json", "tsv"], default="json")
 
   return parser
 
@@ -183,6 +192,19 @@ def audit(args: argparse.Namespace) -> int:
   return 0
 
 
+def coverage(args: argparse.Namespace) -> int:
+  try:
+    report = report_snapshot_coverage(args.from_date, args.to_date)
+  except ValueError as error:
+    raise SystemExit(str(error)) from error
+
+  if args.format == "json":
+    write_json(report)
+  else:
+    write_records([flatten_coverage_report(report)], "tsv")
+  return 0
+
+
 def split_csv(value: str) -> list[str]:
   return [item.strip() for item in value.split(",") if item.strip()]
 
@@ -207,6 +229,22 @@ def write_records(records: list[dict[str, Any]], output_format: str) -> None:
 
 def write_json(value: Any) -> None:
   print(json.dumps(value, ensure_ascii=False, indent=2))
+
+
+def flatten_coverage_report(report: dict[str, Any]) -> dict[str, Any]:
+  counts = report["counts"]
+  return {
+    "observedFrom": report["observedRange"]["from"],
+    "observedTo": report["observedRange"]["to"],
+    "coverageFrom": report["coverageRange"]["from"],
+    "coverageTo": report["coverageRange"]["to"],
+    "observedSnapshots": counts["observedSnapshots"],
+    "expectedDays": counts["expectedDays"],
+    "daysWithSnapshot": counts["daysWithSnapshot"],
+    "missingDays": counts["missingDays"],
+    "snapshotDates": report["snapshotDates"],
+    "missingDates": report["missingDates"]
+  }
 
 
 def format_cell(value: Any) -> str:
