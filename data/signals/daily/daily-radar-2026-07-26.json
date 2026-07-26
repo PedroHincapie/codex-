@@ -1,0 +1,401 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-26",
+  "generatedAt": "2026-07-26T22:58:18Z",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-26-openai-presence-enterprise-agents",
+      "title": "OpenAI lanza Presence para desplegar agentes empresariales gobernados",
+      "source": {
+        "name": "OpenAI",
+        "url": "https://openai.com/index/introducing-openai-presence/",
+        "publishedAt": "2026-07-22",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "OpenAI presento Presence como producto empresarial para agentes de voz y chat en workflows internos y de clientes.",
+        "El producto incluye permisos, politicas, evaluaciones, escalamiento humano y despliegue por FDEs o integradores seleccionados.",
+        "La disponibilidad inicial es limited general availability y no self-serve."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La competencia pasa de modelos aislados a sistemas operativos de agentes empresariales con gobernanza, evaluacion y soporte de despliegue."
+      },
+      "action": "Evaluar Presence como referencia para agentes de soporte, claims, IT service desk y ventas con SLA alto.",
+      "status": "actionable",
+      "tags": [
+        "openai",
+        "agents",
+        "enterprise-ai",
+        "voice",
+        "governance",
+        "production-ai"
+      ]
+    },
+    {
+      "id": "2026-07-26-openai-gpt-56-frontier-models",
+      "title": "OpenAI lanza GPT-5.6 y eleva el baseline para modelos frontier y agentes",
+      "source": {
+        "name": "OpenAI",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "publishedAt": "2026-07-09",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "OpenAI publico GPT-5.6 el 2026-07-09 en su seccion de anuncios de producto.",
+        "La familia incluye variantes orientadas a distintos perfiles de rendimiento y costo.",
+        "El anuncio posiciona mejoras para coding, investigacion, uso empresarial y flujos agentic."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "El lanzamiento cambia la linea base para comparar modelos de razonamiento, coding y agentes en produccion."
+      },
+      "action": "Actualizar benchmarks internos de AI Radar para comparar GPT-5.6 contra Claude, Gemini, Grok y modelos abiertos en tareas agentic.",
+      "status": "actionable",
+      "tags": [
+        "openai",
+        "frontier-models",
+        "agents",
+        "coding",
+        "benchmarks",
+        "enterprise-ai"
+      ]
+    },
+    {
+      "id": "2026-07-26-google-gemini-flash-cost-agentic",
+      "title": "Google libera Gemini 3.6 Flash y 3.5 Flash-Lite para agentes de menor costo",
+      "source": {
+        "name": "Google AI for Developers",
+        "url": "https://ai.google.dev/gemini-api/docs/changelog",
+        "publishedAt": "2026-07-21",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "Google marco Gemini 3.6 Flash y Gemini 3.5 Flash-Lite como versiones GA el 2026-07-21.",
+        "Gemini 3.6 Flash se describe con mejor eficiencia de tokens y capacidades de codigo y planeacion agentic.",
+        "Gemini 3.5 Flash-Lite se posiciona como opcion de baja latencia para automatizacion de alto volumen."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La presion competitiva se concentra en costo por tarea y latencia para agentes masivos, no solo en benchmarks frontier."
+      },
+      "action": "Comparar Gemini Flash contra GPT, Claude y Grok en tareas repetibles de extraccion, coding menor, browser use y soporte.",
+      "status": "confirmed",
+      "tags": [
+        "google",
+        "gemini",
+        "agents",
+        "inference-cost",
+        "coding",
+        "automation"
+      ]
+    },
+    {
+      "id": "2026-07-26-google-gemini-flash-cyber",
+      "title": "Google presenta Gemini 3.5 Flash Cyber para defensa automatizada de software",
+      "source": {
+        "name": "Google DeepMind",
+        "url": "https://deepmind.google/blog/introducing-gemini-3-5-flash-cyber/",
+        "publishedAt": "2026-07-21",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "Google describio el modelo como especializado en encontrar, validar y parchear vulnerabilidades.",
+        "El acceso inicial se limita a gobiernos y trusted partners a traves de CodeMender.",
+        "Google reporto uso interno en productos como Chrome, Android, Cloud, Ads y YouTube."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Los modelos especializados y restringidos para ciberdefensa se vuelven un patron practico por su valor y riesgo dual-use."
+      },
+      "action": "Monitorear acceso a CodeMender, controles de uso y benchmarks defensivos frente a modelos frontier generales.",
+      "status": "confirmed",
+      "tags": [
+        "google",
+        "cybersecurity",
+        "codemender",
+        "specialized-models",
+        "agents",
+        "dual-use"
+      ]
+    },
+    {
+      "id": "2026-07-26-meta-muse-spark-model-api",
+      "title": "Meta abre Meta Model API con Muse Spark 1.1 para tareas agentic multimodales",
+      "source": {
+        "name": "Meta AI",
+        "url": "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/",
+        "publishedAt": "2026-07-09",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "Meta anuncio Muse Spark 1.1 como modelo multimodal orientado a tareas agentic, computer use y coding.",
+        "La Meta Model API entro en public preview para desarrolladores.",
+        "La senal incluye soporte para herramientas externas, MCP servers y workflows multiagente."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Meta avanza de experiencias consumer hacia una oferta developer/API comparable con OpenAI, Anthropic y Google."
+      },
+      "action": "Probar disponibilidad, precios y compatibilidad de la API para browser agents, coding y workflows multimodales largos.",
+      "status": "confirmed",
+      "tags": [
+        "meta",
+        "model-api",
+        "multimodal",
+        "agents",
+        "mcp",
+        "computer-use"
+      ]
+    },
+    {
+      "id": "2026-07-26-xai-grok-45-automations",
+      "title": "xAI lanza Grok 4.5 y Automations para agentes recurrentes",
+      "source": {
+        "name": "xAI",
+        "url": "https://x.ai/news/grok-4-5",
+        "publishedAt": "2026-07-16",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "xAI presento Grok 4.5 como modelo para coding, agentic tasks y knowledge work.",
+        "El modelo se ofrece en Grok Build, Cursor y la consola de xAI.",
+        "La linea de producto se complementa con Automations para trabajos recurrentes o activados por email."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Refuerza el patron de agente persistente y programable como interfaz de consumo, no solo chat bajo demanda."
+      },
+      "action": "Incluir Grok 4.5 en la matriz de costo, calidad y seguridad para coding agents y automatizaciones personales.",
+      "status": "confirmed",
+      "tags": [
+        "xai",
+        "grok",
+        "agents",
+        "coding",
+        "automations",
+        "personal-ai"
+      ]
+    },
+    {
+      "id": "2026-07-26-aws-bench-agent-benchmark",
+      "title": "AWS publica aws-bench para evaluar agentes que operan infraestructura cloud",
+      "source": {
+        "name": "AWS",
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/aws-bench/",
+        "publishedAt": "2026-07-24",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "AWS anuncio aws-bench como benchmark open source para medir precision y eficiencia de agentes en tareas reales de AWS.",
+        "El benchmark incluye casos derivados de uso real como investigacion, troubleshooting y creacion de infraestructura.",
+        "La entrega incluye CLI para crear entornos, ejecutar evaluaciones, puntuar resultados y resetear recursos."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La evaluacion de agentes cloud pasa de demos a pruebas reproducibles sobre estados de infraestructura verificables."
+      },
+      "action": "Ejecutar aws-bench antes de permitir agentes internos con permisos sobre cuentas AWS reales.",
+      "status": "actionable",
+      "tags": [
+        "aws",
+        "agents",
+        "benchmarks",
+        "cloud",
+        "developer-tools",
+        "open-source"
+      ]
+    },
+    {
+      "id": "2026-07-26-github-copilot-linear-agent",
+      "title": "GitHub lleva Copilot cloud agent a flujos issue-to-PR con Linear",
+      "source": {
+        "name": "GitHub Changelog",
+        "url": "https://github.blog/changelog/2026-07-23-copilot-cloud-agent-for-linear-is-now-generally-available/",
+        "publishedAt": "2026-07-23",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "GitHub anuncio disponibilidad general de Copilot cloud agent para Linear.",
+        "Los usuarios pueden asignar issues de Linear a Copilot para analizar la tarea y abrir un draft pull request.",
+        "El agente trabaja en un entorno efimero con GitHub Actions y puede recibir configuracion de modelo, agente custom y ramas desde Linear."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "El flujo issue-to-PR consolida a los agentes de coding como parte del proceso operativo de equipos de producto."
+      },
+      "action": "Piloto con issues pequenos, branch protection obligatorio y medicion de PRs aceptados, rechazados y corregidos.",
+      "status": "actionable",
+      "tags": [
+        "github",
+        "copilot",
+        "agents",
+        "linear",
+        "developer-workflow",
+        "coding"
+      ]
+    },
+    {
+      "id": "2026-07-26-vllm-afd-moe-serving",
+      "title": "vLLM presenta plugin AFD para servir modelos MoE separando Attention y FFN",
+      "source": {
+        "name": "vLLM Blog",
+        "url": "https://vllm-project.github.io/2026/07/23/vllm-afd-plugin.html",
+        "publishedAt": "2026-07-23",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "vLLM anuncio un plugin experimental para Attention-FFN Disaggregation en modelos Mixture-of-Experts.",
+        "El plugin separa Attention service, FFN service y connector layer sin editar el core de vLLM.",
+        "El proyecto soporta NVIDIA GPUs, Ascend NPUs, conectores sincronicos y asincronicos, y wrappers para familias DeepSeek V2/V3."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La inferencia MoE esta evolucionando hacia arquitecturas desagregadas para escalar componentes con perfiles de costo y latencia distintos."
+      },
+      "action": "Reproducir benchmarks antes de produccion y evaluar AFD solo si el workload MoE justifica complejidad operacional adicional.",
+      "status": "candidate",
+      "tags": [
+        "vllm",
+        "inference",
+        "moe",
+        "serving",
+        "performance",
+        "open-source"
+      ]
+    },
+    {
+      "id": "2026-07-26-microsoft-azure-amd-ai-infra",
+      "title": "Microsoft expande Azure AI/HPC con AMD Helios, EPYC y MI455X",
+      "source": {
+        "name": "Microsoft",
+        "url": "https://blogs.microsoft.com/blog/2026/07/20/microsoft-expands-azure-ai-and-hpc-infrastructure-with-amd/",
+        "publishedAt": "2026-07-20",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "Microsoft anuncio nuevas ofertas Azure HDv2, HXv2 y ND MI455X v7 con tecnologia AMD.",
+        "La publicacion vincula la expansion con workloads de modelos, agentes, inferencia y especializacion de infraestructura.",
+        "ND MI455X v7 se posiciona para inferencia AI a escala de produccion."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La infraestructura de IA se diversifica por tipo de workload y reduce dependencia de un unico proveedor de aceleradores."
+      },
+      "action": "Monitorear disponibilidad, precios y benchmarks de ND MI455X v7 frente a Nvidia y TPU para inferencia agentic.",
+      "status": "confirmed",
+      "tags": [
+        "microsoft",
+        "azure",
+        "amd",
+        "inference",
+        "ai-infrastructure",
+        "hpc"
+      ]
+    },
+    {
+      "id": "2026-07-26-anthropic-amd-compute-partnership",
+      "title": "Anthropic asegura capacidad AMD de hasta 2 GW para entrenar y servir Claude",
+      "source": {
+        "name": "AMD",
+        "url": "https://www.amd.com/zh-cn/newsroom/press-releases/amd-anthropic-strategic-partnership.html",
+        "publishedAt": "2026-07-22",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "AMD anuncio que Anthropic desplegara hasta 2 GW de GPUs AMD Instinct MI450 en sistemas Helios.",
+        "El primer gigawatt esta previsto para la primera mitad de 2027.",
+        "AMD comprometio hasta USD 5.000 millones de inversion estrategica y colaboracion en optimizacion de Claude sobre ROCm."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La capacidad de compute sigue siendo una variable estrategica central para labs frontier y disponibilidad de modelos."
+      },
+      "action": "Seguir si la capacidad mejora precio, latencia y disponibilidad de Claude, y que clouds alojan los despliegues.",
+      "status": "confirmed",
+      "tags": [
+        "anthropic",
+        "amd",
+        "claude",
+        "compute",
+        "chips",
+        "rocm",
+        "infrastructure"
+      ]
+    },
+    {
+      "id": "2026-07-26-eu-ai-act-transparency-guidelines",
+      "title": "La Comision Europea publica guias de transparencia del AI Act antes de su aplicacion",
+      "source": {
+        "name": "European Commission",
+        "url": "https://digital-strategy.ec.europa.eu/en/news/commission-publishes-guidelines-transparency-obligations-providers-and-deployers-certain-ai-systems",
+        "publishedAt": "2026-07-20",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "La Comision publico guias para obligaciones de transparencia del AI Act que aplican desde el 2026-08-02.",
+        "Los proveedores deben informar cuando usuarios interactuan directamente con IA.",
+        "Los deployers deben informar deepfakes, contenido de interes publico generado por IA y ciertos usos biometricos o emocionales."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "Los productos de IA con usuarios en la UE enfrentan obligaciones inmediatas de disclosure, marcado y documentacion."
+      },
+      "action": "Revisar UX, metadata, disclosures y documentacion Article 50 para productos con usuarios o clientes europeos.",
+      "status": "actionable",
+      "tags": [
+        "regulation",
+        "eu-ai-act",
+        "transparency",
+        "compliance",
+        "deepfakes",
+        "watermarking"
+      ]
+    },
+    {
+      "id": "2026-07-26-doe-stormbreaker-agentic-ai-critical-infra",
+      "title": "DOE/CESER lanza Stormbreaker para evaluar LLMs y agentes en infraestructura critica",
+      "source": {
+        "name": "U.S. Department of Energy",
+        "url": "https://www.energy.gov/ceser/articles/ceser-releases-new-testbed-advance-llm-and-agentic-ai-evaluation-critical",
+        "publishedAt": "2026-07-16",
+        "retrievedAt": "2026-07-26"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "Stormbreaker evalua LLMs y agentic AI en sistemas electricos y entornos OT.",
+        "El testbed extiende Mjolnir en Lawrence Livermore National Laboratory.",
+        "Incluye configuration transfer y limit discovery para medir comportamiento bajo cambios controlados y limites de capacidad."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La evaluacion de agentes en infraestructura critica se vuelve dinamica y operativa, no solo benchmark estatica."
+      },
+      "action": "Agregar Stormbreaker como referencia para pruebas de agentes en energia, OT, seguridad defensiva y riesgo adversarial.",
+      "status": "actionable",
+      "tags": [
+        "doe",
+        "critical-infrastructure",
+        "cybersecurity",
+        "agents",
+        "energy",
+        "evaluation"
+      ]
+    }
+  ]
+}
