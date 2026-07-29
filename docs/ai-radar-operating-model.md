@@ -22,7 +22,11 @@ de IA en senales accionables para builders. Una senal debe responder:
 ```mermaid
 flowchart LR
   User[Usuario] --> Agent[Agente Codex]
-  Agent --> Skills[Skills AI Radar]
+  Agent --> Manager[ai-radar-source-manager]
+  Manager --> Notion[Notion: AI Radar Sources]
+  Manager --> Cache[config/sources.json]
+  Cache --> Signals[ai-radar-signals]
+  Signals --> Skills[Skills AI Radar]
   Skills --> Tools[Scripts Python]
   Tools --> Store[src/radar_store.py]
   Store --> Daily[data/signals/daily/*.json]
@@ -45,7 +49,7 @@ empezar en la base local.
 
 ```mermaid
 flowchart TD
-  A[Solicitud del usuario] --> B[Normalizar fecha y filtros]
+  A[Solicitud del usuario] --> B[Sincronizar catalogo de fuentes]
   B --> C[Consultar datos locales con scripts/airadar.py]
   C --> D{Hay suficientes senales?}
   D -- Si --> E[Responder desde snapshot local]
@@ -55,6 +59,10 @@ flowchart TD
   H --> I[Validar y auditar]
   I --> J[Responder desde estado persistido]
 ```
+
+La sincronizacion consulta Notion antes de la primera recoleccion editorial del
+dia. Si Notion no responde, conserva la ultima cache valida y reporta
+`fallback-cache`; si tampoco existe cache, reporta `fallback-no-cache`.
 
 Comando base:
 
@@ -91,6 +99,41 @@ sequenceDiagram
     A-->>U: Respuesta con archivo y validaciones
   end
 ```
+
+## Administracion De Fuentes
+
+Notion `AI Radar Sources` es la fuente maestra. La skill
+`ai-radar-source-manager` valida el catalogo y genera `config/sources.json`,
+que `ai-radar-signals` consume en modo de solo lectura.
+
+```mermaid
+flowchart LR
+  N[Notion: AI Radar Sources] --> M[Source Manager]
+  M --> V{Catalogo valido?}
+  V -- Si --> C[Cache v2 / TTL 24 h]
+  V -- No --> F[Conservar ultima cache valida]
+  C --> O[Fuentes oficiales]
+  C --> R[Repositorios tecnicos]
+  C --> U[Comunidades]
+  C --> S[Medios secundarios]
+  O --> Q[Curacion y deduplicacion]
+  R --> Q
+  U --> Q
+  S --> Q
+```
+
+Cadencia recomendada:
+
+| Operacion | Frecuencia | Resultado |
+|---|---|---|
+| Sincronizacion | Diaria o cache mayor a 24 horas | Catalogo fresco o fallback explicito |
+| Salud | Semanal | Disponibilidad, fallos y contenido reciente |
+| Descubrimiento | Mensual | Nuevas fuentes candidatas normalizadas |
+| Revision editorial | Trimestral | Cobertura, ruido, duplicados y decisiones humanas |
+
+Altas, desactivaciones y cambios de URL o categoria requieren aprobacion
+humana. Las metricas de salud comprobadas pueden actualizarse
+automaticamente.
 
 ## Cuando Convertir Una Tarea En Tool
 
@@ -131,6 +174,7 @@ Ejemplos que ya son tool:
 | Ranking | `python3 scripts/airadar.py ranking --date YYYY-MM-DD` | Consultar ranking editorial si existe fixture. |
 | Validacion | `python3 scripts/airadar.py validate --date YYYY-MM-DD` | Revisar estructura minima del snapshot. |
 | Auditoria | `python3 scripts/airadar.py audit --date YYYY-MM-DD` | Detectar duplicados, evidencia vacia, estados y fuentes. |
+| Catalogo de fuentes | `python3 skills/ai-radar-source-manager/scripts/validate_sources_cache.py config/sources.json` | Validar TTL, propiedades, URLs, orden y grupos. |
 
 ## Flujo De Auditoria
 
@@ -159,6 +203,7 @@ flowchart TD
   B[data/signals/daily/] --> B1[Snapshots diarios]
   C[data/reviews/rankings/] --> C1[Rankings y auditorias]
   G[data/sources/candidates/] --> G1[Fuentes candidatas]
+  J[config/sources.json] --> J1[Cache operativa del catalogo Notion]
   D[src/] --> D1[Logica reusable Python]
   E[scripts/] --> E1[Tools llamadas por skills]
   H[skills/] --> H1[Instrucciones especializadas]
@@ -177,18 +222,20 @@ flowchart TD
 - Validar JSON con `jq` cuando se editen datos locales o contratos.
 - No guardar articulos completos, secretos ni salidas generadas no revisadas.
 
-## Sincronizacion De La Skill Activa
+## Sincronizacion De Las Skills Activas
 
-La version canonica de `ai-radar-signals` vive en el repositorio, bajo
-`skills/ai-radar-signals/`. Cuando cambie, sincronizarla con la copia activa de
-Codex y reiniciar la aplicacion para que una sesion nueva cargue las
-instrucciones actualizadas:
+Las versiones canonicas de `ai-radar-signals` y
+`ai-radar-source-manager` viven en el repositorio. Cuando cambien,
+sincronizarlas con las copias activas de Codex y reiniciar la aplicacion para
+que una sesion nueva cargue las instrucciones actualizadas:
 
 ```bash
 diff -u ~/.codex/skills/ai-radar-signals/SKILL.md \
   skills/ai-radar-signals/SKILL.md
 cp skills/ai-radar-signals/SKILL.md \
   ~/.codex/skills/ai-radar-signals/SKILL.md
+cp -R skills/ai-radar-source-manager \
+  ~/.codex/skills/ai-radar-source-manager
 ```
 
 Despues de copiar, volver a ejecutar `diff`. Una salida vacia confirma que la

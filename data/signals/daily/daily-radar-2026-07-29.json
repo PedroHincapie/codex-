@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-29",
+  "generatedAt": "2026-07-29T12:51:14Z",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-29-pangram-ai-content-detection",
+      "title": "Pangram recauda USD 9 millones y lanza detectores de texto e imagen generados por IA",
+      "source": {
+        "name": "TechCrunch",
+        "url": "https://techcrunch.com/2026/07/29/as-ai-content-floods-the-internet-pangram-raises-9m-to-detect-it/",
+        "publishedAt": "2026-07-29",
+        "retrievedAt": "2026-07-29"
+      },
+      "sourceType": "news",
+      "evidence": [
+        "Pangram recaudo USD 9 millones en una ronda liderada por Menlo Ventures con participacion de Haystack, ScOp, Script Capital y Cadenza.",
+        "La empresa lanzo Pangram 4 para deteccion de texto y presento Pangram Image en research preview.",
+        "Pangram afirma que su nuevo detector de texto supera 99% de precision para escritura asistida por IA y contenido mixto humano-IA.",
+        "El sistema fue entrenado con decenas de millones de documentos humanos y versiones sinteticas equivalentes generadas por modelos de lenguaje."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "La ronda y los nuevos detectores muestran demanda creciente por controles de procedencia y autenticidad en publicacion, educacion y plataformas de contenido."
+      },
+      "action": "Evaluar precision, falsos positivos y resistencia a ediciones sobre un corpus propio antes de usar detectores de IA para moderacion o decisiones de alto impacto.",
+      "status": "candidate",
+      "tags": [
+        "pangram",
+        "ai-detection",
+        "content-provenance",
+        "ai-generated-content",
+        "startups"
+      ]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
 interface:
   display_name: "AI Radar Signals"
-  short_description: "Convierte noticias de IA en señales estructuradas."
-  default_prompt: "Convierte estas noticias recientes de IA en señales estructuradas de AI Radar y guarda el snapshot diario."
+  short_description: "Convierte fuentes gestionadas en señales de IA."
+  default_prompt: "Use $ai-radar-signals con el catálogo de $ai-radar-source-manager para buscar y guardar las señales diarias."

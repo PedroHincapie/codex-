@@ -1,0 +1,306 @@
+{
+  "generatedAt": "2026-07-28T12:00:00-05:00",
+  "retrievedFrom": "parallel-web-research",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "window": {
+    "from": "2026-07-21",
+    "to": "2026-07-28"
+  },
+  "candidates": [
+    {
+      "sourceId": "moonshot-kimi-k3-open-weights",
+      "canonicalUrl": "https://github.com/MoonshotAI/Kimi-K3",
+      "sourceName": "Moonshot AI",
+      "sourceType": "repo",
+      "title": "Kimi K3 libera pesos de un modelo MoE multimodal de contexto largo",
+      "publishedAt": "2026-07-27",
+      "retrievedAt": "2026-07-28",
+      "actors": ["moonshot-ai"],
+      "topics": ["open-weights", "multimodal", "agents", "long-context", "moe"],
+      "rawInput": "https://github.com/MoonshotAI/Kimi-K3",
+      "facts": [
+        "Moonshot AI publico los pesos completos y el reporte tecnico de Kimi K3.",
+        "El repositorio describe un modelo MoE de 2.8T parametros con 104B activos, vision nativa y contexto de 1048576 tokens.",
+        "El paper asociado fue enviado a arXiv el 2026-07-27."
+      ],
+      "inferences": [
+        "Kimi K3 cambia el baseline open-weight para agentes, coding y razonamiento multimodal."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "microsoft-openforgerl-harness-native-agent-training",
+      "canonicalUrl": "https://arxiv.org/abs/2607.21557",
+      "sourceName": "arXiv / Microsoft Research",
+      "sourceType": "paper",
+      "title": "OpenForgeRL entrena agentes dentro de harnesses reales",
+      "publishedAt": "2026-07-23",
+      "retrievedAt": "2026-07-28",
+      "actors": ["microsoft-research"],
+      "topics": ["agents", "reinforcement-learning", "computer-use", "open-source"],
+      "rawInput": "https://arxiv.org/abs/2607.21557",
+      "facts": [
+        "OpenForgeRL es un framework abierto para entrenar agentes end-to-end dentro de harnesses como Codex y OpenClaw.",
+        "Un proxy registra las llamadas del modelo como datos de RL y Kubernetes aisla cada rollout.",
+        "Los autores evaluaron agentes sobre ClawEval, OSWorld-Verified, Online-Mind2Web y WebVoyager."
+      ],
+      "inferences": [
+        "El enfoque reduce la brecha entre entrenamiento abierto y los entornos reales de ejecucion de agentes."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "sourceId": "google-tunix-agentic-rl-async",
+      "canonicalUrl": "https://developers.googleblog.com/scaling-agentic-rl-high-throughput-agentic-training-with-tunix/",
+      "sourceName": "Google Developers Blog",
+      "sourceType": "official",
+      "title": "Tunix incorpora rollouts asincronos para entrenamiento agentic en TPU",
+      "publishedAt": "2026-07-21",
+      "retrievedAt": "2026-07-28",
+      "actors": ["google", "tunix"],
+      "topics": ["agents", "reinforcement-learning", "jax", "tpu", "open-source"],
+      "rawInput": "https://developers.googleblog.com/scaling-agentic-rl-high-throughput-agentic-training-with-tunix/",
+      "facts": [
+        "Tunix agrego rollouts asincronos y un pipeline productor-consumidor sin barreras.",
+        "La release integra vLLM-TPU y SGLang-JAX para sampling no bloqueante.",
+        "Las abstracciones de agente y entorno admiten tareas multi-turn y entornos como SWE-bench y WebArena."
+      ],
+      "inferences": [
+        "Google convierte agentic RL multi-turn en capacidad de primera clase para el ecosistema JAX y TPU."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "eu-ai-omnibus-enters-force",
+      "canonicalUrl": "https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force",
+      "sourceName": "European Commission",
+      "sourceType": "official",
+      "title": "El AI Omnibus entra en vigor y modifica plazos de alto riesgo en la UE",
+      "publishedAt": "2026-07-27",
+      "retrievedAt": "2026-07-28",
+      "actors": ["european-commission", "eu-ai-office"],
+      "topics": ["regulation", "eu-ai-act", "high-risk-ai"],
+      "rawInput": "https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force",
+      "facts": [
+        "El AI Omnibus entro en vigor en toda la Union Europea el 2026-07-27.",
+        "Las reglas del Anexo III pasan al 2027-12-02 y las de IA integrada en productos del Anexo I al 2028-08-02.",
+        "La norma amplia sandboxes, simplifica obligaciones y extiende facultades del AI Office."
+      ],
+      "inferences": [
+        "Los equipos que despliegan IA en Europa deben recalcular sus calendarios de compliance sin interpretar la extension como exencion."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "us-ai-kill-switch-act",
+      "canonicalUrl": "https://lieu.house.gov/media-center/in-the-news/house-lawmakers-introduce-bipartisan-ai-kill-switch-bill-following-openai",
+      "sourceName": "Office of Congressman Ted Lieu",
+      "sourceType": "official",
+      "title": "Legisladores presentan un AI Kill Switch Act bipartidista",
+      "publishedAt": "2026-07-23",
+      "retrievedAt": "2026-07-28",
+      "actors": ["ted-lieu", "nathaniel-moran", "us-dhs"],
+      "topics": ["regulation", "frontier-models", "ai-safety", "cybersecurity"],
+      "rawInput": "https://lieu.house.gov/media-center/in-the-news/house-lawmakers-introduce-bipartisan-ai-kill-switch-bill-following-openai",
+      "facts": [
+        "La propuesta bipartidista exige que los sistemas avanzados puedan ralentizarse, suspenderse o apagarse.",
+        "El secretario de Seguridad Nacional podria ordenar medidas de emergencia con consulta interagencial.",
+        "La respuesta prevista es graduada segun el riesgo y llega tras el incidente OpenAI-Hugging Face."
+      ],
+      "inferences": [
+        "Un incidente de agente autonomo ya produjo una propuesta federal de control operacional."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "nvidia-open-secure-ai-alliance",
+      "canonicalUrl": "https://blogs.nvidia.com/blog/open-secure-ai-alliance/",
+      "sourceName": "NVIDIA",
+      "sourceType": "official",
+      "title": "La industria crea Open Secure AI Alliance para seguridad abierta de agentes",
+      "publishedAt": "2026-07-27",
+      "retrievedAt": "2026-07-28",
+      "actors": ["nvidia", "linux-foundation", "hugging-face", "microsoft"],
+      "topics": ["cybersecurity", "open-weights", "agents", "software-supply-chain"],
+      "rawInput": "https://blogs.nvidia.com/blog/open-secure-ai-alliance/",
+      "facts": [
+        "NVIDIA y decenas de socios lanzaron una alianza para compartir tecnologias abiertas de seguridad para software y agentes.",
+        "El trabajo cubre identidad, aislamiento, formatos seguros, escaneo multimodelo y coding seguro.",
+        "NVIDIA aporto modelos, pesos, datos y el framework NOOA para trazabilidad, auditoria y gobernanza."
+      ],
+      "inferences": [
+        "La discusion open-weight se transforma en infraestructura defensiva compartida y auditable."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "microsoft-project-perception-mai-cyber",
+      "canonicalUrl": "https://blogs.microsoft.com/blog/2026/07/27/rethinking-security-for-the-age-of-ai/",
+      "sourceName": "Microsoft",
+      "sourceType": "official",
+      "title": "Microsoft presenta Project Perception y MAI-Cyber-1-Flash",
+      "publishedAt": "2026-07-27",
+      "retrievedAt": "2026-07-28",
+      "actors": ["microsoft", "microsoft-security"],
+      "topics": ["agentic-security", "cybersecurity", "specialized-models", "multi-model"],
+      "rawInput": "https://blogs.microsoft.com/blog/2026/07/27/rethinking-security-for-the-age-of-ai/",
+      "facts": [
+        "Project Perception coordina agentes red, blue y green en un ciclo defensivo continuo.",
+        "Microsoft reporta que MAI-Cyber-1-Flash dentro de MDASH alcanza 96% en CyberGym y casi 50% de ahorro frente a su configuracion actual.",
+        "Project Perception entrara en public preview el 2026-08-03."
+      ],
+      "inferences": [
+        "La defensa agentic converge en modelos especializados, orquestacion multimodelo y actuadores con control humano."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "openai-gpt-transcribe-live",
+      "canonicalUrl": "https://openai.com/products/release-notes/",
+      "sourceName": "OpenAI",
+      "sourceType": "product",
+      "title": "OpenAI libera GPT Transcribe y GPT Live Transcribe",
+      "publishedAt": "2026-07-28",
+      "retrievedAt": "2026-07-28",
+      "actors": ["openai"],
+      "topics": ["speech-to-text", "realtime", "api", "multilingual"],
+      "rawInput": "https://openai.com/products/release-notes/",
+      "facts": [
+        "GPT Transcribe y GPT Live Transcribe llegaron a disponibilidad general el 2026-07-28.",
+        "El primer modelo cubre archivos y turnos finales de Realtime; el segundo ofrece streaming de baja latencia.",
+        "Ambos aceptan contexto libre, keyword hints y multiples idiomas esperados."
+      ],
+      "inferences": [
+        "La API reduce friccion para agentes de voz y flujos de transcripcion multilingue."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "openai-health-chatgpt-us",
+      "canonicalUrl": "https://openai.com/index/health-in-chatgpt/",
+      "sourceName": "OpenAI",
+      "sourceType": "product",
+      "title": "Health in ChatGPT se expande a usuarios elegibles de Estados Unidos",
+      "publishedAt": "2026-07-23",
+      "retrievedAt": "2026-07-28",
+      "actors": ["openai", "apple-health"],
+      "topics": ["health-ai", "connected-data", "privacy", "consumer-ai"],
+      "rawInput": "https://openai.com/index/health-in-chatgpt/",
+      "facts": [
+        "El rollout cubre adultos elegibles en planes Free, Go, Plus y Pro en Estados Unidos.",
+        "La experiencia conecta Apple Health y registros compatibles en web e iOS.",
+        "OpenAI afirma que los datos y conversaciones de Health no entrenan modelos ni se usan para anuncios."
+      ],
+      "inferences": [
+        "La personalizacion sobre datos medicos vuelve consentimiento, aislamiento de datos y limites clinicos requisitos centrales."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "github-mcp-server-stateless-spec",
+      "canonicalUrl": "https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification/",
+      "sourceName": "GitHub Changelog",
+      "sourceType": "product",
+      "title": "GitHub MCP Server adopta el nuevo nucleo stateless de MCP",
+      "publishedAt": "2026-07-23",
+      "retrievedAt": "2026-07-28",
+      "actors": ["github", "model-context-protocol"],
+      "topics": ["mcp", "agents", "protocols", "scalability"],
+      "rawInput": "https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification/",
+      "facts": [
+        "La especificacion elimina sesiones e initialize y permite handshakes paralelos.",
+        "GitHub MCP Server elimino sesiones Redis y accesos de base de datos asociados.",
+        "MCP agrego pruebas oficiales de conformidad para clientes, servidores y SDKs."
+      ],
+      "inferences": [
+        "El cambio reduce estado operacional y facilita escalar y verificar servidores MCP."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "github-issues-agent-automation-controls",
+      "canonicalUrl": "https://github.blog/changelog/2026-07-23-agent-automation-controls-in-github-issues-in-public-preview/",
+      "sourceName": "GitHub Changelog",
+      "sourceType": "product",
+      "title": "GitHub Issues agrega revision y trazabilidad para cambios hechos por agentes",
+      "publishedAt": "2026-07-23",
+      "retrievedAt": "2026-07-28",
+      "actors": ["github"],
+      "topics": ["agents", "governance", "developer-tools", "human-in-the-loop"],
+      "rawInput": "https://github.blog/changelog/2026-07-23-agent-automation-controls-in-github-issues-in-public-preview/",
+      "facts": [
+        "La public preview agrega aprobaciones, niveles de confianza y rationale para cambios de issues hechos por agentes.",
+        "Cubre labels, fields, type, cierre y asignaciones mediante workflows agentic, Copilot y APIs.",
+        "GitHub aclara que las aprobaciones son una conveniencia de workflow y no un control de seguridad del servidor."
+      ],
+      "inferences": [
+        "La gobernanza agentic practica empieza a incorporar trazabilidad y revision graduada dentro del flujo de trabajo."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "github-copilot-enterprise-managed-settings",
+      "canonicalUrl": "https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/",
+      "sourceName": "GitHub Changelog",
+      "sourceType": "product",
+      "title": "GitHub extiende politicas gestionadas a Copilot app y cloud agent",
+      "publishedAt": "2026-07-27",
+      "retrievedAt": "2026-07-28",
+      "actors": ["github"],
+      "topics": ["copilot", "agents", "enterprise-ai", "governance"],
+      "rawInput": "https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/",
+      "facts": [
+        "managed-settings.json ahora gobierna Copilot app y cloud agent ademas de CLI y VS Code.",
+        "Las politicas controlan plugins, marketplaces, bypass de aprobaciones y seleccion automatica de modelo.",
+        "Los valores empresariales prevalecen sobre la configuracion local."
+      ],
+      "inferences": [
+        "La extension cierra una brecha de gobernanza entre clientes interactivos y ejecucion agentic remota."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "xai-grok-build-mode",
+      "canonicalUrl": "https://x.ai/news/grok-build-mode",
+      "sourceName": "xAI",
+      "sourceType": "product",
+      "title": "xAI introduce Build Mode para crear y publicar aplicaciones desde Grok",
+      "publishedAt": "2026-07-28",
+      "retrievedAt": "2026-07-28",
+      "actors": ["xai", "grok"],
+      "topics": ["app-generation", "coding-agents", "websites", "games"],
+      "rawInput": "https://x.ai/news/grok-build-mode",
+      "facts": [
+        "Build Mode genera sitios, aplicaciones, juegos y dashboards con preview vivo en el chat.",
+        "Los artefactos se publican en grok.me o en un dominio propio.",
+        "La early beta esta disponible en web, iOS y Android para SuperGrok Heavy."
+      ],
+      "inferences": [
+        "Los coding agents se convierten en constructores y publicadores de software para usuarios no tecnicos."
+      ],
+      "confidence": "high"
+    },
+    {
+      "sourceId": "nvidia-agent-toolkit-physicsnemo-cuda-x",
+      "canonicalUrl": "https://nvidianews.nvidia.com/news/nvidia-expands-nvidia-agent-toolkit-with-nvidia-physicsnemo-and-cuda-x-libraries-to-transform-how-the-world-engineers-designs-and-builds",
+      "sourceName": "NVIDIA",
+      "sourceType": "official",
+      "title": "NVIDIA verticaliza Agent Toolkit para ingenieria y simulacion",
+      "publishedAt": "2026-07-26",
+      "retrievedAt": "2026-07-28",
+      "actors": ["nvidia", "cadence", "siemens", "synopsys"],
+      "topics": ["agentic-engineering", "physics-ai", "semiconductor-design", "cuda-x"],
+      "rawInput": "https://nvidianews.nvidia.com/news/nvidia-expands-nvidia-agent-toolkit-with-nvidia-physicsnemo-and-cuda-x-libraries-to-transform-how-the-world-engineers-designs-and-builds",
+      "facts": [
+        "NVIDIA amplio Agent Toolkit con PhysicsNeMo re-arquitectado y librerias CUDA-X.",
+        "La entrega agrega cuISS, cuDSS y cuEST para workloads de ingenieria.",
+        "Cadence, Siemens, Synopsys y Samsung describieron integraciones o usos."
+      ],
+      "inferences": [
+        "Los agentes se verticalizan desde tareas generales hacia simulacion, EDA y diseno industrial."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

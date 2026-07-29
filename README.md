@@ -4,7 +4,10 @@ AI Radar es el proyecto del curso avanzado de Codex.
 
 El objetivo del producto es organizar noticias, herramientas, papers, repos y lanzamientos de IA para convertirlos en senales accionables para builders: que paso, por que importa, que tan confiable es y que vale la pena probar.
 
-Estado inicial: definicion de producto, stack objetivo y reglas iniciales. La implementacion se construye por capas durante el curso con Codex.
+Estado actual: nucleo local operativo para administrar fuentes, normalizar
+candidatos, curar senales, auditarlas y producir rankings deterministas. Notion
+funciona como fuente maestra del catalogo editorial y el repositorio conserva
+contratos, cache operativa, snapshots y evidencia de validacion.
 
 ## Problema
 
@@ -32,14 +35,22 @@ Al final del curso, AI Radar debe poder:
 - guardar trazas de decisiones y validaciones,
 - desplegarse con infraestructura controlada.
 
-## Estado Inicial
+## Estado Actual
 
-El starter contiene:
+Al 29 de julio de 2026, el proyecto cuenta con:
 
-- `README.md`
-- `.gitignore`
+- 15 fuentes activas y saludables administradas en Notion;
+- una cache local v2 con TTL de 24 horas y fallback explicito;
+- cuatro grupos de fuentes para recoleccion paralela;
+- skills separadas para fuentes, normalizacion, senales, revision, ranking y
+  fixtures;
+- snapshots diarios, candidatos normalizados y rankings editoriales;
+- CLI local para consulta, validacion, auditoria, cobertura y ranking;
+- pruebas `unittest` para el dominio, el CLI y el contrato del catalogo.
 
-La primera clase usa este estado para mostrar como `AGENTS.md` cambia la forma en que Codex entiende un proyecto antes de escribir codigo.
+El corte verificable, las decisiones tomadas y las piezas pendientes se
+documentan en
+[docs/ai-radar-current-state.md](docs/ai-radar-current-state.md).
 
 ## Stack Objetivo
 
@@ -74,6 +85,11 @@ El modelo operativo completo, con diagramas de flujo, arquitectura, criterios
 para crear tools y capacidades actuales, esta en:
 
 - [docs/ai-radar-operating-model.md](docs/ai-radar-operating-model.md)
+- [docs/ai-radar-current-state.md](docs/ai-radar-current-state.md)
+- [skills/ai-radar-source-manager/references/source-contract.md](skills/ai-radar-source-manager/references/source-contract.md)
+
+La portada operativa y el administrador visual de fuentes viven en
+[AI Radar — Administracion de fuentes](https://app.notion.com/p/3ac17079ee1581bd9a0dda605b898701).
 
 ## Herramientas Locales
 
@@ -90,6 +106,7 @@ python3 scripts/airadar.py show 2026-06-18-deepmind-agent-control-roadmap --fiel
 python3 scripts/airadar.py validate --date 2026-06-20
 python3 scripts/airadar.py audit --date 2026-06-20
 python3 scripts/airadar.py coverage --from 2026-06-13 --to 2026-07-09
+python3 skills/ai-radar-source-manager/scripts/validate_sources_cache.py config/sources.json
 ```
 
 Comandos disponibles:

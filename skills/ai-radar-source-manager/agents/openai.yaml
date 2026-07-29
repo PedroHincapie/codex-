@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Radar Source Manager"
+  short_description: "Administra fuentes, caché y salud de AI Radar."
+  default_prompt: "Use $ai-radar-source-manager para sincronizar Notion, validar la salud de las fuentes y regenerar la caché local."
