@@ -6,8 +6,8 @@ AI Radar convierte novedades de IA en señales curadas y rankings locales. Disti
 
 - `src/`: lógica de dominio; `radar_store.py` carga, filtra, valida y audita señales, y `ranking_engine.py` crea rankings deterministas.
 - `scripts/airadar.py`: CLI local del proyecto.
-- `frontend/`: dashboard estático responsive con modos Reader y Operator; usa datos locales versionados y conserva evidencia visual en `frontend/evidence/`.
-- `supabase/`: configuración y migraciones de la proyección relacional local.
+- `frontend/`: dashboard estático responsive con modos Reader y Operator; consulta Supabase Cloud, conserva fallback local y guarda evidencia visual en `frontend/evidence/`.
+- `supabase/`: configuración y migraciones de las proyecciones relacionales local y Cloud.
 - `tests/`: pruebas `unittest` para el dominio y el CLI.
 - `data/signals/daily/`: snapshots curados `daily-radar-YYYY-MM-DD.json`.
 - `data/reviews/rankings/`: rankings editoriales `signal-review-ranking-YYYY-MM-DD.json`.

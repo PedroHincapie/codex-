@@ -272,12 +272,12 @@ flowchart LR
   A[Fixtures locales] --> B[Tools Python]
   B --> C[Contratos mas ricos]
   C --> D[Deduplicacion y ranking automatizados]
-  D --> E[Supabase local]
-  E --> F[Dashboard con fixtures]
-  F --> G[Conexion remota y despliegue]
+  D --> E[Supabase local y Cloud]
+  E --> F[Dashboard Cloud con fallback]
+  F --> G[Despliegue]
 ```
 
-El proyecto crece por capas. El contrato, las tools, la proyeccion Supabase
-local y el dashboard con fixtures ya estan versionados. La siguiente capa es
-conectar un proyecto remoto aprobado, mantener RLS como frontera de seguridad y
-desplegar la interfaz sin perder el fallback local auditable.
+El proyecto crece por capas. El contrato, las tools, las proyecciones Supabase
+local y Cloud, y el dashboard Cloud con fallback ya estan versionados. La
+siguiente capa es desplegar la interfaz manteniendo RLS como frontera de
+seguridad y el fallback local auditable.

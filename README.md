@@ -8,8 +8,8 @@ Estado actual: nucleo local operativo para administrar fuentes, normalizar
 candidatos, curar senales, auditarlas y producir rankings deterministas. Notion
 funciona como fuente maestra del catalogo editorial y el repositorio conserva
 contratos, cache operativa, snapshots y evidencia de validacion. La persistencia
-Supabase ya cuenta con esquema versionado, RLS, carga idempotente y validacion
-local; la creacion del proyecto remoto permanece como paso controlado.
+Supabase ya cuenta con proyecto Cloud, esquema versionado, RLS, carga
+idempotente y validacion local y remota.
 
 ## Problema
 
@@ -39,7 +39,7 @@ Al final del curso, AI Radar debe poder:
 
 ## Estado Actual
 
-Al 29 de julio de 2026, el proyecto cuenta con:
+Al 30 de julio de 2026, el proyecto cuenta con:
 
 - 15 fuentes activas y saludables administradas en Notion;
 - una cache local v2 con TTL de 24 horas y fallback explicito;
@@ -48,10 +48,10 @@ Al 29 de julio de 2026, el proyecto cuenta con:
   ranking, fixtures y desarrollo frontend;
 - snapshots diarios, candidatos normalizados y rankings editoriales;
 - CLI local para consulta, validacion, auditoria, cobertura y ranking;
-- persistencia Supabase local con esquema versionado, RLS y carga idempotente;
-- dashboard estatico responsive en `frontend/`, alimentado por fixtures
-  versionados y con modos Reader y Operator;
-- 31 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
+- persistencia Supabase local y Cloud con esquema versionado, RLS y 325 filas;
+- dashboard estatico responsive en `frontend/`, conectado primero a Supabase
+  Cloud y con fixtures versionados como fallback visible;
+- 34 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
   la sincronizacion de skills.
 
 El corte verificable, las decisiones tomadas y las piezas pendientes se
@@ -109,9 +109,9 @@ La portada operativa y el administrador visual de fuentes viven en
 | `ai-radar-test-fixture-builder` | Convertir reglas editoriales en fixtures y pruebas. |
 | `desarrollo-frontend-airadar` | Implementar y verificar interfaces con datos trazables, estados completos, accesibilidad y evidencia visual. |
 
-El dashboard ya esta versionado en `frontend/` y declara de forma visible que
-usa datos locales, no una conexion en tiempo real. Su conexion a Supabase y su
-despliegue siguen pendientes.
+El dashboard ya esta versionado en `frontend/`, consulta Supabase Cloud mediante
+la Data API y declara visualmente si opera en Cloud o en fallback local. Su
+despliegue sigue pendiente.
 
 ## Herramientas Locales
 
@@ -171,6 +171,8 @@ python3 scripts/load_supabase.py --apply
 ```
 
 La clave secreta no debe guardarse en el repositorio ni exponerse al frontend.
+La configuracion publica del frontend vive en `frontend/supabase-config.js` y
+usa exclusivamente una clave `sb_publishable_...`.
 
 Para cargar la instancia local sin copiar ni mostrar sus claves:
 
@@ -231,6 +233,9 @@ La definicion reproducible vive en `supabase/`:
 - `src/persistence.py`: mapeo determinista desde los JSON a registros
   relacionales.
 - `scripts/load_supabase.py`: upserts por lotes, protegidos por `--apply`.
+
+El proyecto Cloud, sus conteos, controles de acceso y procedimiento operativo
+se documentan en [docs/supabase-cloud.md](docs/supabase-cloud.md).
 
 El esquema separa datos publicados de datos editoriales internos. Los roles
 `anon` y `authenticated` solo tienen `SELECT` sobre snapshots, senales,

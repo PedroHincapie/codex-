@@ -1,6 +1,6 @@
 # Estado Actual De AI Radar
 
-Fecha de corte: 29 de julio de 2026.
+Fecha de corte: 30 de julio de 2026.
 
 Este documento registra el estado verificable del producto despues de
 incorporar la administracion de fuentes en Notion, la cache local y el flujo de
@@ -19,14 +19,14 @@ flowchart LR
   K --> S[Senales curadas]
   S --> A[Auditoria]
   A --> R[Ranking]
-  R --> P[Supabase local]
-  R --> U[Dashboard con fixtures]
+  R --> P[Supabase local y Cloud]
+  P --> U[Dashboard Cloud con fallback]
 ```
 
 Notion gobierna que fuentes consultar. El repositorio conserva los datos
 procesables y las reglas deterministas. Las skills coordinan el razonamiento,
-los scripts validan los contratos y el dashboard presenta una lectura local
-trazable.
+los scripts validan los contratos y el dashboard presenta una lectura Cloud
+con fallback local trazable.
 
 ## Corte Verificable
 
@@ -44,10 +44,11 @@ trazable.
 | Senales del 29 de julio | 1 candidata, sin duplicados ni evidencia vacia |
 | Ranking del 28 de julio | 107 senales acumuladas |
 | Esquema Supabase local | 6 tablas con RLS y grants explicitos |
-| Proyeccion relacional | 325 filas cargadas idempotentemente |
-| Dashboard local | Responsive, modos Reader y Operator, fixture versionado |
+| Supabase Cloud | Proyecto `AI Radar`, `us-east-1`, saludable |
+| Proyeccion relacional | 325 filas en local y Cloud |
+| Dashboard | Cloud primero, fallback local, modos Reader y Operator |
 | Skills canonicas | 7: seis editoriales y una de desarrollo frontend |
-| Suite automatizada | 31 pruebas aprobadas |
+| Suite automatizada | 34 pruebas aprobadas |
 
 Los conteos son una fotografia editorial, no una promesa de volumen diario.
 
@@ -84,9 +85,9 @@ El contrato completo vive en
 `config/sources.json` en modo de solo lectura.
 
 La skill frontend establece las puertas de calidad de la interfaz. El dashboard
-ya forma parte de los artefactos versionados en `frontend/`, consume snapshots
-y rankings locales y explicita que no representa datos en tiempo real. Todavia
-no esta conectado a Supabase ni desplegado.
+ya forma parte de los artefactos versionados en `frontend/`, consulta Supabase
+Cloud y conserva los snapshots y rankings locales como fallback explicito.
+Todavia no esta desplegado.
 
 ## Cache Y Continuidad
 
@@ -141,7 +142,7 @@ Resultado del corte:
 - cache valida con 15 fuentes;
 - snapshot del 29 de julio valido;
 - sin duplicados ni evidencia vacia en ese snapshot;
-- 31 pruebas aprobadas;
+- 34 pruebas aprobadas;
 - siete skills canonicas sincronizadas con las copias activas de Codex;
 - migracion Supabase aplicada sin errores en Postgres local;
 - lint y asesores locales sin hallazgos;
@@ -149,8 +150,10 @@ Resultado del corte:
   senales, 3 rankings, 167 entradas de ranking, 2 lotes y 22 candidatos;
 - los roles publicos pueden leer datos publicados y no tienen privilegios sobre
   candidatos internos;
-- dashboard validado en escritorio y 369 x 799, con modos Reader y Operator,
-  paginacion, busqueda, estado vacio, estado de error y consola sin errores;
+- proyecto Cloud `xredenxxhnzkmfxxnrlg` activo y saludable en `us-east-1`;
+- 325 filas verificadas en Cloud y asesores de seguridad sin hallazgos;
+- dashboard validado con datos Cloud, fallback local, modos Reader y Operator,
+  paginacion, estado vacio, estado de error y consola sin errores;
 - capturas verificables conservadas en `frontend/evidence/`.
 
 ## Decisiones Pendientes
@@ -159,10 +162,6 @@ Resultado del corte:
 - Registrar `Ultimo contenido detectado` durante comprobaciones reales.
 - Definir una automatizacion concreta para la sincronizacion diaria y la
   revision semanal.
-- Crear el proyecto Supabase remoto en la organizacion aprobada, aplicar la
-  migracion y cargar la proyeccion validada.
-- Conectar el dashboard a las lecturas publicas de Supabase conservando el
-  fixture local como fallback verificable.
 - Definir el destino y desplegar el dashboard.
 - Definir y desplegar las Vercel Functions que realmente requieran acceso
   privilegiado; las lecturas publicas pueden usar la Data API con RLS.

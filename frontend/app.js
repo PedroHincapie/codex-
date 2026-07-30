@@ -1,4 +1,4 @@
-import { DATA_SOURCE, loadRadarData } from "./data.js";
+import { loadRadarData } from "./data.js?v=20260730-cloud";
 
 const PAGE_SIZE = 6;
 const dimensionLabels = {
@@ -65,6 +65,10 @@ const elements = {
   toast: document.querySelector("#toast"),
   sidebar: document.querySelector("#sidebar"),
   menuButton: document.querySelector("#menu-button"),
+  dataBadge: document.querySelector("#data-badge"),
+  sourceNotice: document.querySelector("#source-notice"),
+  sourceNoticeTitle: document.querySelector("#source-notice-title"),
+  sourceNoticeText: document.querySelector("#source-notice-text"),
 };
 
 const formatDate = (value) =>
@@ -132,6 +136,12 @@ async function initialize() {
       data.totalSignals.toLocaleString("es-CO");
     document.querySelector("#sidebar-source-count").textContent =
       `${data.sourceCount} fuentes en snapshots`;
+    elements.dataBadge.textContent = data.source.badge;
+    elements.sourceNotice.classList.toggle("is-degraded", data.degraded);
+    elements.sourceNoticeTitle.textContent = `${data.source.label}.`;
+    elements.sourceNoticeText.textContent = data.degraded
+      ? `Modo degradado: ${data.source.note}`
+      : "Ranking y señales consultados desde la Data API protegida por RLS.";
 
     render();
   } catch (error) {
@@ -314,9 +324,10 @@ function createDraft(signal) {
     impact: { ...signal.impact },
     action: signal.action,
     provenance: {
-      kind: DATA_SOURCE.kind,
-      ranking: DATA_SOURCE.ranking,
-      contract: DATA_SOURCE.contract,
+      kind: state.data.source.kind,
+      endpoint: state.data.source.url,
+      ranking: state.data.source.ranking,
+      contract: state.data.source.contract,
       persisted: false,
     },
   };
@@ -563,7 +574,12 @@ elements.previewDialog.addEventListener("click", (event) => {
 });
 
 document.querySelector("#source-details-button").addEventListener("click", () => {
-  showToast(`${DATA_SOURCE.label}: ${DATA_SOURCE.note}`);
+  const source = state.data?.source;
+  showToast(
+    source
+      ? `${source.label}: ${source.note}`
+      : "La fuente de datos todavía se está validando.",
+  );
 });
 
 elements.menuButton.addEventListener("click", () => {
