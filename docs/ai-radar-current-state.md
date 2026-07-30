@@ -48,7 +48,7 @@ con fallback local trazable.
 | Proyeccion relacional | 325 filas en local y Cloud |
 | Dashboard | Cloud primero, fallback local, modos Reader y Operator |
 | Skills canonicas | 7: seis editoriales y una de desarrollo frontend |
-| Suite automatizada | 34 pruebas aprobadas |
+| Suite automatizada | 35 pruebas aprobadas |
 
 Los conteos son una fotografia editorial, no una promesa de volumen diario.
 
@@ -142,7 +142,7 @@ Resultado del corte:
 - cache valida con 15 fuentes;
 - snapshot del 29 de julio valido;
 - sin duplicados ni evidencia vacia en ese snapshot;
-- 34 pruebas aprobadas;
+- 35 pruebas aprobadas;
 - siete skills canonicas sincronizadas con las copias activas de Codex;
 - migracion Supabase aplicada sin errores en Postgres local;
 - lint y asesores locales sin hallazgos;

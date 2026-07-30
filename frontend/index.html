@@ -324,6 +324,27 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-    <script type="module" src="./app.js?v=20260730-cloud"></script>
+    <script>
+      (() => {
+        const timeout = window.setTimeout(() => {
+          const loading = document.querySelector("#loading-state");
+          const error = document.querySelector("#error-state");
+          const message = document.querySelector("#error-message");
+          if (loading) loading.hidden = true;
+          if (error) error.hidden = false;
+          if (message) {
+            message.textContent =
+              "La aplicación no pudo completar su inicio. Recarga la página para reintentar; si continúa, verifica que app.js, data.js y supabase-config.js estén publicados juntos.";
+          }
+        }, 18_000);
+
+        window.addEventListener(
+          "airadar:ready",
+          () => window.clearTimeout(timeout),
+          { once: true },
+        );
+      })();
+    </script>
+    <script type="module" src="./app.js?v=20260730-resilient"></script>
   </body>
 </html>

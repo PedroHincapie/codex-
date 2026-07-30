@@ -33,6 +33,15 @@ class FrontendSupabaseConfigTest(unittest.TestCase):
     self.assertIn('kind: "fixture"', data_source)
     self.assertIn('demoState === "fallback"', data_source)
     self.assertIn("data.fallbackReason", data_source)
+    self.assertIn("REQUEST_TIMEOUT_MS", data_source)
+    self.assertIn("AbortController", data_source)
+
+  def test_frontend_has_an_independent_startup_watchdog(self):
+    markup = (ROOT / "frontend" / "index.html").read_text(encoding="utf-8")
+
+    self.assertIn('"airadar:ready"', markup)
+    self.assertIn("18_000", markup)
+    self.assertIn("La aplicación no pudo completar su inicio", markup)
 
 
 if __name__ == "__main__":

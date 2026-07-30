@@ -1,4 +1,4 @@
-import { loadRadarData } from "./data.js?v=20260730-cloud";
+import { loadRadarData } from "./data.js?v=20260730-resilient";
 
 const PAGE_SIZE = 6;
 const dimensionLabels = {
@@ -140,14 +140,16 @@ async function initialize() {
     elements.sourceNotice.classList.toggle("is-degraded", data.degraded);
     elements.sourceNoticeTitle.textContent = `${data.source.label}.`;
     elements.sourceNoticeText.textContent = data.degraded
-      ? `Modo degradado: ${data.source.note}`
+      ? `Modo degradado: ${data.source.note} Motivo: ${data.fallbackReason}`
       : "Ranking y señales consultados desde la Data API protegida por RLS.";
 
     render();
+    window.dispatchEvent(new Event("airadar:ready"));
   } catch (error) {
     elements.loading.hidden = true;
     elements.error.hidden = false;
     elements.errorMessage.textContent = error.message;
+    window.dispatchEvent(new Event("airadar:ready"));
   }
 }
 

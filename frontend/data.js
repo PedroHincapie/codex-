@@ -1,5 +1,6 @@
-import { SUPABASE_CONFIG } from "./supabase-config.js?v=20260730-cloud";
+import { SUPABASE_CONFIG } from "./supabase-config.js?v=20260730-resilient";
 
+const REQUEST_TIMEOUT_MS = 8_000;
 const SNAPSHOT_DATES = [
   "2026-06-13",
   "2026-06-14",
@@ -48,8 +49,27 @@ export const DATA_SOURCE = Object.freeze({
   note: "Lectura pública desde Supabase Cloud con RLS y clave publicable.",
 });
 
+async function fetchWithTimeout(resource, options = {}) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  try {
+    return await fetch(resource, {
+      ...options,
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (error.name === "AbortError") {
+      throw new Error(`La consulta excedió ${REQUEST_TIMEOUT_MS / 1_000} segundos.`);
+    }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
 async function fetchJson(path) {
-  const response = await fetch(path);
+  const response = await fetchWithTimeout(path);
 
   if (!response.ok) {
     throw new Error(`No se pudo leer ${path} (${response.status})`);
@@ -60,7 +80,7 @@ async function fetchJson(path) {
 
 async function fetchSupabase(table, query) {
   const endpoint = `${SUPABASE_CONFIG.url}/rest/v1/${table}?${query}`;
-  const response = await fetch(endpoint, {
+  const response = await fetchWithTimeout(endpoint, {
     headers: {
       apikey: SUPABASE_CONFIG.publishableKey,
       Accept: "application/json",
@@ -207,7 +227,8 @@ export async function loadRadarData({ demoState = "" } = {}) {
   } catch (cloudError) {
     try {
       data = await loadFixtureData();
-      data.fallbackReason = cloudError.message;
+      data.fallbackReason =
+        cloudError.message || "Supabase Cloud no respondió dentro del tiempo esperado.";
     } catch (fixtureError) {
       throw new Error(
         `Supabase Cloud y el fallback local fallaron: ${fixtureError.message}`,

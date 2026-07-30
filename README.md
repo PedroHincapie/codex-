@@ -51,7 +51,7 @@ Al 30 de julio de 2026, el proyecto cuenta con:
 - persistencia Supabase local y Cloud con esquema versionado, RLS y 325 filas;
 - dashboard estatico responsive en `frontend/`, conectado primero a Supabase
   Cloud y con fixtures versionados como fallback visible;
-- 34 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
+- 35 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
   la sincronizacion de skills.
 
 El corte verificable, las decisiones tomadas y las piezas pendientes se

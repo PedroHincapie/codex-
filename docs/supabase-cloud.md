@@ -40,6 +40,9 @@ importacion controlada. La extension HTTP temporal se elimino al terminar.
 `frontend/data.js` consulta primero Supabase Cloud. Si la Data API no responde,
 usa los JSON locales y muestra `Fallback local` junto con un aviso de modo
 degradado. El fallback nunca se presenta como una respuesta Cloud.
+Cada peticion tiene un maximo de ocho segundos y el arranque cuenta con un
+watchdog independiente: una falla de red o de modulos ya no puede dejar la
+interfaz mostrando el loader indefinidamente.
 
 Estados reproducibles:
 
