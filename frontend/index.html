@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta
+      name="description"
+      content="Dashboard local de AI Radar para explorar señales, evidencia y rankings editoriales."
+    >
+    <title>AI Radar · Signal Intelligence</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23061116'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%238f5cff' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='12' fill='none' stroke='%2332c7e9' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%2373e1ea'/%3E%3C/svg%3E"
+    >
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+        <a class="brand" href="./" aria-label="AI Radar, inicio">
+          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="19"></circle>
+            <circle cx="24" cy="24" r="11"></circle>
+            <path d="M24 5a19 19 0 0 1 17 10M7 30a19 19 0 0 1-1-6"></path>
+            <circle class="brand-dot" cx="37" cy="14" r="2.5"></circle>
+            <circle class="brand-dot" cx="24" cy="24" r="3"></circle>
+          </svg>
+          <span>AI Radar</span>
+        </a>
+
+        <nav class="primary-nav" aria-label="Secciones">
+          <button class="nav-item is-active" type="button" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">◉</span>
+            <span>Radar</span>
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon" aria-hidden="true">▥</span>
+            <span>Rankings</span>
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon" aria-hidden="true">⌁</span>
+            <span>Fuentes</span>
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            <span>Evidencia</span>
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon" aria-hidden="true">◇</span>
+            <span>Revisiones</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+
+        <div class="radar-count" aria-label="Resumen de datos locales">
+          <span>Señales versionadas</span>
+          <strong id="sidebar-signal-count">—</strong>
+          <small id="sidebar-source-count">Cargando fuentes…</small>
+        </div>
+
+        <div class="sidebar-actions" aria-label="Preferencias">
+          <button class="icon-button" type="button" aria-label="Ayuda">?</button>
+          <button class="icon-button" type="button" aria-label="Configuración">⚙</button>
+          <button class="icon-button" id="theme-button" type="button" aria-label="Aumentar contraste">☼</button>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <button
+            class="menu-button"
+            id="menu-button"
+            type="button"
+            aria-label="Abrir navegación"
+            aria-controls="sidebar"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+
+          <div class="mode-switch" role="group" aria-label="Modo de trabajo">
+            <button class="mode-button is-active" type="button" data-mode="reader" aria-pressed="true">
+              Reader
+            </button>
+            <button class="mode-button" type="button" data-mode="operator" aria-pressed="false">
+              Operator
+            </button>
+          </div>
+
+          <div class="topbar-meta">
+            <span id="last-updated">Cargando corte local…</span>
+            <span class="data-badge">Fixture local</span>
+          </div>
+
+          <button class="icon-button notification-button" type="button" aria-label="Notificaciones">
+            ♢<span class="notification-dot"></span>
+          </button>
+          <button class="secondary-button" id="filter-button" type="button" aria-expanded="false">
+            <span aria-hidden="true">▽</span> Filtros
+          </button>
+        </header>
+
+        <main id="main-content" tabindex="-1">
+          <section class="source-notice" aria-label="Procedencia de los datos">
+            <span class="source-notice-icon" aria-hidden="true">✓</span>
+            <p>
+              <strong>Datos locales versionados.</strong>
+              Ranking editorial y snapshots del repositorio; no es una conexión en tiempo real.
+            </p>
+            <button id="source-details-button" type="button">Ver procedencia</button>
+          </section>
+
+          <section class="dashboard" aria-labelledby="ranking-title">
+            <div class="ranking-pane">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Inteligencia editorial</p>
+                  <h1 id="ranking-title">Signal ranking</h1>
+                </div>
+                <div class="heading-actions">
+                  <label class="search-field">
+                    <span class="sr-only">Buscar señales</span>
+                    <span aria-hidden="true">⌕</span>
+                    <input id="search-input" type="search" placeholder="Buscar señales…" autocomplete="off">
+                  </label>
+                  <button
+                    class="compact-button"
+                    id="evidence-toggle"
+                    type="button"
+                    aria-controls="evidence-panel"
+                    aria-expanded="true"
+                  >
+                    Evidencia
+                  </button>
+                </div>
+              </div>
+
+              <div class="filter-popover" id="filter-popover" hidden>
+                <div>
+                  <label for="status-filter">Estado</label>
+                  <select id="status-filter">
+                    <option value="">Todos</option>
+                    <option value="actionable">Accionable</option>
+                    <option value="confirmed">Confirmada</option>
+                    <option value="evolving">En evolución</option>
+                    <option value="candidate">Candidata</option>
+                    <option value="debated">En debate</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="impact-filter">Impacto</label>
+                  <select id="impact-filter">
+                    <option value="">Todos</option>
+                    <option value="high">Alto</option>
+                    <option value="medium-high">Medio-alto</option>
+                    <option value="medium">Medio</option>
+                  </select>
+                </div>
+                <button class="text-button" id="clear-filters" type="button">Limpiar filtros</button>
+              </div>
+
+              <div class="state-card loading-state" id="loading-state" role="status">
+                <div class="spinner" aria-hidden="true"></div>
+                <strong>Cargando radar local</strong>
+                <span>Resolviendo ranking y snapshots versionados…</span>
+              </div>
+
+              <div class="state-card error-state" id="error-state" role="alert" hidden>
+                <span class="state-icon" aria-hidden="true">!</span>
+                <strong>No pudimos cargar los datos locales</strong>
+                <span id="error-message">Revisa que el servidor se haya iniciado desde la raíz del repositorio.</span>
+                <button class="primary-button" id="retry-button" type="button">Reintentar</button>
+              </div>
+
+              <div class="state-card empty-state" id="empty-state" hidden>
+                <span class="state-icon" aria-hidden="true">⌕</span>
+                <strong>No hay señales que coincidan</strong>
+                <span>Prueba otra búsqueda o elimina los filtros activos.</span>
+                <button class="secondary-button" id="empty-clear-button" type="button">Limpiar filtros</button>
+              </div>
+
+              <div class="table-card" id="table-card" hidden>
+                <div class="table-scroll">
+                  <table>
+                    <caption class="sr-only">Ranking editorial de señales de inteligencia artificial</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col" class="rank-cell">#</th>
+                        <th scope="col">Señal</th>
+                        <th scope="col">Impacto</th>
+                        <th scope="col">Confianza</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Tags</th>
+                        <th scope="col">Fuente</th>
+                      </tr>
+                    </thead>
+                    <tbody id="ranking-body"></tbody>
+                  </table>
+                </div>
+                <footer class="table-footer">
+                  <span id="results-label">—</span>
+                  <div class="pagination" aria-label="Paginación">
+                    <button class="page-button" id="previous-page" type="button" aria-label="Página anterior">‹</button>
+                    <span id="page-label" aria-live="polite">Página 1</span>
+                    <button class="page-button" id="next-page" type="button" aria-label="Página siguiente">›</button>
+                  </div>
+                </footer>
+              </div>
+            </div>
+
+            <aside class="evidence-panel" id="evidence-panel" aria-labelledby="evidence-title">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Dossier de señal</p>
+                  <h2 id="evidence-title">Evidencia</h2>
+                </div>
+                <button class="icon-button panel-close" id="evidence-close" type="button" aria-label="Cerrar evidencia">×</button>
+              </div>
+              <div id="evidence-content" class="evidence-content">
+                <div class="panel-placeholder">Selecciona una señal para revisar su evidencia.</div>
+              </div>
+            </aside>
+          </section>
+
+          <section class="operator-panel" id="operator-panel" aria-labelledby="operator-title" hidden>
+            <header class="operator-header">
+              <div>
+                <p class="eyebrow">Edición local</p>
+                <h2 id="operator-title">Operator mode</h2>
+              </div>
+              <span class="draft-badge">Borrador no persistido</span>
+            </header>
+
+            <div class="operator-grid">
+              <section class="operator-card" aria-labelledby="validation-title">
+                <h3 id="validation-title">Validación</h3>
+                <div class="validation-message success">
+                  <span aria-hidden="true">✓</span>
+                  Contrato local resuelto
+                </div>
+                <div class="validation-message warning">
+                  <span aria-hidden="true">△</span>
+                  Revisar riesgo editorial antes de publicar
+                </div>
+
+                <label for="operator-status">Estado editorial</label>
+                <select id="operator-status">
+                  <option value="actionable">Accionable</option>
+                  <option value="confirmed">Confirmada</option>
+                  <option value="evolving">En evolución</option>
+                  <option value="candidate">Candidata</option>
+                  <option value="debated">En debate</option>
+                </select>
+
+                <span class="field-label">Tags</span>
+                <div class="tag-editor" id="tag-editor"></div>
+                <form class="tag-form" id="tag-form">
+                  <label class="sr-only" for="tag-input">Nuevo tag</label>
+                  <input id="tag-input" type="text" placeholder="nuevo-tag" pattern="[a-z0-9-]+">
+                  <button class="compact-button" type="submit">Añadir</button>
+                </form>
+              </section>
+
+              <section class="operator-card scoring-card" aria-labelledby="scoring-title">
+                <h3 id="scoring-title">Scoring <small>(0–100)</small></h3>
+                <div id="scoring-controls"></div>
+                <div class="weighted-score">
+                  <span>Weighted impact score</span>
+                  <strong id="weighted-score">—</strong>
+                </div>
+              </section>
+
+              <section class="operator-card" aria-labelledby="quality-title">
+                <h3 id="quality-title">Evidence quality checklist</h3>
+                <ul class="quality-list">
+                  <li><span aria-hidden="true">✓</span> Fuente identificada</li>
+                  <li><span aria-hidden="true">✓</span> Evidencia conectada a la señal</li>
+                  <li><span aria-hidden="true">✓</span> Acción concreta disponible</li>
+                  <li><span aria-hidden="true">✓</span> Impacto justificado</li>
+                  <li class="warning"><span aria-hidden="true">△</span> Requiere revisión humana</li>
+                </ul>
+                <label for="evidence-strength">Fortaleza de evidencia</label>
+                <select id="evidence-strength">
+                  <option>Fuerte</option>
+                  <option>Moderada</option>
+                  <option>Débil</option>
+                </select>
+                <div class="strength-meter" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </section>
+
+              <section class="operator-card action-card" aria-labelledby="actions-title">
+                <h3 id="actions-title">Snapshot local</h3>
+                <div class="publish-illustration" aria-hidden="true">⇧</div>
+                <button class="primary-button" id="publish-button" type="button">Exportar borrador</button>
+                <p>Crea un JSON descargable. No modifica snapshots ni Supabase.</p>
+                <button class="secondary-button" id="preview-button" type="button">Vista previa</button>
+              </section>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <dialog id="preview-dialog" aria-labelledby="preview-title">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow">Borrador local</p>
+          <h2 id="preview-title">Vista previa de snapshot</h2>
+        </div>
+        <button class="icon-button" id="dialog-close" type="button" aria-label="Cerrar vista previa">×</button>
+      </div>
+      <pre id="preview-json"></pre>
+      <div class="dialog-actions">
+        <button class="secondary-button" id="dialog-cancel" type="button">Cerrar</button>
+        <button class="primary-button" id="dialog-export" type="button">Exportar JSON</button>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

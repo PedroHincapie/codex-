@@ -272,9 +272,12 @@ flowchart LR
   A[Fixtures locales] --> B[Tools Python]
   B --> C[Contratos mas ricos]
   C --> D[Deduplicacion y ranking automatizados]
-  D --> E[Dashboard]
-  E --> F[APIs y base de datos]
+  D --> E[Supabase local]
+  E --> F[Dashboard con fixtures]
+  F --> G[Conexion remota y despliegue]
 ```
 
-El proyecto debe crecer por capas. Primero se estabiliza el contrato local y
-las tools; despues se conectan fuentes externas, UI, APIs o base de datos.
+El proyecto crece por capas. El contrato, las tools, la proyeccion Supabase
+local y el dashboard con fixtures ya estan versionados. La siguiente capa es
+conectar un proyecto remoto aprobado, mantener RLS como frontera de seguridad y
+desplegar la interfaz sin perder el fallback local auditable.

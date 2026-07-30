@@ -49,7 +49,9 @@ Al 29 de julio de 2026, el proyecto cuenta con:
 - snapshots diarios, candidatos normalizados y rankings editoriales;
 - CLI local para consulta, validacion, auditoria, cobertura y ranking;
 - persistencia Supabase local con esquema versionado, RLS y carga idempotente;
-- 29 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
+- dashboard estatico responsive en `frontend/`, alimentado por fixtures
+  versionados y con modos Reader y Operator;
+- 31 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
   la sincronizacion de skills.
 
 El corte verificable, las decisiones tomadas y las piezas pendientes se
@@ -107,8 +109,9 @@ La portada operativa y el administrador visual de fuentes viven en
 | `ai-radar-test-fixture-builder` | Convertir reglas editoriales en fixtures y pruebas. |
 | `desarrollo-frontend-airadar` | Implementar y verificar interfaces con datos trazables, estados completos, accesibilidad y evidencia visual. |
 
-La existencia de la skill frontend define el proceso de entrega, pero no
-significa que el dashboard objetivo ya este versionado o desplegado.
+El dashboard ya esta versionado en `frontend/` y declara de forma visible que
+usa datos locales, no una conexion en tiempo real. Su conexion a Supabase y su
+despliegue siguen pendientes.
 
 ## Herramientas Locales
 
@@ -127,9 +130,16 @@ python3 scripts/airadar.py audit --date 2026-06-20
 python3 scripts/airadar.py coverage --from 2026-06-13 --to 2026-07-09
 python3 scripts/airadar.py persistence
 python3 scripts/load_supabase.py
+python3 scripts/load_supabase.py --local --apply
 python3 scripts/check_skill_sync.py
 python3 skills/ai-radar-source-manager/scripts/validate_sources_cache.py config/sources.json
+python3 -m http.server 8000
 ```
+
+Con el servidor estatico activo, el dashboard se abre en
+`http://127.0.0.1:8000/frontend/`. Los estados de demostracion reproducibles
+usan `?demo=empty` y `?demo=error`; la evidencia visual revisada vive en
+`frontend/evidence/`.
 
 Comandos disponibles:
 
@@ -161,6 +171,16 @@ python3 scripts/load_supabase.py --apply
 ```
 
 La clave secreta no debe guardarse en el repositorio ni exponerse al frontend.
+
+Para cargar la instancia local sin copiar ni mostrar sus claves:
+
+```bash
+npx --yes supabase@2.110.0 status
+python3 scripts/load_supabase.py --local --apply
+```
+
+`--local` obtiene las credenciales efimeras mediante Supabase CLI, las mantiene
+solo en memoria y reporta exclusivamente los conteos aplicados.
 
 Filtros utiles:
 

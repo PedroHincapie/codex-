@@ -6,6 +6,8 @@ AI Radar convierte novedades de IA en señales curadas y rankings locales. Disti
 
 - `src/`: lógica de dominio; `radar_store.py` carga, filtra, valida y audita señales, y `ranking_engine.py` crea rankings deterministas.
 - `scripts/airadar.py`: CLI local del proyecto.
+- `frontend/`: dashboard estático responsive con modos Reader y Operator; usa datos locales versionados y conserva evidencia visual en `frontend/evidence/`.
+- `supabase/`: configuración y migraciones de la proyección relacional local.
 - `tests/`: pruebas `unittest` para el dominio y el CLI.
 - `data/signals/daily/`: snapshots curados `daily-radar-YYYY-MM-DD.json`.
 - `data/reviews/rankings/`: rankings editoriales `signal-review-ranking-YYYY-MM-DD.json`.
@@ -24,9 +26,12 @@ python3 scripts/airadar.py validate --date 2026-06-20
 python3 scripts/airadar.py audit --date 2026-06-20
 python3 scripts/airadar.py coverage --from 2026-06-13 --to 2026-07-09
 python3 scripts/airadar.py ranking --generate --date 2026-06-25 --limit 3
+python3 scripts/load_supabase.py --local --apply
+python3 -m http.server 8000
 ```
 
 `list`, `summary` y `show` consultan señales; `validate` verifica contratos; `audit` detecta duplicados y evidencia vacía; `coverage` informa días faltantes. Usa `--format json` para resultados procesables.
+Con el servidor estático activo, valida el dashboard en `http://127.0.0.1:8000/frontend/`.
 
 ## Estilo y datos
 
@@ -34,7 +39,7 @@ Escribe Python y JSON con indentación de 2 espacios, funciones y variables en `
 
 ## Pruebas
 
-Añade pruebas `unittest` para cambios de parsing, filtrado, validación, auditoría, cobertura o ranking. Mantén fixtures deterministas y cubre casos vacíos, errores y límites. Ejecuta `python3 -m unittest` antes de entregar cambios.
+Añade pruebas `unittest` para cambios de parsing, filtrado, validación, auditoría, cobertura, ranking o persistencia. Mantén fixtures deterministas y cubre casos vacíos, errores y límites. Para cambios visuales valida escritorio, móvil, estados vacío/error y consola del navegador. Ejecuta `python3 -m unittest` antes de entregar cambios.
 
 ## Commits y pull requests
 

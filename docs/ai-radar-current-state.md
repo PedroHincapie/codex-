@@ -19,11 +19,14 @@ flowchart LR
   K --> S[Senales curadas]
   S --> A[Auditoria]
   A --> R[Ranking]
+  R --> P[Supabase local]
+  R --> U[Dashboard con fixtures]
 ```
 
 Notion gobierna que fuentes consultar. El repositorio conserva los datos
-procesables y las reglas deterministas. Las skills coordinan el razonamiento y
-los scripts validan los contratos.
+procesables y las reglas deterministas. Las skills coordinan el razonamiento,
+los scripts validan los contratos y el dashboard presenta una lectura local
+trazable.
 
 ## Corte Verificable
 
@@ -42,8 +45,9 @@ los scripts validan los contratos.
 | Ranking del 28 de julio | 107 senales acumuladas |
 | Esquema Supabase local | 6 tablas con RLS y grants explicitos |
 | Proyeccion relacional | 325 filas cargadas idempotentemente |
+| Dashboard local | Responsive, modos Reader y Operator, fixture versionado |
 | Skills canonicas | 7: seis editoriales y una de desarrollo frontend |
-| Suite automatizada | 29 pruebas aprobadas |
+| Suite automatizada | 31 pruebas aprobadas |
 
 Los conteos son una fotografia editorial, no una promesa de volumen diario.
 
@@ -79,9 +83,10 @@ El contrato completo vive en
 `ai-radar-signals` no consulta ni modifica Notion directamente. Consume
 `config/sources.json` en modo de solo lectura.
 
-La skill frontend establece puertas de calidad para futuras interfaces. El
-dashboard objetivo todavia no forma parte de los artefactos versionados ni
-esta desplegado.
+La skill frontend establece las puertas de calidad de la interfaz. El dashboard
+ya forma parte de los artefactos versionados en `frontend/`, consume snapshots
+y rankings locales y explicita que no representa datos en tiempo real. Todavia
+no esta conectado a Supabase ni desplegado.
 
 ## Cache Y Continuidad
 
@@ -125,8 +130,10 @@ python3 scripts/airadar.py validate --date 2026-07-29
 python3 scripts/airadar.py audit --date 2026-07-29
 python3 scripts/airadar.py persistence
 python3 scripts/load_supabase.py
+python3 scripts/load_supabase.py --local --apply
 python3 scripts/check_skill_sync.py
 python3 -m unittest
+python3 -m http.server 8000
 ```
 
 Resultado del corte:
@@ -134,14 +141,17 @@ Resultado del corte:
 - cache valida con 15 fuentes;
 - snapshot del 29 de julio valido;
 - sin duplicados ni evidencia vacia en ese snapshot;
-- 29 pruebas aprobadas;
+- 31 pruebas aprobadas;
 - siete skills canonicas sincronizadas con las copias activas de Codex;
 - migracion Supabase aplicada sin errores en Postgres local;
 - lint y asesores locales sin hallazgos;
 - dos cargas consecutivas conservaron los mismos conteos: 23 snapshots, 108
   senales, 3 rankings, 167 entradas de ranking, 2 lotes y 22 candidatos;
 - los roles publicos pueden leer datos publicados y no tienen privilegios sobre
-  candidatos internos.
+  candidatos internos;
+- dashboard validado en escritorio y 369 x 799, con modos Reader y Operator,
+  paginacion, busqueda, estado vacio, estado de error y consola sin errores;
+- capturas verificables conservadas en `frontend/evidence/`.
 
 ## Decisiones Pendientes
 
@@ -151,7 +161,9 @@ Resultado del corte:
   revision semanal.
 - Crear el proyecto Supabase remoto en la organizacion aprobada, aplicar la
   migracion y cargar la proyeccion validada.
-- Construir el dashboard visual sobre el contrato relacional estabilizado.
+- Conectar el dashboard a las lecturas publicas de Supabase conservando el
+  fixture local como fallback verificable.
+- Definir el destino y desplegar el dashboard.
 - Definir y desplegar las Vercel Functions que realmente requieran acceso
   privilegiado; las lecturas publicas pueden usar la Data API con RLS.
 
