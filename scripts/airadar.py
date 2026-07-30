@@ -24,6 +24,7 @@ from src.radar_store import (  # noqa: E402
   validate_daily_snapshot
 )
 from src.ranking_engine import build_ranking, write_ranking  # noqa: E402
+from src.persistence import build_persistence_bundle, persistence_manifest  # noqa: E402
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -44,6 +45,8 @@ def main(argv: list[str] | None = None) -> int:
     return audit(args)
   if args.command == "coverage":
     return coverage(args)
+  if args.command == "persistence":
+    return persistence(args)
 
   parser.print_help()
   return 0
@@ -85,6 +88,17 @@ def build_parser() -> argparse.ArgumentParser:
   coverage_parser.add_argument("--from", dest="from_date")
   coverage_parser.add_argument("--to", dest="to_date")
   coverage_parser.add_argument("--format", choices=["json", "tsv"], default="json")
+
+  persistence_parser = subparsers.add_parser(
+    "persistence",
+    help="Prepara y valida registros para persistencia en Supabase."
+  )
+  persistence_parser.add_argument(
+    "--include-records",
+    action="store_true",
+    help="Incluye los registros normalizados además del manifiesto."
+  )
+  persistence_parser.add_argument("--format", choices=["json"], default="json")
 
   return parser
 
@@ -202,6 +216,15 @@ def coverage(args: argparse.Namespace) -> int:
     write_json(report)
   else:
     write_records([flatten_coverage_report(report)], "tsv")
+  return 0
+
+
+def persistence(args: argparse.Namespace) -> int:
+  bundle = build_persistence_bundle()
+  result = {"manifest": persistence_manifest(bundle)}
+  if args.include_records:
+    result["records"] = bundle
+  write_json(result)
   return 0
 
 

@@ -40,7 +40,9 @@ los scripts validan los contratos.
 | Senales del 28 de julio | 14: 8 accionables, 4 en evolucion y 2 candidatas |
 | Senales del 29 de julio | 1 candidata, sin duplicados ni evidencia vacia |
 | Ranking del 28 de julio | 107 senales acumuladas |
-| Suite automatizada | 20 pruebas aprobadas |
+| Esquema Supabase local | 6 tablas con RLS y grants explicitos |
+| Proyeccion relacional | 325 filas cargadas idempotentemente |
+| Suite automatizada | 26 pruebas aprobadas |
 
 Los conteos son una fotografia editorial, no una promesa de volumen diario.
 
@@ -115,6 +117,8 @@ Comandos de control:
 python3 skills/ai-radar-source-manager/scripts/validate_sources_cache.py config/sources.json
 python3 scripts/airadar.py validate --date 2026-07-29
 python3 scripts/airadar.py audit --date 2026-07-29
+python3 scripts/airadar.py persistence
+python3 scripts/load_supabase.py
 python3 -m unittest
 ```
 
@@ -123,7 +127,13 @@ Resultado del corte:
 - cache valida con 15 fuentes;
 - snapshot del 29 de julio valido;
 - sin duplicados ni evidencia vacia en ese snapshot;
-- 20 pruebas aprobadas.
+- 26 pruebas aprobadas;
+- migracion Supabase aplicada sin errores en Postgres local;
+- lint y asesores locales sin hallazgos;
+- dos cargas consecutivas conservaron los mismos conteos: 23 snapshots, 108
+  senales, 3 rankings, 167 entradas de ranking, 2 lotes y 22 candidatos;
+- los roles publicos pueden leer datos publicados y no tienen privilegios sobre
+  candidatos internos.
 
 ## Decisiones Pendientes
 
@@ -131,8 +141,11 @@ Resultado del corte:
 - Registrar `Ultimo contenido detectado` durante comprobaciones reales.
 - Definir una automatizacion concreta para la sincronizacion diaria y la
   revision semanal.
-- Construir el dashboard visual del producto sobre contratos ya estabilizados.
-- Evaluar Supabase y APIs solo cuando aporten valor frente al flujo local.
+- Crear el proyecto Supabase remoto en la organizacion aprobada, aplicar la
+  migracion y cargar la proyeccion validada.
+- Construir el dashboard visual sobre el contrato relacional estabilizado.
+- Definir y desplegar las Vercel Functions que realmente requieran acceso
+  privilegiado; las lecturas publicas pueden usar la Data API con RLS.
 
 ## Regla De Documentacion
 

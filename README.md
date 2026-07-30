@@ -7,7 +7,9 @@ El objetivo del producto es organizar noticias, herramientas, papers, repos y la
 Estado actual: nucleo local operativo para administrar fuentes, normalizar
 candidatos, curar senales, auditarlas y producir rankings deterministas. Notion
 funciona como fuente maestra del catalogo editorial y el repositorio conserva
-contratos, cache operativa, snapshots y evidencia de validacion.
+contratos, cache operativa, snapshots y evidencia de validacion. La persistencia
+Supabase ya cuenta con esquema versionado, RLS, carga idempotente y validacion
+local; la creacion del proyecto remoto permanece como paso controlado.
 
 ## Problema
 
@@ -106,6 +108,8 @@ python3 scripts/airadar.py show 2026-06-18-deepmind-agent-control-roadmap --fiel
 python3 scripts/airadar.py validate --date 2026-06-20
 python3 scripts/airadar.py audit --date 2026-06-20
 python3 scripts/airadar.py coverage --from 2026-06-13 --to 2026-07-09
+python3 scripts/airadar.py persistence
+python3 scripts/load_supabase.py
 python3 skills/ai-radar-source-manager/scripts/validate_sources_cache.py config/sources.json
 ```
 
@@ -123,6 +127,19 @@ Comandos disponibles:
   principales.
 - `coverage`: reporta rango observado, dias con snapshot, dias faltantes y
   conteos de cobertura local sin crear snapshots nuevos.
+- `persistence`: normaliza y valida los registros que corresponden a las tablas
+  Supabase sin modificar ninguna base.
+
+La carga remota o local requiere una URL y una clave secreta de servidor. El
+script hace un dry-run por defecto y solo escribe con `--apply`:
+
+```bash
+SUPABASE_URL=https://PROJECT_REF.supabase.co \
+SUPABASE_SECRET_KEY=... \
+python3 scripts/load_supabase.py --apply
+```
+
+La clave secreta no debe guardarse en el repositorio ni exponerse al frontend.
 
 Filtros utiles:
 
@@ -163,6 +180,21 @@ Los datos versionados separan responsabilidades por directorio:
 - `data/signals/daily/`: snapshots diarios curados por `source.publishedAt`.
 - `data/reviews/rankings/`: rankings y auditorias editoriales sobre senales.
 - `data/sources/candidates/`: candidatos normalizados antes de curacion final.
+
+## Persistencia Supabase
+
+La definicion reproducible vive en `supabase/`:
+
+- `supabase/config.toml`: entorno de desarrollo local.
+- `supabase/migrations/`: esquema, indices, grants y politicas RLS versionados.
+- `src/persistence.py`: mapeo determinista desde los JSON a registros
+  relacionales.
+- `scripts/load_supabase.py`: upserts por lotes, protegidos por `--apply`.
+
+El esquema separa datos publicados de datos editoriales internos. Los roles
+`anon` y `authenticated` solo tienen `SELECT` sobre snapshots, senales,
+rankings y entradas de ranking. Los lotes de candidatos y sus registros solo
+son accesibles mediante un backend con clave secreta.
 
 ## Criterio Para Crear Tools
 

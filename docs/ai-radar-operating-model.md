@@ -32,6 +32,8 @@ flowchart LR
   Store --> Daily[data/signals/daily/*.json]
   Store --> Reviews[data/reviews/rankings/*.json]
   Store --> Sources[data/sources/candidates/*.json]
+  Store --> Persistence[src/persistence.py]
+  Persistence --> Supabase[(Supabase Postgres)]
   Daily --> Contract[docs/contracts/ai-radar-daily.schema.json]
   Tools --> Report[Salida JSON o TSV]
   Agent --> Response[Respuesta al usuario]
@@ -175,6 +177,8 @@ Ejemplos que ya son tool:
 | Validacion | `python3 scripts/airadar.py validate --date YYYY-MM-DD` | Revisar estructura minima del snapshot. |
 | Auditoria | `python3 scripts/airadar.py audit --date YYYY-MM-DD` | Detectar duplicados, evidencia vacia, estados y fuentes. |
 | Catalogo de fuentes | `python3 skills/ai-radar-source-manager/scripts/validate_sources_cache.py config/sources.json` | Validar TTL, propiedades, URLs, orden y grupos. |
+| Preparar persistencia | `python3 scripts/airadar.py persistence` | Validar relaciones y contar registros antes de cargar. |
+| Cargar Supabase | `python3 scripts/load_supabase.py --apply` | Ejecutar upserts idempotentes usando una clave secreta de servidor. |
 
 ## Flujo De Auditoria
 
@@ -221,6 +225,27 @@ flowchart TD
 - Probar tools con `unittest`.
 - Validar JSON con `jq` cuando se editen datos locales o contratos.
 - No guardar articulos completos, secretos ni salidas generadas no revisadas.
+- Mantener las migraciones Supabase en Git y aplicar el mismo esquema en todos
+  los entornos.
+- No exponer `SUPABASE_SECRET_KEY` ni `SUPABASE_SERVICE_ROLE_KEY` al navegador.
+- Habilitar RLS en todas las tablas `public` y combinar politicas con grants
+  explicitos.
+
+## Persistencia Relacional
+
+```mermaid
+erDiagram
+  RADAR_SNAPSHOTS ||--o{ SIGNALS : contains
+  RANKINGS ||--o{ RANKING_ENTRIES : contains
+  SIGNALS ||--o{ RANKING_ENTRIES : scores
+  SOURCE_CANDIDATE_BATCHES ||--o{ SOURCE_CANDIDATES : contains
+```
+
+Los JSON versionados siguen siendo la evidencia editorial auditable. La base
+Supabase es una proyeccion relacional idempotente para consultas del dashboard
+y futuras APIs. `radar_snapshots`, `signals`, `rankings` y `ranking_entries`
+son de lectura publica; `source_candidate_batches` y `source_candidates`
+permanecen internos.
 
 ## Sincronizacion De Las Skills Activas
 

@@ -31,6 +31,20 @@ class AiradarCliTest(unittest.TestCase):
     self.assertGreaterEqual(summary["count"], 1)
     self.assertIn("topTags", summary)
 
+  def test_persistence_reports_normalized_rows(self):
+    stdout = io.StringIO()
+
+    with redirect_stdout(stdout):
+      exit_code = main(["persistence"])
+
+    result = json.loads(stdout.getvalue())
+    counts = {item["table"]: item["rows"] for item in result["manifest"]["tables"]}
+
+    self.assertEqual(exit_code, 0)
+    self.assertGreater(counts["signals"], 0)
+    self.assertGreater(counts["ranking_entries"], 0)
+    self.assertNotIn("records", result)
+
 
 if __name__ == "__main__":
   unittest.main()
