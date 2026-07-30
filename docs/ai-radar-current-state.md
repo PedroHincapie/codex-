@@ -42,14 +42,15 @@ los scripts validan los contratos.
 | Ranking del 28 de julio | 107 senales acumuladas |
 | Esquema Supabase local | 6 tablas con RLS y grants explicitos |
 | Proyeccion relacional | 325 filas cargadas idempotentemente |
-| Suite automatizada | 26 pruebas aprobadas |
+| Skills canonicas | 7: seis editoriales y una de desarrollo frontend |
+| Suite automatizada | 29 pruebas aprobadas |
 
 Los conteos son una fotografia editorial, no una promesa de volumen diario.
 
 ## Administrador De Fuentes
 
 La portada operativa se encuentra en
-[AI Radar — Administracion de fuentes](https://app.notion.com/p/3ac17079ee1581bd9a0dda605b898701).
+[AI Radar — Centro de operacion y fuentes](https://app.notion.com/p/3ac17079ee1581bd9a0dda605b898701).
 La base `AI Radar Sources` contiene:
 
 - identidad: fuente, tipo, URL y descripcion;
@@ -73,9 +74,14 @@ El contrato completo vive en
 | `ai-radar-signal-reviewer` | Auditar calidad editorial y deduplicacion |
 | `ai-radar-ranking-engine` | Puntuar y ordenar senales deterministicamente |
 | `ai-radar-test-fixture-builder` | Convertir reglas editoriales en fixtures y pruebas |
+| `desarrollo-frontend-airadar` | Implementar y verificar interfaces con datos trazables, estados completos, accesibilidad y evidencia visual |
 
 `ai-radar-signals` no consulta ni modifica Notion directamente. Consume
 `config/sources.json` en modo de solo lectura.
+
+La skill frontend establece puertas de calidad para futuras interfaces. El
+dashboard objetivo todavia no forma parte de los artefactos versionados ni
+esta desplegado.
 
 ## Cache Y Continuidad
 
@@ -119,6 +125,7 @@ python3 scripts/airadar.py validate --date 2026-07-29
 python3 scripts/airadar.py audit --date 2026-07-29
 python3 scripts/airadar.py persistence
 python3 scripts/load_supabase.py
+python3 scripts/check_skill_sync.py
 python3 -m unittest
 ```
 
@@ -127,7 +134,8 @@ Resultado del corte:
 - cache valida con 15 fuentes;
 - snapshot del 29 de julio valido;
 - sin duplicados ni evidencia vacia en ese snapshot;
-- 26 pruebas aprobadas;
+- 29 pruebas aprobadas;
+- siete skills canonicas sincronizadas con las copias activas de Codex;
 - migracion Supabase aplicada sin errores en Postgres local;
 - lint y asesores locales sin hallazgos;
 - dos cargas consecutivas conservaron los mismos conteos: 23 snapshots, 108

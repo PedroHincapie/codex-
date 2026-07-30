@@ -249,22 +249,21 @@ permanecen internos.
 
 ## Sincronizacion De Las Skills Activas
 
-Las versiones canonicas de `ai-radar-signals` y
-`ai-radar-source-manager` viven en el repositorio. Cuando cambien,
+Las siete versiones canonicas viven en `skills/`. Cuando cambien,
 sincronizarlas con las copias activas de Codex y reiniciar la aplicacion para
-que una sesion nueva cargue las instrucciones actualizadas:
+que una sesion nueva cargue las instrucciones actualizadas.
+
+El control determinista compara todos los archivos canonicos de cada skill:
 
 ```bash
-diff -u ~/.codex/skills/ai-radar-signals/SKILL.md \
-  skills/ai-radar-signals/SKILL.md
-cp skills/ai-radar-signals/SKILL.md \
-  ~/.codex/skills/ai-radar-signals/SKILL.md
-cp -R skills/ai-radar-source-manager \
-  ~/.codex/skills/ai-radar-source-manager
+python3 scripts/check_skill_sync.py
+python3 scripts/check_skill_sync.py --format json
 ```
 
-Despues de copiar, volver a ejecutar `diff`. Una salida vacia confirma que la
-skill instalada coincide con la fuente canonica.
+El comando termina con codigo `0` cuando las siete skills coinciden y con
+codigo `1` cuando encuentra una skill ausente o archivos faltantes, adicionales
+o modificados. La suite `unittest` cubre los estados sincronizado, ausente y
+divergente.
 
 ## Camino De Evolucion
 

@@ -44,11 +44,13 @@ Al 29 de julio de 2026, el proyecto cuenta con:
 - 15 fuentes activas y saludables administradas en Notion;
 - una cache local v2 con TTL de 24 horas y fallback explicito;
 - cuatro grupos de fuentes para recoleccion paralela;
-- skills separadas para fuentes, normalizacion, senales, revision, ranking y
-  fixtures;
+- siete skills canonicas para fuentes, normalizacion, senales, revision,
+  ranking, fixtures y desarrollo frontend;
 - snapshots diarios, candidatos normalizados y rankings editoriales;
 - CLI local para consulta, validacion, auditoria, cobertura y ranking;
-- pruebas `unittest` para el dominio, el CLI y el contrato del catalogo.
+- persistencia Supabase local con esquema versionado, RLS y carga idempotente;
+- 29 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
+  la sincronizacion de skills.
 
 El corte verificable, las decisiones tomadas y las piezas pendientes se
 documentan en
@@ -91,7 +93,22 @@ para crear tools y capacidades actuales, esta en:
 - [skills/ai-radar-source-manager/references/source-contract.md](skills/ai-radar-source-manager/references/source-contract.md)
 
 La portada operativa y el administrador visual de fuentes viven en
-[AI Radar — Administracion de fuentes](https://app.notion.com/p/3ac17079ee1581bd9a0dda605b898701).
+[AI Radar — Centro de operacion y fuentes](https://app.notion.com/p/3ac17079ee1581bd9a0dda605b898701).
+
+## Skills Del Proyecto
+
+| Skill | Responsabilidad |
+|---|---|
+| `ai-radar-source-manager` | Sincronizar Notion, validar salud, generar cache y gobernar cambios. |
+| `ai-radar-source-normalizer` | Convertir entradas heterogeneas en candidatos comparables. |
+| `ai-radar-signals` | Curar noticias recientes usando el catalogo preparado. |
+| `ai-radar-signal-reviewer` | Auditar calidad editorial y deduplicacion. |
+| `ai-radar-ranking-engine` | Puntuar y ordenar senales deterministicamente. |
+| `ai-radar-test-fixture-builder` | Convertir reglas editoriales en fixtures y pruebas. |
+| `desarrollo-frontend-airadar` | Implementar y verificar interfaces con datos trazables, estados completos, accesibilidad y evidencia visual. |
+
+La existencia de la skill frontend define el proceso de entrega, pero no
+significa que el dashboard objetivo ya este versionado o desplegado.
 
 ## Herramientas Locales
 
@@ -110,6 +127,7 @@ python3 scripts/airadar.py audit --date 2026-06-20
 python3 scripts/airadar.py coverage --from 2026-06-13 --to 2026-07-09
 python3 scripts/airadar.py persistence
 python3 scripts/load_supabase.py
+python3 scripts/check_skill_sync.py
 python3 skills/ai-radar-source-manager/scripts/validate_sources_cache.py config/sources.json
 ```
 
@@ -129,6 +147,9 @@ Comandos disponibles:
   conteos de cobertura local sin crear snapshots nuevos.
 - `persistence`: normaliza y valida los registros que corresponden a las tablas
   Supabase sin modificar ninguna base.
+- `scripts/check_skill_sync.py`: compara las siete skills canonicas del
+  repositorio con las copias activas de Codex y falla si falta o difiere algun
+  archivo.
 
 La carga remota o local requiere una URL y una clave secreta de servidor. El
 script hace un dry-run por defecto y solo escribe con `--apply`:
