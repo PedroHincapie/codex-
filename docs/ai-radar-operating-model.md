@@ -33,7 +33,14 @@ flowchart LR
   Store --> Reviews[data/reviews/rankings/*.json]
   Store --> Sources[data/sources/candidates/*.json]
   Store --> Persistence[src/persistence.py]
-  Persistence --> Supabase[(Supabase Postgres)]
+  Persistence --> Local[(Supabase local)]
+  Persistence --> Cloud[(Supabase Cloud)]
+  Cloud --> DataAPI[Data API con RLS]
+  DataAPI --> Frontend[frontend/ Reader y Operator]
+  Frontend --> Auditor[ai-radar-use-case-auditor]
+  Auditor --> Issues[GitHub Issues]
+  Daily --> Frontend
+  Reviews --> Frontend
   Daily --> Contract[docs/contracts/ai-radar-daily.schema.json]
   Tools --> Report[Salida JSON o TSV]
   Agent --> Response[Respuesta al usuario]
@@ -179,6 +186,10 @@ Ejemplos que ya son tool:
 | Catalogo de fuentes | `python3 skills/ai-radar-source-manager/scripts/validate_sources_cache.py config/sources.json` | Validar TTL, propiedades, URLs, orden y grupos. |
 | Preparar persistencia | `python3 scripts/airadar.py persistence` | Validar relaciones y contar registros antes de cargar. |
 | Cargar Supabase | `python3 scripts/load_supabase.py --apply` | Ejecutar upserts idempotentes usando una clave secreta de servidor. |
+| Cargar Supabase local | `python3 scripts/load_supabase.py --local --apply` | Resolver credenciales efimeras con CLI sin imprimirlas. |
+| Validar skills activas | `python3 scripts/check_skill_sync.py` | Detectar skills ausentes o divergentes. |
+| Validar documentacion | `python3 scripts/check_documentation_sync.py` | Comparar metricas verificables con README y documentos canonicos. |
+| Servir dashboard | `python3 -m http.server 8000` | Probar Reader, Operator, Cloud, fallback, vacio y error. |
 
 ## Flujo De Auditoria
 
@@ -212,6 +223,8 @@ flowchart TD
   E[scripts/] --> E1[Tools llamadas por skills]
   H[skills/] --> H1[Instrucciones especializadas]
   I[tests/] --> I1[Pruebas unittest]
+  K[supabase/] --> K1[Migraciones local y Cloud]
+  L[frontend/] --> L1[Dashboard y evidencia visual]
 ```
 
 ## Reglas De Trabajo
@@ -223,6 +236,8 @@ flowchart TD
 - Usar scripts Python directamente desde skills.
 - Convertir tareas mecanicas en tools.
 - Probar tools con `unittest`.
+- Ejecutar `scripts/check_skill_sync.py` y
+  `scripts/check_documentation_sync.py` antes de cerrar cambios materiales.
 - Validar JSON con `jq` cuando se editen datos locales o contratos.
 - No guardar articulos completos, secretos ni salidas generadas no revisadas.
 - Mantener las migraciones Supabase en Git y aplicar el mismo esquema en todos
@@ -230,6 +245,8 @@ flowchart TD
 - No exponer `SUPABASE_SECRET_KEY` ni `SUPABASE_SERVICE_ROLE_KEY` al navegador.
 - Habilitar RLS en todas las tablas `public` y combinar politicas con grants
   explicitos.
+- Actualizar README, documentos canonicos y Notion cuando cambie una capacidad,
+  una decision o una metrica visible.
 
 ## Persistencia Relacional
 
@@ -249,7 +266,7 @@ permanecen internos.
 
 ## Sincronizacion De Las Skills Activas
 
-Las siete versiones canonicas viven en `skills/`. Cuando cambien,
+Las ocho versiones canonicas viven en `skills/`. Cuando cambien,
 sincronizarlas con las copias activas de Codex y reiniciar la aplicacion para
 que una sesion nueva cargue las instrucciones actualizadas.
 
@@ -260,10 +277,33 @@ python3 scripts/check_skill_sync.py
 python3 scripts/check_skill_sync.py --format json
 ```
 
-El comando termina con codigo `0` cuando las siete skills coinciden y con
+El comando termina con codigo `0` cuando las ocho skills coinciden y con
 codigo `1` cuando encuentra una skill ausente o archivos faltantes, adicionales
 o modificados. La suite `unittest` cubre los estados sincronizado, ausente y
 divergente.
+
+## Sincronizacion De La Documentacion
+
+`scripts/check_documentation_sync.py` deriva conteos desde los artefactos
+versionados y confirma que README, estado actual, modelo operativo y documento
+Supabase Cloud contienen las metricas y capacidades obligatorias:
+
+```bash
+python3 scripts/check_documentation_sync.py
+python3 scripts/check_documentation_sync.py --format json
+```
+
+Notion se valida mediante el conector porque es una proyeccion externa. La
+portada debe reflejar el mismo corte antes de cerrar cualquier cambio material.
+
+## Auditoria De Casos De Uso
+
+`ai-radar-use-case-auditor` coordina una prueba end-to-end sin confundir
+observacion con correccion. Registra precondiciones, mutaciones autorizadas,
+persistencia, comportamiento visible, consola y pruebas; despues convierte
+cada diferencia independiente en un issue de GitHub con evidencia, pasos,
+resultado esperado, resultado actual, archivo probable y criterios de
+aceptacion. La publicacion de un issue no autoriza implementar su solucion.
 
 ## Camino De Evolucion
 

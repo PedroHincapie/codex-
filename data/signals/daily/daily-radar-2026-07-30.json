@@ -1,0 +1,213 @@
+{
+  "$schema": "../../../docs/contracts/ai-radar-daily.schema.json",
+  "contractVersion": "1.1.0",
+  "radarDate": "2026-07-30",
+  "generatedAt": "2026-07-31T01:42:00Z",
+  "topic": "artificial-intelligence",
+  "locale": "es",
+  "signals": [
+    {
+      "id": "2026-07-30-cohere-north-automations",
+      "title": "Cohere presenta North Automations para orquestar flujos empresariales con agentes",
+      "source": {
+        "name": "Cohere Blog",
+        "url": "https://cohere.com/blog/introducing-north-automations-ai-workflows",
+        "publishedAt": "2026-07-27",
+        "retrievedAt": "2026-07-30"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "North Automations convierte objetivos descritos en lenguaje natural en flujos programables con bucles, ramificaciones y selección de modelos por etapa.",
+        "La propuesta incorpora versionado, pruebas antes de producción, aprobaciones humanas y analítica de uso y consumo de tokens.",
+        "Cohere ofrece la capacidad a clientes de North con despliegue en nube o local e integraciones mediante MCP o SDK."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La nueva capa de orquestación amplía la oferta agentic empresarial de Cohere con controles operativos y opciones de despliegue gobernado."
+      },
+      "action": "Probar un flujo con aprobación humana y medir trazabilidad, aislamiento de datos y consumo de tokens antes de considerar un piloto empresarial.",
+      "status": "actionable",
+      "tags": [
+        "cohere",
+        "agents",
+        "workflow-orchestration",
+        "enterprise-ai",
+        "governance"
+      ]
+    },
+    {
+      "id": "2026-07-30-anthropic-cyber-eval-incidents",
+      "title": "Anthropic documenta tres accesos reales durante evaluaciones de ciberseguridad",
+      "source": {
+        "name": "Anthropic Newsroom",
+        "url": "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals",
+        "publishedAt": "2026-07-30",
+        "retrievedAt": "2026-07-30"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "Anthropic revisó 141006 ejecuciones de evaluación con posible acceso a internet e identificó tres incidentes distribuidos en seis ejecuciones.",
+        "Una configuración errónea permitió que modelos Claude accedieran sin autorización a infraestructura de tres organizaciones mediante contraseñas débiles y endpoints sin autenticación.",
+        "La compañía detuvo las evaluaciones de ciberseguridad el 23 de julio, identificó los incidentes al día siguiente y notificó a las organizaciones el 27 de julio."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "El incidente demuestra que un entorno de evaluación mal aislado puede convertir pruebas de agentes en accesos reales a infraestructura externa."
+      },
+      "action": "Auditar aislamiento de red, credenciales y autorización explícita antes de ejecutar evaluaciones de ciberseguridad con agentes.",
+      "status": "actionable",
+      "tags": [
+        "anthropic",
+        "ai-safety",
+        "cybersecurity",
+        "model-evaluations",
+        "incident-response"
+      ]
+    },
+    {
+      "id": "2026-07-30-deepmind-gemini-robotics-2",
+      "title": "Google DeepMind anuncia Gemini Robotics 2 con control corporal completo",
+      "source": {
+        "name": "Google DeepMind News",
+        "url": "https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/",
+        "publishedAt": "2026-07-30",
+        "retrievedAt": "2026-07-30"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "Google DeepMind presentó Gemini Robotics 2, Gemini Robotics ER 2 y Gemini Robotics On-Device 2.",
+        "La familia incorpora control corporal completo, destreza, tareas de varios pasos y colaboración entre robots.",
+        "ER 2 está disponible en Google AI Studio y en vista previa empresarial, mientras los modelos VLA se ofrecen a socios de acceso temprano."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La familia acerca modelos multimodales y agentic a robots físicos con opciones de razonamiento, ejecución local y adaptación."
+      },
+      "action": "Evaluar seguridad física, latencia y generalización en una tarea controlada antes de ampliar cualquier piloto robótico.",
+      "status": "candidate",
+      "tags": [
+        "deepmind",
+        "robotics",
+        "physical-ai",
+        "multimodal",
+        "on-device-ai"
+      ]
+    },
+    {
+      "id": "2026-07-30-openai-gpt-56-efficiency",
+      "title": "OpenAI atribuye a GPT-5.6 mejoras de costo y eficiencia en inferencia",
+      "source": {
+        "name": "OpenAI News",
+        "url": "https://openai.com/index/gpt-5-6-frontier-intelligence-efficiency/",
+        "publishedAt": "2026-07-29",
+        "retrievedAt": "2026-07-30"
+      },
+      "sourceType": "official",
+      "evidence": [
+        "OpenAI reporta una reducción de 20% en costos de serving de extremo a extremo mediante optimizaciones de kernels realizadas con GPT-5.6 Sol y Codex.",
+        "El modelo diseñó y ejecutó experimentos para mejorar su modelo borrador de decodificación especulativa y elevó más de 15% la eficiencia de generación de tokens.",
+        "El harness agentic usa descubrimiento diferido, historial append-only y orden determinista de herramientas para reducir contexto y favorecer prompt caching."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "Las técnicas descritas conectan optimización de inferencia y diseño de harnesses agentic con reducciones materiales de costo operativo."
+      },
+      "action": "Medir prompt caching, contexto cargado y costo por tarea en los flujos agentic propios antes de adoptar patrones equivalentes.",
+      "status": "candidate",
+      "tags": [
+        "openai",
+        "gpt-5-6",
+        "inference",
+        "agentic-systems",
+        "efficiency"
+      ]
+    },
+    {
+      "id": "2026-07-30-chrome-ai-security-fixes",
+      "title": "Google vincula herramientas de IA con 1072 correcciones de seguridad en Chrome",
+      "source": {
+        "name": "TechCrunch",
+        "url": "https://techcrunch.com/2026/07/30/google-says-it-fixed-more-chrome-bugs-in-june-than-over-the-past-two-years-thanks-to-ai/",
+        "publishedAt": "2026-07-30",
+        "retrievedAt": "2026-07-30"
+      },
+      "sourceType": "news",
+      "evidence": [
+        "Google corrigió 1072 fallos de seguridad en las versiones 149 y 150 de Chrome publicadas en junio.",
+        "La cifra supera los 1036 fallos corregidos en las 23 versiones anteriores durante aproximadamente dos años.",
+        "La compañía atribuyó el aumento de capacidad de corrección a herramientas de IA y a Gemini."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "El volumen reportado sugiere un cambio sustancial en la capacidad de detectar y corregir vulnerabilidades con asistencia de IA."
+      },
+      "action": "Seguir las notas técnicas de Chromium y medir precisión, regresiones y tiempo de remediación antes de extrapolar el resultado a otros repositorios.",
+      "status": "candidate",
+      "tags": [
+        "google",
+        "chrome",
+        "cybersecurity",
+        "ai-assisted-development",
+        "vulnerability-management"
+      ]
+    },
+    {
+      "id": "2026-07-30-llamacpp-cuda-q2-quantization",
+      "title": "llama.cpp incorpora soporte CUDA para la cuantización Q2_0",
+      "source": {
+        "name": "ggml-org/llama.cpp",
+        "url": "https://github.com/ggml-org/llama.cpp/pull/25707",
+        "publishedAt": "2026-07-30",
+        "retrievedAt": "2026-07-30"
+      },
+      "sourceType": "repo",
+      "evidence": [
+        "El pull request 25707 fue fusionado el 30 de julio y añade el backend CUDA para Q2_0 después del soporte en CPU y Metal.",
+        "El cambio declara soporte para modelos Ternary-Bonsai de 1.7B, 4B, 8B y 27B parámetros.",
+        "Las pruebas publicadas reportan coincidencia top-1 entre 98.35% y 98.77% frente a F16 e incluyen benchmarks en NVIDIA L40S."
+      ],
+      "impact": {
+        "level": "medium-high",
+        "summary": "El soporte CUDA amplía las opciones de inferencia local de modelos extremadamente cuantizados con baja huella de memoria."
+      },
+      "action": "Reproducir calidad, memoria y rendimiento en una GPU objetivo antes de adoptar Q2_0 en cargas de producción.",
+      "status": "candidate",
+      "tags": [
+        "llama-cpp",
+        "cuda",
+        "quantization",
+        "local-inference",
+        "performance"
+      ]
+    },
+    {
+      "id": "2026-07-30-ai-agents-open-ended-research",
+      "title": "Dos casos de estudio exponen límites de agentes en investigación abierta de IA",
+      "source": {
+        "name": "Hugging Face Daily Papers",
+        "url": "https://arxiv.org/abs/2607.27191",
+        "publishedAt": "2026-07-29",
+        "retrievedAt": "2026-07-30"
+      },
+      "sourceType": "paper",
+      "evidence": [
+        "El estudio evalúa agentes sobre preguntas centrales de dos trabajos NeurIPS 2026 inéditos y usa a sus autores originales como evaluadores.",
+        "Los agentes recibieron seis días y miles de dólares de cómputo, y completaron la ingeniería sin asistencia humana.",
+        "Los autores rechazaron ambos resultados e identificaron cinco fallas recurrentes que también reprodujeron con un segundo modelo y scaffold."
+      ],
+      "impact": {
+        "level": "high",
+        "summary": "La evaluación aporta evidencia de que completar la ejecución técnica no basta para producir resultados científicos aceptables en investigación abierta."
+      },
+      "action": "Incorporar revisión experta de hipótesis, interpretación y validez experimental en cualquier flujo de investigación autónoma.",
+      "status": "candidate",
+      "tags": [
+        "agents",
+        "ai-research",
+        "evaluation",
+        "reliability",
+        "human-review"
+      ]
+    }
+  ]
+}

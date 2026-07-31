@@ -39,20 +39,23 @@ Al final del curso, AI Radar debe poder:
 
 ## Estado Actual
 
-Al 30 de julio de 2026, el proyecto cuenta con:
+Al 31 de julio de 2026, el proyecto cuenta con:
 
-- 15 fuentes activas y saludables administradas en Notion;
+- 16 fuentes activas y saludables administradas en Notion;
 - una cache local v2 con TTL de 24 horas y fallback explicito;
 - cuatro grupos de fuentes para recoleccion paralela;
-- siete skills canonicas para fuentes, normalizacion, senales, revision,
-  ranking, fixtures y desarrollo frontend;
-- snapshots diarios, candidatos normalizados y rankings editoriales;
+- 8 skills canonicas para fuentes, normalizacion, senales, revision, ranking,
+  fixtures, desarrollo frontend y auditoria de casos de uso;
+- 24 snapshots diarios con 115 senales, 2 lotes con 22 candidatos
+  normalizados y 4 rankings con 282 entradas;
 - CLI local para consulta, validacion, auditoria, cobertura y ranking;
-- persistencia Supabase local y Cloud con esquema versionado, RLS y 325 filas;
+- persistencia Supabase local y Cloud con 4 migraciones versionadas, RLS y 449
+  filas;
 - dashboard estatico responsive en `frontend/`, conectado primero a Supabase
-  Cloud y con fixtures versionados como fallback visible;
-- 35 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
-  la sincronizacion de skills.
+  Cloud, con fixtures versionados como fallback visible y 9 capturas de
+  evidencia;
+- 36 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
+  la sincronizacion de skills y documentacion.
 
 El corte verificable, las decisiones tomadas y las piezas pendientes se
 documentan en
@@ -92,6 +95,7 @@ para crear tools y capacidades actuales, esta en:
 
 - [docs/ai-radar-operating-model.md](docs/ai-radar-operating-model.md)
 - [docs/ai-radar-current-state.md](docs/ai-radar-current-state.md)
+- [docs/supabase-cloud.md](docs/supabase-cloud.md)
 - [skills/ai-radar-source-manager/references/source-contract.md](skills/ai-radar-source-manager/references/source-contract.md)
 
 La portada operativa y el administrador visual de fuentes viven en
@@ -108,6 +112,7 @@ La portada operativa y el administrador visual de fuentes viven en
 | `ai-radar-ranking-engine` | Puntuar y ordenar senales deterministicamente. |
 | `ai-radar-test-fixture-builder` | Convertir reglas editoriales en fixtures y pruebas. |
 | `desarrollo-frontend-airadar` | Implementar y verificar interfaces con datos trazables, estados completos, accesibilidad y evidencia visual. |
+| `ai-radar-use-case-auditor` | Ejecutar casos de uso end-to-end, conservar evidencia y convertir hallazgos en issues reproducibles. |
 
 El dashboard ya esta versionado en `frontend/`, consulta Supabase Cloud mediante
 la Data API y declara visualmente si opera en Cloud o en fallback local. Su
@@ -132,6 +137,7 @@ python3 scripts/airadar.py persistence
 python3 scripts/load_supabase.py
 python3 scripts/load_supabase.py --local --apply
 python3 scripts/check_skill_sync.py
+python3 scripts/check_documentation_sync.py
 python3 skills/ai-radar-source-manager/scripts/validate_sources_cache.py config/sources.json
 python3 -m http.server 8000
 ```
@@ -157,9 +163,12 @@ Comandos disponibles:
   conteos de cobertura local sin crear snapshots nuevos.
 - `persistence`: normaliza y valida los registros que corresponden a las tablas
   Supabase sin modificar ninguna base.
-- `scripts/check_skill_sync.py`: compara las siete skills canonicas del
+- `scripts/check_skill_sync.py`: compara las 8 skills canonicas del
   repositorio con las copias activas de Codex y falla si falta o difiere algun
   archivo.
+- `scripts/check_documentation_sync.py`: deriva metricas desde datos, pruebas,
+  skills, migraciones y evidencia visual; falla si README o los documentos
+  canonicos dejan de reflejarlas.
 
 La carga remota o local requiere una URL y una clave secreta de servidor. El
 script hace un dry-run por defecto y solo escribe con `--apply`:
@@ -259,3 +268,29 @@ modelo:
 - contar senales por estado,
 - detectar evidencia vacia,
 - listar fuentes principales y su frecuencia.
+
+## Sincronizacion Documental
+
+La implementacion es la fuente de las metricas; README, documentos canonicos y
+Notion son sus proyecciones explicativas.
+
+| Estado verificable | Reflejo obligatorio |
+|---|---|
+| Datos y rankings bajo `data/` | README, estado actual y Supabase Cloud |
+| Skills bajo `skills/` | README, estado actual, modelo operativo y copias activas |
+| Migraciones y proyecto Supabase | README, estado actual, modelo operativo, documento Cloud y Notion |
+| Dashboard y `frontend/evidence/` | README, estado actual, modelo operativo y Notion |
+| Suite `unittest` | README, estado actual y Notion |
+
+Antes de cerrar un cambio material:
+
+```bash
+python3 scripts/check_skill_sync.py
+python3 scripts/check_documentation_sync.py
+python3 -m unittest
+```
+
+El segundo comando valida las proyecciones versionadas. La portada
+[AI Radar — Centro de operacion y fuentes](https://app.notion.com/p/3ac17079ee1581bd9a0dda605b898701)
+debe compararse mediante el conector de Notion porque no forma parte del
+filesystem local.

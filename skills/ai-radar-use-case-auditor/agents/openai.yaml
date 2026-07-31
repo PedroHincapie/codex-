@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Radar Use Case Auditor"
+  short_description: "Audita casos de uso y genera issues trazables"
+  default_prompt: "Usa $ai-radar-use-case-auditor para ejecutar un caso de uso, registrar hallazgos y crear issues reproducibles en GitHub."

@@ -1,6 +1,6 @@
 # Estado Actual De AI Radar
 
-Fecha de corte: 30 de julio de 2026.
+Fecha de corte: 31 de julio de 2026.
 
 Este documento registra el estado verificable del producto despues de
 incorporar la administracion de fuentes en Notion, la cache local y el flujo de
@@ -32,8 +32,8 @@ con fallback local trazable.
 
 | Elemento | Estado al corte |
 |---|---|
-| Catalogo en Notion | 15 fuentes activas y saludables |
-| Fuentes oficiales | 5 |
+| Catalogo en Notion | 16 fuentes activas y saludables |
+| Fuentes oficiales | 6 |
 | Repositorios tecnicos | 4 |
 | Comunidades | 2 |
 | Medios secundarios | 4 |
@@ -42,13 +42,16 @@ con fallback local trazable.
 | Candidatos del 28 de julio | 14 |
 | Senales del 28 de julio | 14: 8 accionables, 4 en evolucion y 2 candidatas |
 | Senales del 29 de julio | 1 candidata, sin duplicados ni evidencia vacia |
-| Ranking del 28 de julio | 107 senales acumuladas |
+| Senales del 30 de julio | 7: 2 accionables y 5 candidatas, sin duplicados ni evidencia vacia |
+| Ranking del 30 de julio | 115 senales acumuladas |
 | Esquema Supabase local | 6 tablas con RLS y grants explicitos |
 | Supabase Cloud | Proyecto `AI Radar`, `us-east-1`, saludable |
-| Proyeccion relacional | 325 filas en local y Cloud |
+| Proyeccion relacional | 449 filas en local y Cloud |
 | Dashboard | Cloud primero, fallback local, modos Reader y Operator |
-| Skills canonicas | 7: seis editoriales y una de desarrollo frontend |
-| Suite automatizada | 35 pruebas aprobadas |
+| Skills canonicas | 8: seis editoriales, una de frontend y una de auditoria end-to-end |
+| Migraciones Supabase | 4 migraciones versionadas |
+| Evidencia visual | 9 capturas versionadas |
+| Suite automatizada | 36 pruebas aprobadas |
 
 Los conteos son una fotografia editorial, no una promesa de volumen diario.
 
@@ -80,6 +83,7 @@ El contrato completo vive en
 | `ai-radar-ranking-engine` | Puntuar y ordenar senales deterministicamente |
 | `ai-radar-test-fixture-builder` | Convertir reglas editoriales en fixtures y pruebas |
 | `desarrollo-frontend-airadar` | Implementar y verificar interfaces con datos trazables, estados completos, accesibilidad y evidencia visual |
+| `ai-radar-use-case-auditor` | Ejecutar casos de uso end-to-end, preservar evidencia y crear issues reproducibles |
 
 `ai-radar-signals` no consulta ni modifica Notion directamente. Consume
 `config/sources.json` en modo de solo lectura.
@@ -133,28 +137,32 @@ python3 scripts/airadar.py persistence
 python3 scripts/load_supabase.py
 python3 scripts/load_supabase.py --local --apply
 python3 scripts/check_skill_sync.py
+python3 scripts/check_documentation_sync.py
 python3 -m unittest
 python3 -m http.server 8000
 ```
 
 Resultado del corte:
 
-- cache valida con 15 fuentes;
-- snapshot del 29 de julio valido;
-- sin duplicados ni evidencia vacia en ese snapshot;
-- 35 pruebas aprobadas;
-- siete skills canonicas sincronizadas con las copias activas de Codex;
+- cache valida con 16 fuentes;
+- snapshots del 29 y 30 de julio validos;
+- sin duplicados ni evidencia vacia en el snapshot del 30 de julio;
+- 36 pruebas aprobadas;
+- 8 skills canonicas sincronizadas con las copias activas de Codex;
+- cuatro migraciones Supabase versionadas;
 - migracion Supabase aplicada sin errores en Postgres local;
 - lint y asesores locales sin hallazgos;
-- dos cargas consecutivas conservaron los mismos conteos: 23 snapshots, 108
-  senales, 3 rankings, 167 entradas de ranking, 2 lotes y 22 candidatos;
+- la proyeccion local y Cloud conserva 24 snapshots, 115 senales, 4 rankings,
+  282 entradas de ranking, 2 lotes y 22 candidatos: 449 filas en total;
 - los roles publicos pueden leer datos publicados y no tienen privilegios sobre
   candidatos internos;
 - proyecto Cloud `xredenxxhnzkmfxxnrlg` activo y saludable en `us-east-1`;
-- 325 filas verificadas en Cloud y asesores de seguridad sin hallazgos;
+- 449 filas verificadas en Cloud y asesores de seguridad sin hallazgos;
 - dashboard validado con datos Cloud, fallback local, modos Reader y Operator,
   paginacion, estado vacio, estado de error y consola sin errores;
-- capturas verificables conservadas en `frontend/evidence/`.
+- 9 capturas verificables conservadas en `frontend/evidence/`;
+- README y documentos canonicos validados con
+  `scripts/check_documentation_sync.py`.
 
 ## Decisiones Pendientes
 
@@ -165,6 +173,8 @@ Resultado del corte:
 - Definir el destino y desplegar el dashboard.
 - Definir y desplegar las Vercel Functions que realmente requieran acceso
   privilegiado; las lecturas publicas pueden usar la Data API con RLS.
+- Resolver los hallazgos funcionales abiertos en GitHub sobre navegacion,
+  notificaciones y trazabilidad de fallos de fuentes.
 
 ## Regla De Documentacion
 
@@ -173,4 +183,7 @@ Cada cambio material debe actualizar como minimo:
 1. el contrato o modelo operativo afectado;
 2. las pruebas o validaciones deterministas;
 3. esta fotografia si cambia una capacidad o decision;
-4. la portada de Notion si cambia el estado visible del producto.
+4. README y los documentos especializados afectados;
+5. la portada de Notion si cambia el estado visible del producto;
+6. ejecutar `scripts/check_skill_sync.py`,
+   `scripts/check_documentation_sync.py` y `python3 -m unittest`.

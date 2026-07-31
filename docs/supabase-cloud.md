@@ -1,6 +1,6 @@
 # Supabase Cloud De AI Radar
 
-Fecha de conexion: 30 de julio de 2026.
+Fecha de ultima verificacion: 31 de julio de 2026.
 
 ## Proyecto
 
@@ -23,14 +23,14 @@ La proyeccion Cloud conserva el mismo corte validado localmente:
 
 | Tabla | Filas | Acceso publico |
 |---|---:|---|
-| `radar_snapshots` | 23 | Lectura |
-| `signals` | 108 | Lectura |
-| `rankings` | 3 | Lectura |
-| `ranking_entries` | 167 | Lectura |
+| `radar_snapshots` | 24 | Lectura |
+| `signals` | 115 | Lectura |
+| `rankings` | 4 | Lectura |
+| `ranking_entries` | 282 | Lectura |
 | `source_candidate_batches` | 2 | Denegado |
 | `source_candidates` | 22 | Denegado |
 
-Total: 325 filas.
+Total: 449 filas.
 
 Los datos se cargaron desde los JSON versionados del repositorio mediante una
 importacion controlada. La extension HTTP temporal se elimino al terminar.
@@ -63,3 +63,18 @@ Estados reproducibles:
 La clave publicable puede rotarse en Supabase. Si cambia, actualizar
 `frontend/supabase-config.js`, ejecutar la suite y repetir la validacion en
 navegador.
+
+## Compatibilidad Con La Data API
+
+Las migraciones conceden `SELECT` de forma explicita solo a las cuatro tablas
+publicadas y habilitan RLS en las seis tablas. Este diseño es compatible con el
+cambio de Supabase que deja de exponer automaticamente las tablas nuevas:
+
+- [Securing your API](https://supabase.com/docs/guides/api/securing-your-api)
+- [Tables not exposed automatically](https://supabase.com/changelog/45329-breaking-change-tables-not-exposed-to-data-and-graphql-api-automatically)
+- [Understanding API keys](https://supabase.com/docs/guides/getting-started/api-keys)
+
+La validacion del 31 de julio de 2026 confirmo proyecto saludable, Postgres 17,
+449 filas, RLS en las seis tablas y cero hallazgos del asesor de seguridad. El
+asesor de rendimiento solo reporto indices aun no utilizados; se conservan
+hasta contar con trafico representativo del dashboard.
