@@ -47,11 +47,12 @@ con fallback local trazable.
 | Esquema Supabase local | 6 tablas con RLS y grants explicitos |
 | Supabase Cloud | Proyecto `AI Radar`, `us-east-1`, saludable |
 | Proyeccion relacional | 449 filas en local y Cloud |
-| Dashboard | Cloud primero, fallback local, modos Reader y Operator |
+| Dashboard | Cloud primero, fallback local, cinco secciones, notificaciones, modos Reader y Operator |
 | Skills canonicas | 8: seis editoriales, una de frontend y una de auditoria end-to-end |
 | Migraciones Supabase | 4 migraciones versionadas |
-| Evidencia visual | 9 capturas versionadas |
-| Suite automatizada | 36 pruebas aprobadas |
+| Evidencia visual | 12 capturas versionadas |
+| Observabilidad de fuentes | Contrato y CLI para bloqueos HTTP y descartes por fecha no verificable |
+| Suite automatizada | 44 pruebas aprobadas |
 
 Los conteos son una fotografia editorial, no una promesa de volumen diario.
 
@@ -147,7 +148,7 @@ Resultado del corte:
 - cache valida con 16 fuentes;
 - snapshots del 29 y 30 de julio validos;
 - sin duplicados ni evidencia vacia en el snapshot del 30 de julio;
-- 36 pruebas aprobadas;
+- 44 pruebas aprobadas;
 - 8 skills canonicas sincronizadas con las copias activas de Codex;
 - cuatro migraciones Supabase versionadas;
 - migracion Supabase aplicada sin errores en Postgres local;
@@ -160,7 +161,11 @@ Resultado del corte:
 - 449 filas verificadas en Cloud y asesores de seguridad sin hallazgos;
 - dashboard validado con datos Cloud, fallback local, modos Reader y Operator,
   paginacion, estado vacio, estado de error y consola sin errores;
-- 9 capturas verificables conservadas en `frontend/evidence/`;
+- 12 capturas verificables conservadas en `frontend/evidence/`;
+- navegacion operativa para Radar, Rankings, Fuentes, Evidencia y Revisiones;
+- panel de notificaciones con conteo real, teclado y estado vacio por sesion;
+- bloqueos HTTP y descartes por fecha no verificable registrados mediante
+  `scripts/record_source_finding.py`;
 - README y documentos canonicos validados con
   `scripts/check_documentation_sync.py`.
 
@@ -173,8 +178,8 @@ Resultado del corte:
 - Definir el destino y desplegar el dashboard.
 - Definir y desplegar las Vercel Functions que realmente requieran acceso
   privilegiado; las lecturas publicas pueden usar la Data API con RLS.
-- Resolver los hallazgos funcionales abiertos en GitHub sobre navegacion,
-  notificaciones y trazabilidad de fallos de fuentes.
+- Publicar la rama local auditada y desplegar el dashboard cuando se resuelva
+  el flujo de autenticacion del repositorio.
 
 ## Regla De Documentacion
 

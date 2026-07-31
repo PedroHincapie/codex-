@@ -32,6 +32,7 @@ flowchart LR
   Store --> Daily[data/signals/daily/*.json]
   Store --> Reviews[data/reviews/rankings/*.json]
   Store --> Sources[data/sources/candidates/*.json]
+  Store --> Findings[data/observability/source-findings-*.json]
   Store --> Persistence[src/persistence.py]
   Persistence --> Local[(Supabase local)]
   Persistence --> Cloud[(Supabase Cloud)]
@@ -189,6 +190,7 @@ Ejemplos que ya son tool:
 | Cargar Supabase local | `python3 scripts/load_supabase.py --local --apply` | Resolver credenciales efimeras con CLI sin imprimirlas. |
 | Validar skills activas | `python3 scripts/check_skill_sync.py` | Detectar skills ausentes o divergentes. |
 | Validar documentacion | `python3 scripts/check_documentation_sync.py` | Comparar metricas verificables con README y documentos canonicos. |
+| Registrar hallazgo de fuente | `python3 scripts/record_source_finding.py` | Conservar bloqueos HTTP y descartes editoriales sin detener la recoleccion. |
 | Servir dashboard | `python3 -m http.server 8000` | Probar Reader, Operator, Cloud, fallback, vacio y error. |
 
 ## Flujo De Auditoria
@@ -240,6 +242,8 @@ flowchart TD
   `scripts/check_documentation_sync.py` antes de cerrar cambios materiales.
 - Validar JSON con `jq` cuando se editen datos locales o contratos.
 - No guardar articulos completos, secretos ni salidas generadas no revisadas.
+- Registrar fallos y descartes en `data/observability/` con el contrato
+  `docs/contracts/ai-radar-source-findings.schema.json`.
 - Mantener las migraciones Supabase en Git y aplicar el mismo esquema en todos
   los entornos.
 - No exponer `SUPABASE_SECRET_KEY` ni `SUPABASE_SERVICE_ROLE_KEY` al navegador.

@@ -23,6 +23,33 @@ const impactLabels = {
   medium: "Medio",
   low: "Bajo",
 };
+const viewMetadata = {
+  radar: {
+    title: "Radar",
+    eyebrow: "Inteligencia editorial",
+    description: "Resumen operativo del corte editorial y sus señales prioritarias.",
+  },
+  rankings: {
+    title: "Rankings",
+    eyebrow: "Priorización",
+    description: "Orden determinista de señales con impacto, confianza y evidencia.",
+  },
+  sources: {
+    title: "Fuentes",
+    eyebrow: "Procedencia",
+    description: "Cobertura de fuentes observada en los snapshots cargados.",
+  },
+  evidence: {
+    title: "Evidencia",
+    eyebrow: "Trazabilidad",
+    description: "Acceso directo a los dossiers y fuentes de cada señal.",
+  },
+  reviews: {
+    title: "Revisiones",
+    eyebrow: "Control editorial",
+    description: "Cola verificable de señales que requieren decisión humana.",
+  },
+};
 
 const state = {
   data: null,
@@ -34,6 +61,8 @@ const state = {
   evidenceOpen: true,
   draft: null,
   lastFocusedElement: null,
+  activeView: "radar",
+  notificationsDismissed: false,
 };
 
 const elements = {
@@ -69,6 +98,16 @@ const elements = {
   sourceNotice: document.querySelector("#source-notice"),
   sourceNoticeTitle: document.querySelector("#source-notice-title"),
   sourceNoticeText: document.querySelector("#source-notice-text"),
+  dashboard: document.querySelector("#ranking-view"),
+  sectionView: document.querySelector("#section-view"),
+  sectionViewContent: document.querySelector("#section-view-content"),
+  viewTitle: document.querySelector("#view-title"),
+  viewEyebrow: document.querySelector("#view-eyebrow"),
+  viewDescription: document.querySelector("#view-description"),
+  notificationButton: document.querySelector("#notification-button"),
+  notificationPanel: document.querySelector("#notification-panel"),
+  notificationContent: document.querySelector("#notification-content"),
+  notificationDot: document.querySelector("#notification-dot"),
 };
 
 const formatDate = (value) =>
@@ -116,6 +155,226 @@ function showToast(message) {
   }, 3200);
 }
 
+function statusCounts() {
+  return state.signals.reduce((counts, signal) => {
+    counts[signal.status] = (counts[signal.status] || 0) + 1;
+    return counts;
+  }, {});
+}
+
+function getInitialView() {
+  const candidate = window.location.hash.replace("#", "");
+  return viewMetadata[candidate] ? candidate : "radar";
+}
+
+function setActiveView(view, { focus = true, updateUrl = true } = {}) {
+  if (!viewMetadata[view]) return;
+  state.activeView = view;
+  document.querySelectorAll("[data-view]").forEach((button) => {
+    const active = button.dataset.view === view;
+    button.classList.toggle("is-active", active);
+    if (active) button.setAttribute("aria-current", "page");
+    else button.removeAttribute("aria-current");
+  });
+  if (updateUrl) {
+    const url = new URL(window.location.href);
+    url.hash = view;
+    window.history.replaceState(null, "", url);
+  }
+  elements.sidebar.classList.remove("is-open");
+  elements.menuButton.setAttribute("aria-expanded", "false");
+  elements.menuButton.setAttribute("aria-label", "Abrir navegación");
+  renderActiveView();
+  renderOperator();
+  if (focus) {
+    const target = view === "rankings" ? document.querySelector("#ranking-title") : elements.viewTitle;
+    target?.focus();
+  }
+}
+
+function renderActiveView() {
+  const rankingsActive = state.activeView === "rankings";
+  elements.dashboard.hidden = !rankingsActive;
+  elements.sectionView.hidden = rankingsActive;
+  if (rankingsActive || !state.data) return;
+
+  const metadata = viewMetadata[state.activeView];
+  elements.viewTitle.textContent = metadata.title;
+  elements.viewEyebrow.textContent = metadata.eyebrow;
+  elements.viewDescription.textContent = metadata.description;
+
+  const renderers = {
+    radar: renderRadarOverview,
+    sources: renderSourcesView,
+    evidence: renderEvidenceView,
+    reviews: renderReviewsView,
+  };
+  elements.sectionViewContent.innerHTML = renderers[state.activeView]();
+  bindSectionActions();
+}
+
+function renderRadarOverview() {
+  const counts = statusCounts();
+  const actionable = (counts.actionable || 0) + (counts.confirmed || 0);
+  const review = (counts.candidate || 0) + (counts.debated || 0) + (counts.evolving || 0);
+  const topSignals = state.signals.slice(0, 5).map((signal) => `
+    <li>
+      <span class="rank-number">${signal.rank}</span>
+      <button type="button" data-open-signal="${escapeHtml(signal.signalId)}">
+        <strong>${escapeHtml(signal.title)}</strong>
+        <small>${escapeHtml(signal.source.name)} · ${escapeHtml(statusLabels[signal.status] || signal.status)}</small>
+      </button>
+      <strong class="impact-score">${scoreToPercent(signal.score)}</strong>
+    </li>
+  `).join("");
+  return `
+    <div class="overview-grid">
+      <article class="metric-card"><span>Señales</span><strong>${state.data.totalSignals}</strong><small>Ranking acumulado</small></article>
+      <article class="metric-card"><span>Fuentes</span><strong>${state.data.sourceCount}</strong><small>Observadas en snapshots</small></article>
+      <article class="metric-card"><span>Listas para actuar</span><strong>${actionable}</strong><small>Accionables o confirmadas</small></article>
+      <article class="metric-card"><span>Revisión pendiente</span><strong>${review}</strong><small>Candidatas, debatidas o en evolución</small></article>
+    </div>
+    <section class="view-block" aria-labelledby="priority-title">
+      <h2 id="priority-title">Señales prioritarias</h2>
+      <ol class="view-list">${topSignals}</ol>
+    </section>
+  `;
+}
+
+function renderSourcesView() {
+  const sources = new Map();
+  state.signals.forEach((signal) => {
+    const key = signal.source.name;
+    const current = sources.get(key) || {
+      name: signal.source.name,
+      url: signal.source.url,
+      type: signal.sourceType || "sin-clasificar",
+      count: 0,
+      latest: signal.source.publishedAt,
+    };
+    current.count += 1;
+    if (signal.source.publishedAt >= current.latest) {
+      current.latest = signal.source.publishedAt;
+      current.url = signal.source.url;
+    }
+    sources.set(key, current);
+  });
+  const cards = [...sources.values()]
+    .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name))
+    .map((source) => `
+      <article class="source-card-view">
+        <header><strong>${escapeHtml(source.name)}</strong><span class="source-type">${escapeHtml(source.type)}</span></header>
+        <small>${source.count} señales · última publicación ${escapeHtml(source.latest)}</small>
+        <a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">Abrir fuente <span aria-hidden="true">↗</span></a>
+      </article>
+    `).join("");
+  return `<div class="source-grid">${cards}</div>`;
+}
+
+function renderEvidenceView() {
+  const cards = state.signals.slice(0, 18).map((signal) => `
+    <article class="evidence-card">
+      <header><span class="status status-${escapeHtml(signal.status)}">${escapeHtml(statusLabels[signal.status] || signal.status)}</span><strong>#${signal.rank}</strong></header>
+      <button type="button" data-open-signal="${escapeHtml(signal.signalId)}"><strong>${escapeHtml(signal.title)}</strong></button>
+      <small>${signal.evidence.length} evidencias · ${escapeHtml(signal.source.name)}</small>
+    </article>
+  `).join("");
+  return `<div class="evidence-grid">${cards}</div>`;
+}
+
+function renderReviewsView() {
+  const counts = statusCounts();
+  const reviewSignals = state.signals.filter((signal) =>
+    ["candidate", "debated", "evolving"].includes(signal.status)
+  );
+  const queue = reviewSignals.slice(0, 8).map((signal) => `
+    <li>
+      <span class="rank-number">${signal.rank}</span>
+      <button type="button" data-open-signal="${escapeHtml(signal.signalId)}">
+        <strong>${escapeHtml(signal.title)}</strong>
+        <small>${escapeHtml(statusLabels[signal.status] || signal.status)} · ${escapeHtml(signal.source.name)}</small>
+      </button>
+      <span class="status status-${escapeHtml(signal.status)}">${escapeHtml(statusLabels[signal.status] || signal.status)}</span>
+    </li>
+  `).join("");
+  return `
+    <div class="review-grid">
+      <article class="content-card"><strong>${counts.candidate || 0}</strong><p>Candidatas pendientes de evidencia o decisión.</p></article>
+      <article class="content-card"><strong>${counts.evolving || 0}</strong><p>En evolución y sujetas a seguimiento.</p></article>
+      <article class="content-card"><strong>${counts.debated || 0}</strong><p>En debate y con revisión humana necesaria.</p></article>
+    </div>
+    <section class="view-block" aria-labelledby="review-queue-title">
+      <h2 id="review-queue-title">Cola de revisión</h2>
+      ${queue ? `<ol class="view-list">${queue}</ol>` : '<div class="notification-empty">No hay revisiones pendientes.</div>'}
+    </section>
+  `;
+}
+
+function bindSectionActions() {
+  elements.sectionViewContent.querySelectorAll("[data-open-signal]").forEach((button) => {
+    button.addEventListener("click", () => {
+      setActiveView("rankings", { focus: false });
+      selectSignal(button.dataset.openSignal);
+      document.querySelector("#ranking-title")?.focus();
+    });
+  });
+}
+
+function buildNotifications() {
+  if (!state.data || state.notificationsDismissed) return [];
+  const notifications = [];
+  const pendingReview = state.signals.filter((signal) =>
+    ["candidate", "debated", "evolving"].includes(signal.status)
+  ).length;
+  if (pendingReview) {
+    notifications.push({
+      icon: "◇",
+      title: `${pendingReview} señales requieren revisión`,
+      detail: "La cola incluye candidatas, señales en debate y señales en evolución.",
+    });
+  }
+  if (state.data.degraded) {
+    notifications.push({
+      icon: "△",
+      title: "Fuente de datos degradada",
+      detail: state.data.fallbackReason || "El dashboard está usando el fallback local.",
+    });
+  }
+  return notifications;
+}
+
+function renderNotifications() {
+  const notifications = buildNotifications();
+  elements.notificationDot.hidden = notifications.length === 0;
+  elements.notificationButton.setAttribute(
+    "aria-label",
+    notifications.length ? `Notificaciones, ${notifications.length} pendientes` : "Notificaciones, sin pendientes",
+  );
+  elements.notificationContent.innerHTML = notifications.length
+    ? `
+      <ul class="notification-list">
+        ${notifications.map((item) => `
+          <li><span aria-hidden="true">${item.icon}</span><div><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.detail)}</small></div></li>
+        `).join("")}
+      </ul>
+      <div class="notification-actions"><button class="text-button" id="notification-clear" type="button">Marcar como revisadas</button></div>
+    `
+    : '<div class="notification-empty"><span>No hay notificaciones pendientes para este corte.</span></div>';
+  document.querySelector("#notification-clear")?.addEventListener("click", () => {
+    state.notificationsDismissed = true;
+    renderNotifications();
+    showToast("Notificaciones marcadas como revisadas en esta sesión.");
+  });
+}
+
+function toggleNotifications(forceOpen) {
+  const open = forceOpen ?? elements.notificationPanel.hidden;
+  elements.notificationPanel.hidden = !open;
+  elements.notificationButton.setAttribute("aria-expanded", String(open));
+  if (open) elements.notificationPanel.focus();
+  else elements.notificationButton.focus();
+}
+
 async function initialize() {
   elements.loading.hidden = false;
   elements.error.hidden = true;
@@ -129,6 +388,7 @@ async function initialize() {
     state.filteredSignals = [...state.signals];
     state.selectedId = state.signals[0]?.signalId || null;
     state.page = 1;
+    state.activeView = getInitialView();
 
     document.querySelector("#last-updated").textContent =
       `Corte editorial: ${formatDate(data.generatedAt)}`;
@@ -156,7 +416,9 @@ async function initialize() {
 function render() {
   renderRanking();
   renderEvidence();
+  renderActiveView();
   renderOperator();
+  renderNotifications();
 }
 
 function renderRanking() {
@@ -338,7 +600,7 @@ function createDraft(signal) {
 function renderOperator() {
   const operatorActive = state.mode === "operator";
   const signal = getSelectedSignal();
-  const operatorVisible = operatorActive && Boolean(signal);
+  const operatorVisible = operatorActive && state.activeView === "rankings" && Boolean(signal);
   elements.operatorPanel.hidden = !operatorVisible;
   elements.body.classList.toggle("operator-mode", operatorVisible);
   if (!operatorVisible) return;
@@ -467,6 +729,9 @@ function setMode(mode) {
     button.classList.toggle("is-active", active);
     button.setAttribute("aria-pressed", String(active));
   });
+  if (mode === "operator" && state.activeView !== "rankings") {
+    setActiveView("rankings", { focus: false });
+  }
   renderOperator();
   if (mode === "operator") {
     elements.operatorPanel.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -517,6 +782,13 @@ function closePreview() {
 document.querySelectorAll("[data-mode]").forEach((button) => {
   button.addEventListener("click", () => setMode(button.dataset.mode));
 });
+
+document.querySelectorAll("[data-view]").forEach((button) => {
+  button.addEventListener("click", () => setActiveView(button.dataset.view));
+});
+
+elements.notificationButton.addEventListener("click", () => toggleNotifications());
+document.querySelector("#notification-close").addEventListener("click", () => toggleNotifications(false));
 
 elements.search.addEventListener("input", applyFilters);
 elements.statusFilter.addEventListener("change", applyFilters);
@@ -599,11 +871,19 @@ document.querySelector("#theme-button").addEventListener("click", (event) => {
 });
 
 window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !elements.notificationPanel.hidden) {
+    toggleNotifications(false);
+    return;
+  }
   if (event.key === "Escape" && elements.sidebar.classList.contains("is-open")) {
     elements.sidebar.classList.remove("is-open");
     elements.menuButton.setAttribute("aria-expanded", "false");
     elements.menuButton.focus();
   }
+});
+
+window.addEventListener("hashchange", () => {
+  setActiveView(getInitialView(), { updateUrl: false });
 });
 
 initialize();

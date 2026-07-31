@@ -87,8 +87,10 @@ Usar esta forma cuando no exista un contrato mas especifico:
 ## Reglas
 
 - No inventar fechas de publicacion.
-- Si falta una fecha, marcarla como pendiente en conversacion o pedir
-  verificacion antes de guardar.
+- Si falta una fecha verificable, excluir el candidato y registrar
+  `missing-verifiable-published-at` mediante
+  `scripts/record_source_finding.py candidate-rejection`. Conservar fuente,
+  URL, `retrievedAt` y `rawInput`; nunca agregar un `publishedAt` inferido.
 - No tratar una inferencia como hecho.
 - Preferir slugs estables en `kebab-case`.
 - Mantener tags y topics en minusculas con guiones.
@@ -99,4 +101,6 @@ Usar esta forma cuando no exista un contrato mas especifico:
 - Revisar que cada URL canonica sea trazable al input original.
 - Confirmar que cada fuente tenga tipo y nombre.
 - Confirmar que cada hecho pueda apuntar a una fuente.
+- Confirmar que los descartes por metadatos insuficientes queden en
+  `data/observability/source-findings-YYYY-MM-DD.json`.
 - Ejecutar `jq empty` si se genera JSON.

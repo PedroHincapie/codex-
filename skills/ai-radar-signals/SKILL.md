@@ -86,6 +86,12 @@ presentadas como nuevas.
      usuario o busqueda web.
    - Priorizar fuentes primarias u organizaciones periodisticas confiables.
    - Capturar URL, fuente, fecha de publicacion y fecha de consulta.
+   - Registrar cada fallo HTTP con
+     `scripts/record_source_finding.py fetch-failure`; continuar con los otros
+     grupos y no desactivar una fuente por un fallo aislado.
+   - Si la fecha de publicacion no puede verificarse, registrar
+     `candidate-rejection` con `missing-verifiable-published-at` antes de
+     excluir el candidato. No inventar la fecha.
 
 5. **Seleccionar senales**
    - Elegir noticias con consecuencia practica para builders.
@@ -188,6 +194,8 @@ El flujo puede generar o actualizar:
 - `config/sources.json`: cache consumida en modo de solo lectura; su propietario
   es `ai-radar-source-manager`.
 - `data/signals/daily/daily-radar-YYYY-MM-DD.json`: snapshot diario de senales.
+- `data/observability/source-findings-YYYY-MM-DD.json`: bloqueos, degradaciones
+  y descartes estructurados que no se elevan a senal.
 - Opcionalmente, pruebas futuras bajo `tests/` cuando el repo tenga tooling.
 
 ## Validaciones
@@ -196,6 +204,7 @@ Validar como minimo:
 
 ```bash
 jq empty docs/contracts/ai-radar-daily.schema.json
+jq empty docs/contracts/ai-radar-source-findings.schema.json
 jq empty config/sources.json
 jq empty data/signals/daily/daily-radar-YYYY-MM-DD.json
 ```

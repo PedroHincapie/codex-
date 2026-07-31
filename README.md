@@ -52,9 +52,10 @@ Al 31 de julio de 2026, el proyecto cuenta con:
 - persistencia Supabase local y Cloud con 4 migraciones versionadas, RLS y 449
   filas;
 - dashboard estatico responsive en `frontend/`, conectado primero a Supabase
-  Cloud, con fixtures versionados como fallback visible y 9 capturas de
+  Cloud, con cinco secciones operativas, notificaciones verificables, fixtures
+  versionados como fallback visible y 12 capturas de
   evidencia;
-- 36 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
+- 44 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
   la sincronizacion de skills y documentacion.
 
 El corte verificable, las decisiones tomadas y las piezas pendientes se
@@ -136,6 +137,7 @@ python3 scripts/airadar.py coverage --from 2026-06-13 --to 2026-07-09
 python3 scripts/airadar.py persistence
 python3 scripts/load_supabase.py
 python3 scripts/load_supabase.py --local --apply
+python3 scripts/record_source_finding.py --help
 python3 scripts/check_skill_sync.py
 python3 scripts/check_documentation_sync.py
 python3 skills/ai-radar-source-manager/scripts/validate_sources_cache.py config/sources.json
@@ -169,6 +171,9 @@ Comandos disponibles:
 - `scripts/check_documentation_sync.py`: deriva metricas desde datos, pruebas,
   skills, migraciones y evidencia visual; falla si README o los documentos
   canonicos dejan de reflejarlas.
+- `scripts/record_source_finding.py`: registra bloqueos HTTP y descartes por
+  metadatos insuficientes en `data/observability/` sin detener los otros grupos
+  ni inventar fechas.
 
 La carga remota o local requiere una URL y una clave secreta de servidor. El
 script hace un dry-run por defecto y solo escribe con `--apply`:

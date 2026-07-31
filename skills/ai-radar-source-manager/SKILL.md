@@ -65,6 +65,13 @@ Un codigo HTTP aislado, bloqueo por robots, necesidad de JavaScript o limite
 temporal no demuestra que una fuente haya dejado de existir. Registrar la
 limitacion antes de cambiar su salud.
 
+Cuando una consulta falle, registrar el hallazgo con
+`scripts/record_source_finding.py fetch-failure`, incluyendo fuente, URL,
+fecha absoluta, grupo, codigo HTTP y estrategia. Un 403 aislado debe quedar
+como `blocked`, continuar con las demas fuentes y usar
+`sourceHealthAction: record-only`. Probar alternativas unicamente cuando esten
+configuradas en el catalogo.
+
 ## Descubrimiento Y Revision
 
 - Consultar primero el catalogo para evitar duplicados.
@@ -93,6 +100,8 @@ Informar:
 - `cacheGeneratedAt` y `cacheExpiresAt`;
 - cantidad total y por tipo;
 - fuentes degradadas o en revision;
+- conteos de bloqueos, degradaciones y falta de contenido desde
+  `data/observability/source-findings-YYYY-MM-DD.json`;
 - cambios realizados y decisiones pendientes de aprobacion.
 
 ## Recursos

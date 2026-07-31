@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-radar.local/contracts/ai-radar-source-findings.schema.json",
+  "title": "AI Radar source findings report",
+  "type": "object",
+  "required": ["version", "reportDate", "generatedAt", "summary", "findings"],
+  "properties": {
+    "version": {"const": 1},
+    "reportDate": {"type": "string", "format": "date"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "summary": {
+      "type": "object",
+      "required": ["total", "fetchFailures", "contentUnavailable", "candidateRejections", "reasonCounts"]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "observedAt", "source", "outcome", "reasonCode", "collectionAction"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["fetch_failure", "content_unavailable", "candidate_rejection"]},
+          "observedAt": {"type": "string", "format": "date"},
+          "source": {
+            "type": "object",
+            "required": ["name", "url"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "url": {"type": "string", "format": "uri"}
+            }
+          },
+          "outcome": {"enum": ["blocked", "degraded", "no_content", "rejected"]},
+          "reasonCode": {"type": "string", "minLength": 1},
+          "collectionAction": {"enum": ["continue-other-sources", "exclude-candidate"]}
+        }
+      }
+    }
+  }
+}

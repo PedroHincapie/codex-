@@ -47,12 +47,18 @@ o estado accesible.
 
 ### Criterios de aceptacion
 
-- [ ] Cada seccion tiene un destino o comportamiento definido.
-- [ ] El control activo actualiza `is-active` y `aria-current`.
-- [ ] Contenido y foco se actualizan de forma accesible.
-- [ ] La navegacion funciona en escritorio y movil.
-- [ ] Hay pruebas o evidencia visual de todas las secciones.
-- [ ] La consola no presenta errores al navegar.
+- [x] Cada seccion tiene un destino o comportamiento definido.
+- [x] El control activo actualiza `is-active` y `aria-current`.
+- [x] Contenido y foco se actualizan de forma accesible.
+- [x] La navegacion funciona en escritorio y movil.
+- [x] Hay pruebas o evidencia visual de todas las secciones.
+- [x] La consola no presenta errores al navegar.
+
+### Resolucion
+
+Completado el 31 de julio de 2026. Radar, Rankings, Fuentes, Evidencia y
+Revisiones usan vistas derivadas del mismo corte de datos; actualizan hash,
+estado activo, foco y navegacion movil.
 
 ## Frontend: definir el proposito del boton de notificaciones
 
@@ -91,12 +97,18 @@ observable.
 
 ### Criterios de aceptacion
 
-- [ ] Se definen los eventos que generan notificaciones.
-- [ ] El boton abre una vista verificable.
-- [ ] El indicador representa cantidad o estado real.
-- [ ] Abrir, cerrar y recorrer funciona con teclado.
-- [ ] Existe un estado vacio.
-- [ ] Hay evidencia visual y la consola queda sin errores.
+- [x] Se definen los eventos que generan notificaciones.
+- [x] El boton abre una vista verificable.
+- [x] El indicador representa cantidad o estado real.
+- [x] Abrir, cerrar y recorrer funciona con teclado.
+- [x] Existe un estado vacio.
+- [x] Hay evidencia visual y la consola queda sin errores.
+
+### Resolucion
+
+Completado el 31 de julio de 2026. El panel informa revisiones editoriales y
+modo degradado, permite marcar el corte como revisado durante la sesion y
+expone cierre, foco y estado mediante atributos accesibles.
 
 ## Documentacion: sincronizar conteos despues de una ingestion
 
@@ -185,12 +197,18 @@ El 403 solo queda documentado manualmente.
 
 ### Criterios de aceptacion
 
-- [ ] El 403 genera un hallazgo estructurado.
-- [ ] Un fallo aislado no desactiva la fuente.
-- [ ] Solo se intentan alternativas configuradas y permitidas.
-- [ ] Los demas grupos continuan.
-- [ ] El reporte diferencia bloqueo, degradacion y falta de contenido.
-- [ ] Existe un fixture determinista para 403.
+- [x] El 403 genera un hallazgo estructurado.
+- [x] Un fallo aislado no desactiva la fuente.
+- [x] Solo se intentan alternativas configuradas y permitidas.
+- [x] Los demas grupos continuan.
+- [x] El reporte diferencia bloqueo, degradacion y falta de contenido.
+- [x] Existe un fixture determinista para 403.
+
+### Resolucion
+
+Completado el 31 de julio de 2026 con `src/source_findings.py`,
+`scripts/record_source_finding.py`, contrato JSON, fixture y reporte
+`data/observability/source-findings-2026-07-30.json`.
 
 ## Fuentes: registrar el rechazo por fecha no verificable
 
@@ -229,9 +247,15 @@ El candidato no se eleva, pero el motivo solo aparece en el reporte manual.
 
 ### Criterios de aceptacion
 
-- [ ] La fecha solo se acepta desde evidencia verificable.
-- [ ] El descarte usa una razon estructurada.
-- [ ] Se conservan URL, fuente y `retrievedAt`.
-- [ ] Una señal no usa fechas inferidas sin evidencia.
-- [ ] El reporte contabiliza descartes por metadatos insuficientes.
-- [ ] Existe un fixture para ausencia de `publishedAt`.
+- [x] La fecha solo se acepta desde evidencia verificable.
+- [x] El descarte usa una razon estructurada.
+- [x] Se conservan URL, fuente y `retrievedAt`.
+- [x] Una señal no usa fechas inferidas sin evidencia.
+- [x] El reporte contabiliza descartes por metadatos insuficientes.
+- [x] Existe un fixture para ausencia de `publishedAt`.
+
+### Resolucion
+
+Completado el 31 de julio de 2026. El motivo
+`missing-verifiable-published-at` conserva fuente, URL, `retrievedAt` y entrada
+cruda sin agregar una fecha inferida.

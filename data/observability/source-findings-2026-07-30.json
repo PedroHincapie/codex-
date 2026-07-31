@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "reportDate": "2026-07-30",
+  "generatedAt": "2026-07-30T00:00:00Z",
+  "summary": {
+    "total": 2,
+    "fetchFailures": 1,
+    "contentUnavailable": 0,
+    "candidateRejections": 1,
+    "reasonCounts": {
+      "http-403": 1,
+      "missing-verifiable-published-at": 1
+    }
+  },
+  "findings": [
+    {
+      "id": "2026-07-30-ars-technica-http-403",
+      "kind": "fetch_failure",
+      "observedAt": "2026-07-30",
+      "source": {
+        "name": "Ars Technica",
+        "url": "https://arstechnica.com/ai/",
+        "group": "secondary-context"
+      },
+      "outcome": "blocked",
+      "reasonCode": "http-403",
+      "httpStatus": 403,
+      "message": "La fuente respondio HTTP 403 durante la recoleccion paralela.",
+      "strategy": "canonical-url",
+      "collectionAction": "continue-other-sources",
+      "sourceHealthAction": "record-only",
+      "alternativePolicy": "configured-only"
+    },
+    {
+      "id": "2026-07-30-ieee-missing-verifiable-published-at",
+      "kind": "candidate_rejection",
+      "observedAt": "2026-07-30",
+      "source": {
+        "name": "IEEE",
+        "url": "https://spectrum.ieee.org/artificial-intelligence"
+      },
+      "outcome": "rejected",
+      "reasonCode": "missing-verifiable-published-at",
+      "missingFields": [
+        "publishedAt"
+      ],
+      "candidate": {
+        "canonicalUrl": "https://spectrum.ieee.org/artificial-intelligence",
+        "sourceName": "IEEE",
+        "retrievedAt": "2026-07-30",
+        "rawInput": "https://spectrum.ieee.org/artificial-intelligence"
+      },
+      "collectionAction": "exclude-candidate",
+      "datePolicy": "verified-evidence-only"
+    }
+  ]
+}

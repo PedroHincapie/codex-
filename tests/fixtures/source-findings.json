@@ -1,0 +1,18 @@
+{
+  "fetchFailure": {
+    "sourceName": "Ars Technica",
+    "url": "https://arstechnica.com/ai/",
+    "retrievedAt": "2026-07-30",
+    "group": "secondary-context",
+    "httpStatus": 403,
+    "expectedOutcome": "blocked",
+    "expectedReason": "http-403"
+  },
+  "candidateRejection": {
+    "sourceName": "IEEE",
+    "url": "https://spectrum.ieee.org/artificial-intelligence",
+    "retrievedAt": "2026-07-30",
+    "expectedOutcome": "rejected",
+    "expectedReason": "missing-verifiable-published-at"
+  }
+}

@@ -8,7 +8,7 @@ class DocumentationSyncTest(unittest.TestCase):
     result = check_documentation_sync()
 
     self.assertTrue(result["inSync"], "\n".join(result["errors"]))
-    self.assertEqual(result["facts"]["tests"], 36)
+    self.assertEqual(result["facts"]["tests"], 44)
     self.assertEqual(result["facts"]["skills"], 8)
     self.assertEqual(result["facts"]["persistenceRows"], 449)
 
