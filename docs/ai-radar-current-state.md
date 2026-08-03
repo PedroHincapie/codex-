@@ -47,12 +47,12 @@ con fallback local trazable.
 | Esquema Supabase local | 6 tablas con RLS y grants explicitos |
 | Supabase Cloud | Proyecto `AI Radar`, `us-east-1`, saludable |
 | Proyeccion relacional | 449 filas en local y Cloud |
-| Dashboard | Cloud primero, fallback local, cinco secciones, notificaciones, modos Reader y Operator |
+| Dashboard | Cloud primero, respaldo local, navegación separada para Explorar y Revisar, notificaciones y detalle responsive |
 | Skills canonicas | 8: seis editoriales, una de frontend y una de auditoria end-to-end |
 | Migraciones Supabase | 4 migraciones versionadas |
-| Evidencia visual | 12 capturas versionadas |
+| Evidencia visual | 26 capturas versionadas |
 | Observabilidad de fuentes | Contrato y CLI para bloqueos HTTP y descartes por fecha no verificable |
-| Suite automatizada | 44 pruebas aprobadas |
+| Suite automatizada | 47 pruebas aprobadas |
 
 Los conteos son una fotografia editorial, no una promesa de volumen diario.
 
@@ -148,7 +148,7 @@ Resultado del corte:
 - cache valida con 16 fuentes;
 - snapshots del 29 y 30 de julio validos;
 - sin duplicados ni evidencia vacia en el snapshot del 30 de julio;
-- 44 pruebas aprobadas;
+- 47 pruebas aprobadas;
 - 8 skills canonicas sincronizadas con las copias activas de Codex;
 - cuatro migraciones Supabase versionadas;
 - migracion Supabase aplicada sin errores en Postgres local;
@@ -159,9 +159,9 @@ Resultado del corte:
   candidatos internos;
 - proyecto Cloud `xredenxxhnzkmfxxnrlg` activo y saludable en `us-east-1`;
 - 449 filas verificadas en Cloud y asesores de seguridad sin hallazgos;
-- dashboard validado con datos Cloud, fallback local, modos Reader y Operator,
+- dashboard validado con datos Cloud, respaldo local, contextos Explorar y Revisar,
   paginacion, estado vacio, estado de error y consola sin errores;
-- 12 capturas verificables conservadas en `frontend/evidence/`;
+- 26 capturas verificables conservadas en `frontend/evidence/`;
 - navegacion operativa para Radar, Rankings, Fuentes, Evidencia y Revisiones;
 - panel de notificaciones con conteo real, teclado y estado vacio por sesion;
 - bloqueos HTTP y descartes por fecha no verificable registrados mediante

@@ -37,7 +37,7 @@ flowchart LR
   Persistence --> Local[(Supabase local)]
   Persistence --> Cloud[(Supabase Cloud)]
   Cloud --> DataAPI[Data API con RLS]
-  DataAPI --> Frontend[frontend/ Reader y Operator]
+  DataAPI --> Frontend[frontend/ Explorar y Revisar]
   Frontend --> Auditor[ai-radar-use-case-auditor]
   Auditor --> Issues[GitHub Issues]
   Daily --> Frontend
@@ -191,7 +191,7 @@ Ejemplos que ya son tool:
 | Validar skills activas | `python3 scripts/check_skill_sync.py` | Detectar skills ausentes o divergentes. |
 | Validar documentacion | `python3 scripts/check_documentation_sync.py` | Comparar metricas verificables con README y documentos canonicos. |
 | Registrar hallazgo de fuente | `python3 scripts/record_source_finding.py` | Conservar bloqueos HTTP y descartes editoriales sin detener la recoleccion. |
-| Servir dashboard | `python3 -m http.server 8000` | Probar Reader, Operator, Cloud, fallback, vacio y error. |
+| Servir dashboard | `python3 -m http.server 8000` | Probar Explorar, Revisar, Cloud, respaldo local, vacio y error. |
 
 ## Flujo De Auditoria
 

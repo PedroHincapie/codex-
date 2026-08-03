@@ -8,12 +8,12 @@
       name="description"
       content="Dashboard local de AI Radar para explorar señales, evidencia y rankings editoriales."
     >
-    <title>AI Radar · Signal Intelligence</title>
+    <title>AI Radar · Inteligencia de señales</title>
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23061116'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%238f5cff' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='12' fill='none' stroke='%2332c7e9' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%2373e1ea'/%3E%3C/svg%3E"
     >
-    <link rel="stylesheet" href="./styles.css?v=20260731-sections">
+    <link rel="stylesheet" href="./styles.css?v=20260731-ux-iteration6">
   </head>
   <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
@@ -32,26 +32,32 @@
         </a>
 
         <nav class="primary-nav" aria-label="Secciones">
-          <button class="nav-item is-active" type="button" data-view="radar" aria-current="page">
-            <span class="nav-icon" aria-hidden="true">◉</span>
-            <span>Radar</span>
-          </button>
-          <button class="nav-item" type="button" data-view="rankings">
-            <span class="nav-icon" aria-hidden="true">▥</span>
-            <span>Rankings</span>
-          </button>
-          <button class="nav-item" type="button" data-view="sources">
-            <span class="nav-icon" aria-hidden="true">⌁</span>
-            <span>Fuentes</span>
-          </button>
-          <button class="nav-item" type="button" data-view="evidence">
-            <span class="nav-icon" aria-hidden="true">▤</span>
-            <span>Evidencia</span>
-          </button>
-          <button class="nav-item" type="button" data-view="reviews">
-            <span class="nav-icon" aria-hidden="true">◇</span>
-            <span>Revisiones</span>
-          </button>
+          <div class="nav-group" data-mode-nav="reader">
+            <span class="nav-group-label">Lectura</span>
+            <button class="nav-item is-active" type="button" data-view="radar" aria-current="page">
+              <span class="nav-icon" aria-hidden="true">◉</span>
+              <span>Radar</span>
+            </button>
+            <button class="nav-item" type="button" data-view="rankings">
+              <span class="nav-icon" aria-hidden="true">▥</span>
+              <span>Ranking</span>
+            </button>
+            <button class="nav-item" type="button" data-view="sources">
+              <span class="nav-icon" aria-hidden="true">⌁</span>
+              <span>Fuentes citadas</span>
+            </button>
+          </div>
+          <div class="nav-group" data-mode-nav="operator" hidden>
+            <span class="nav-group-label">Operación editorial</span>
+            <button class="nav-item" type="button" data-view="reviews">
+              <span class="nav-icon" aria-hidden="true">◇</span>
+              <span>Cola de revisión</span>
+            </button>
+            <button class="nav-item" type="button" data-view="evidence">
+              <span class="nav-icon" aria-hidden="true">▤</span>
+              <span>Biblioteca de evidencia</span>
+            </button>
+          </div>
         </nav>
 
         <div class="sidebar-spacer"></div>
@@ -82,14 +88,15 @@
             ☰
           </button>
 
-          <div class="mode-switch" role="group" aria-label="Modo de trabajo">
+          <div class="mode-switch" role="group" aria-label="Contexto de trabajo">
             <button class="mode-button is-active" type="button" data-mode="reader" aria-pressed="true">
-              Reader
+              Explorar
             </button>
             <button class="mode-button" type="button" data-mode="operator" aria-pressed="false">
-              Operator
+              Revisar
             </button>
           </div>
+          <span class="mode-context" id="mode-context">Lectura de inteligencia</span>
 
           <div class="topbar-meta">
             <span id="last-updated">Cargando corte editorial…</span>
@@ -135,6 +142,7 @@
               <strong id="source-notice-title">Conectando con Supabase Cloud.</strong>
               <span id="source-notice-text">Validando la fuente de datos…</span>
             </p>
+            <span class="mobile-cutoff" id="mobile-last-updated"></span>
             <button id="source-details-button" type="button">Ver procedencia</button>
           </section>
 
@@ -154,7 +162,7 @@
               <div class="section-heading">
                 <div>
                   <p class="eyebrow">Inteligencia editorial</p>
-                  <h1 id="ranking-title" tabindex="-1">Signal ranking</h1>
+                  <h1 id="ranking-title" tabindex="-1">Ranking de señales</h1>
                 </div>
                 <div class="heading-actions">
                   <label class="search-field">
@@ -169,7 +177,7 @@
                     aria-controls="evidence-panel"
                     aria-expanded="true"
                   >
-                    Evidencia
+                    Ver detalle
                   </button>
                 </div>
               </div>
@@ -207,7 +215,7 @@
               <div class="state-card error-state" id="error-state" role="alert" hidden>
                 <span class="state-icon" aria-hidden="true">!</span>
                 <strong>No pudimos cargar los datos</strong>
-                <span id="error-message">Supabase Cloud y el fallback local no están disponibles.</span>
+                <span id="error-message">Supabase Cloud y el respaldo local no están disponibles.</span>
                 <button class="primary-button" id="retry-button" type="button">Reintentar</button>
               </div>
 
@@ -226,10 +234,10 @@
                       <tr>
                         <th scope="col" class="rank-cell">#</th>
                         <th scope="col">Señal</th>
-                        <th scope="col">Impacto</th>
-                        <th scope="col">Confianza</th>
+                        <th scope="col">Puntaje</th>
+                        <th scope="col">Confianza editorial</th>
                         <th scope="col">Estado</th>
-                        <th scope="col">Tags</th>
+                        <th scope="col">Etiquetas</th>
                         <th scope="col">Fuente</th>
                       </tr>
                     </thead>
@@ -247,25 +255,26 @@
               </div>
             </div>
 
-            <aside class="evidence-panel" id="evidence-panel" aria-labelledby="evidence-title">
+            <aside class="evidence-panel" id="evidence-panel" aria-labelledby="evidence-title" tabindex="-1">
               <div class="panel-header">
                 <div>
-                  <p class="eyebrow">Dossier de señal</p>
-                  <h2 id="evidence-title">Evidencia</h2>
+                  <p class="eyebrow">Detalle de señal</p>
+                  <h2 id="evidence-title">Evidencia y acción</h2>
                 </div>
-                <button class="icon-button panel-close" id="evidence-close" type="button" aria-label="Cerrar evidencia">×</button>
+                <button class="icon-button panel-close" id="evidence-close" type="button" aria-label="Cerrar detalle de señal">×</button>
               </div>
               <div id="evidence-content" class="evidence-content">
                 <div class="panel-placeholder">Selecciona una señal para revisar su evidencia.</div>
               </div>
             </aside>
+            <button class="evidence-backdrop" id="evidence-backdrop" type="button" aria-label="Cerrar detalle de señal" hidden></button>
           </section>
 
           <section class="operator-panel" id="operator-panel" aria-labelledby="operator-title" hidden>
             <header class="operator-header">
               <div>
-                <p class="eyebrow">Edición local</p>
-                <h2 id="operator-title">Operator mode</h2>
+                <p class="eyebrow">Operación editorial</p>
+                <h2 id="operator-title">Revisión de señal</h2>
               </div>
               <span class="draft-badge">Borrador no persistido</span>
             </header>
@@ -291,26 +300,26 @@
                   <option value="debated">En debate</option>
                 </select>
 
-                <span class="field-label">Tags</span>
+                <span class="field-label">Etiquetas</span>
                 <div class="tag-editor" id="tag-editor"></div>
                 <form class="tag-form" id="tag-form">
-                  <label class="sr-only" for="tag-input">Nuevo tag</label>
-                  <input id="tag-input" type="text" placeholder="nuevo-tag" pattern="[a-z0-9-]+">
+                  <label class="sr-only" for="tag-input">Nueva etiqueta</label>
+                  <input id="tag-input" type="text" placeholder="nueva-etiqueta" pattern="[a-z0-9-]+">
                   <button class="compact-button" type="submit">Añadir</button>
                 </form>
               </section>
 
               <section class="operator-card scoring-card" aria-labelledby="scoring-title">
-                <h3 id="scoring-title">Scoring <small>(0–100)</small></h3>
+                <h3 id="scoring-title">Puntuación editorial <small>(0–100)</small></h3>
                 <div id="scoring-controls"></div>
                 <div class="weighted-score">
-                  <span>Weighted impact score</span>
+                  <span>Puntaje total ponderado</span>
                   <strong id="weighted-score">—</strong>
                 </div>
               </section>
 
               <section class="operator-card" aria-labelledby="quality-title">
-                <h3 id="quality-title">Evidence quality checklist</h3>
+                <h3 id="quality-title">Control de calidad de la evidencia</h3>
                 <ul class="quality-list">
                   <li><span aria-hidden="true">✓</span> Fuente identificada</li>
                   <li><span aria-hidden="true">✓</span> Evidencia conectada a la señal</li>
@@ -330,10 +339,10 @@
               </section>
 
               <section class="operator-card action-card" aria-labelledby="actions-title">
-                <h3 id="actions-title">Snapshot local</h3>
+                <h3 id="actions-title">Borrador local</h3>
                 <div class="publish-illustration" aria-hidden="true">⇧</div>
                 <button class="primary-button" id="publish-button" type="button">Exportar borrador</button>
-                <p>Crea un JSON descargable. No modifica snapshots ni Supabase.</p>
+                <p>Crea un JSON descargable. No modifica cortes versionados ni Supabase.</p>
                 <button class="secondary-button" id="preview-button" type="button">Vista previa</button>
               </section>
             </div>
@@ -346,7 +355,7 @@
       <div class="dialog-header">
         <div>
           <p class="eyebrow">Borrador local</p>
-          <h2 id="preview-title">Vista previa de snapshot</h2>
+          <h2 id="preview-title">Vista previa del borrador</h2>
         </div>
         <button class="icon-button" id="dialog-close" type="button" aria-label="Cerrar vista previa">×</button>
       </div>
@@ -380,6 +389,6 @@
         );
       })();
     </script>
-    <script type="module" src="./app.js?v=20260731-sections"></script>
+    <script type="module" src="./app.js?v=20260731-ux-iteration6"></script>
   </body>
 </html>

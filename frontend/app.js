@@ -1,6 +1,11 @@
 import { loadRadarData } from "./data.js?v=20260730-resilient";
 
 const PAGE_SIZE = 6;
+const SECTION_PAGE_SIZES = {
+  sources: 12,
+  evidence: 18,
+  reviews: 8,
+};
 const dimensionLabels = {
   novelty: "Novedad",
   evidence: "Evidencia",
@@ -23,6 +28,26 @@ const impactLabels = {
   medium: "Medio",
   low: "Bajo",
 };
+const sourceTypeLabels = {
+  official: "Fuente oficial",
+  news: "Medio especializado",
+  paper: "Investigación",
+  product: "Producto",
+  repository: "Repositorio",
+  "sin-clasificar": "Sin clasificar",
+};
+const modeMetadata = {
+  reader: {
+    label: "Explorar",
+    context: "Lectura de inteligencia",
+    defaultView: "radar",
+  },
+  operator: {
+    label: "Revisar",
+    context: "Operación editorial",
+    defaultView: "reviews",
+  },
+};
 const viewMetadata = {
   radar: {
     title: "Radar",
@@ -30,22 +55,22 @@ const viewMetadata = {
     description: "Resumen operativo del corte editorial y sus señales prioritarias.",
   },
   rankings: {
-    title: "Rankings",
+    title: "Ranking",
     eyebrow: "Priorización",
     description: "Orden determinista de señales con impacto, confianza y evidencia.",
   },
   sources: {
-    title: "Fuentes",
+    title: "Fuentes citadas",
     eyebrow: "Procedencia",
-    description: "Cobertura de fuentes observada en los snapshots cargados.",
+    description: "Cobertura de fuentes observada en los cortes editoriales cargados.",
   },
   evidence: {
-    title: "Evidencia",
+    title: "Biblioteca de evidencia",
     eyebrow: "Trazabilidad",
     description: "Acceso directo a los dossiers y fuentes de cada señal.",
   },
   reviews: {
-    title: "Revisiones",
+    title: "Cola de revisión",
     eyebrow: "Control editorial",
     description: "Cola verificable de señales que requieren decisión humana.",
   },
@@ -63,6 +88,17 @@ const state = {
   lastFocusedElement: null,
   activeView: "radar",
   notificationsDismissed: false,
+  evidenceDrawerViewport: window.matchMedia("(max-width: 1180px)").matches,
+  viewQueries: {
+    sources: "",
+    evidence: "",
+    reviews: "",
+  },
+  viewPages: {
+    sources: 1,
+    evidence: 1,
+    reviews: 1,
+  },
 };
 
 const elements = {
@@ -108,9 +144,21 @@ const elements = {
   notificationPanel: document.querySelector("#notification-panel"),
   notificationContent: document.querySelector("#notification-content"),
   notificationDot: document.querySelector("#notification-dot"),
+  filterButton: document.querySelector("#filter-button"),
+  evidenceBackdrop: document.querySelector("#evidence-backdrop"),
+  modeContext: document.querySelector("#mode-context"),
+  mobileLastUpdated: document.querySelector("#mobile-last-updated"),
 };
 
 const formatDate = (value) =>
+  new Intl.DateTimeFormat("es-CO", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(value));
+
+const formatCompactDate = (value) =>
   new Intl.DateTimeFormat("es-CO", {
     day: "numeric",
     month: "short",
@@ -167,6 +215,37 @@ function getInitialView() {
   return viewMetadata[candidate] ? candidate : "radar";
 }
 
+function isEvidenceDrawer() {
+  return window.matchMedia("(max-width: 1180px)").matches;
+}
+
+function getFocusableElements(container) {
+  return [...container.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+  )].filter((element) => !element.hidden && element.offsetParent !== null);
+}
+
+function updateModeNavigation() {
+  elements.body.dataset.workMode = state.mode;
+  elements.modeContext.textContent = modeMetadata[state.mode].context;
+  document.querySelectorAll("[data-mode-nav]").forEach((group) => {
+    group.hidden = group.dataset.modeNav !== state.mode;
+  });
+  document.querySelectorAll(".mode-button[data-mode]").forEach((button) => {
+    const active = button.dataset.mode === state.mode;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function syncSidebarPresentation() {
+  const compact = window.matchMedia("(max-width: 920px)").matches;
+  const open = elements.sidebar.classList.contains("is-open");
+  elements.sidebar.inert = compact && !open;
+  if (compact && !open) elements.sidebar.setAttribute("aria-hidden", "true");
+  else elements.sidebar.removeAttribute("aria-hidden");
+}
+
 function setActiveView(view, { focus = true, updateUrl = true } = {}) {
   if (!viewMetadata[view]) return;
   state.activeView = view;
@@ -184,6 +263,8 @@ function setActiveView(view, { focus = true, updateUrl = true } = {}) {
   elements.sidebar.classList.remove("is-open");
   elements.menuButton.setAttribute("aria-expanded", "false");
   elements.menuButton.setAttribute("aria-label", "Abrir navegación");
+  syncSidebarPresentation();
+  if (view !== "rankings") closeEvidence({ restoreFocus: false });
   renderActiveView();
   renderOperator();
   if (focus) {
@@ -196,6 +277,7 @@ function renderActiveView() {
   const rankingsActive = state.activeView === "rankings";
   elements.dashboard.hidden = !rankingsActive;
   elements.sectionView.hidden = rankingsActive;
+  elements.filterButton.hidden = !rankingsActive;
   if (rankingsActive || !state.data) return;
 
   const metadata = viewMetadata[state.activeView];
@@ -230,8 +312,8 @@ function renderRadarOverview() {
   return `
     <div class="overview-grid">
       <article class="metric-card"><span>Señales</span><strong>${state.data.totalSignals}</strong><small>Ranking acumulado</small></article>
-      <article class="metric-card"><span>Fuentes</span><strong>${state.data.sourceCount}</strong><small>Observadas en snapshots</small></article>
-      <article class="metric-card"><span>Listas para actuar</span><strong>${actionable}</strong><small>Accionables o confirmadas</small></article>
+      <article class="metric-card"><span>Fuentes citadas</span><strong>${state.data.sourceCount}</strong><small>Observadas en los cortes editoriales</small></article>
+      <article class="metric-card"><span>Señales listas para actuar</span><strong>${actionable}</strong><small>Accionables o confirmadas</small></article>
       <article class="metric-card"><span>Revisión pendiente</span><strong>${review}</strong><small>Candidatas, debatidas o en evolución</small></article>
     </div>
     <section class="view-block" aria-labelledby="priority-title">
@@ -239,6 +321,57 @@ function renderRadarOverview() {
       <ol class="view-list">${topSignals}</ol>
     </section>
   `;
+}
+
+function paginateSection(view, items) {
+  const pageSize = SECTION_PAGE_SIZES[view];
+  const pageCount = Math.max(1, Math.ceil(items.length / pageSize));
+  state.viewPages[view] = Math.min(state.viewPages[view], pageCount);
+  const page = state.viewPages[view];
+  const start = (page - 1) * pageSize;
+  return {
+    page,
+    pageCount,
+    start,
+    end: Math.min(start + pageSize, items.length),
+    items: items.slice(start, start + pageSize),
+    total: items.length,
+  };
+}
+
+function renderSectionSearch(view, placeholder) {
+  return `
+    <label class="section-search">
+      <span class="sr-only">${escapeHtml(placeholder)}</span>
+      <span aria-hidden="true">⌕</span>
+      <input
+        type="search"
+        data-section-search="${view}"
+        value="${escapeHtml(state.viewQueries[view])}"
+        placeholder="${escapeHtml(placeholder)}"
+        autocomplete="off"
+      >
+    </label>
+  `;
+}
+
+function renderSectionPagination(view, pageData, noun) {
+  const first = pageData.total ? pageData.start + 1 : 0;
+  return `
+    <footer class="section-pagination">
+      <span aria-live="polite">Mostrando ${first}–${pageData.end} de ${pageData.total} ${noun}</span>
+      <div class="pagination" aria-label="Paginación de ${noun}">
+        <button class="page-button" type="button" data-section-page="${view}" data-page-delta="-1" aria-label="Página anterior" ${pageData.page === 1 ? "disabled" : ""}>‹</button>
+        <span>Página ${pageData.page} de ${pageData.pageCount}</span>
+        <button class="page-button" type="button" data-section-page="${view}" data-page-delta="1" aria-label="Página siguiente" ${pageData.page === pageData.pageCount ? "disabled" : ""}>›</button>
+      </div>
+    </footer>
+  `;
+}
+
+function renderSectionCount(pageData, noun) {
+  const first = pageData.total ? pageData.start + 1 : 0;
+  return `<span class="section-count-summary">${first}–${pageData.end} de ${pageData.total} ${noun}</span>`;
 }
 
 function renderSourcesView() {
@@ -259,27 +392,46 @@ function renderSourcesView() {
     }
     sources.set(key, current);
   });
-  const cards = [...sources.values()]
+  const query = state.viewQueries.sources.trim().toLowerCase();
+  const filteredSources = [...sources.values()]
     .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name))
+    .filter((source) =>
+      !query || [source.name, source.type].join(" ").toLowerCase().includes(query)
+    );
+  const pageData = paginateSection("sources", filteredSources);
+  const cards = pageData.items
     .map((source) => `
       <article class="source-card-view">
-        <header><strong>${escapeHtml(source.name)}</strong><span class="source-type">${escapeHtml(source.type)}</span></header>
+        <header><strong>${escapeHtml(source.name)}</strong><span class="source-type">${escapeHtml(sourceTypeLabels[source.type] || source.type)}</span></header>
         <small>${source.count} señales · última publicación ${escapeHtml(source.latest)}</small>
         <a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">Abrir fuente <span aria-hidden="true">↗</span></a>
       </article>
     `).join("");
-  return `<div class="source-grid">${cards}</div>`;
+  return `
+    <div class="section-tools">${renderSectionCount(pageData, "fuentes")}${renderSectionSearch("sources", "Buscar fuentes citadas…")}</div>
+    ${cards ? `<div class="source-grid">${cards}</div>` : '<div class="section-empty">No hay fuentes que coincidan con la búsqueda.</div>'}
+    ${renderSectionPagination("sources", pageData, "fuentes")}
+  `;
 }
 
 function renderEvidenceView() {
-  const cards = state.signals.slice(0, 18).map((signal) => `
+  const query = state.viewQueries.evidence.trim().toLowerCase();
+  const filteredSignals = state.signals.filter((signal) =>
+    !query || [signal.title, signal.source.name, ...signal.tags].join(" ").toLowerCase().includes(query)
+  );
+  const pageData = paginateSection("evidence", filteredSignals);
+  const cards = pageData.items.map((signal) => `
     <article class="evidence-card">
       <header><span class="status status-${escapeHtml(signal.status)}">${escapeHtml(statusLabels[signal.status] || signal.status)}</span><strong>#${signal.rank}</strong></header>
       <button type="button" data-open-signal="${escapeHtml(signal.signalId)}"><strong>${escapeHtml(signal.title)}</strong></button>
       <small>${signal.evidence.length} evidencias · ${escapeHtml(signal.source.name)}</small>
     </article>
   `).join("");
-  return `<div class="evidence-grid">${cards}</div>`;
+  return `
+    <div class="section-tools">${renderSectionCount(pageData, "señales")}${renderSectionSearch("evidence", "Buscar señales o fuentes…")}</div>
+    ${cards ? `<div class="evidence-grid">${cards}</div>` : '<div class="section-empty">No hay evidencias que coincidan con la búsqueda.</div>'}
+    ${renderSectionPagination("evidence", pageData, "señales")}
+  `;
 }
 
 function renderReviewsView() {
@@ -287,7 +439,15 @@ function renderReviewsView() {
   const reviewSignals = state.signals.filter((signal) =>
     ["candidate", "debated", "evolving"].includes(signal.status)
   );
-  const queue = reviewSignals.slice(0, 8).map((signal) => `
+  const query = state.viewQueries.reviews.trim().toLowerCase();
+  const filteredReviews = reviewSignals.filter((signal) =>
+    !query || [signal.title, signal.source.name, statusLabels[signal.status], ...signal.tags]
+      .join(" ")
+      .toLowerCase()
+      .includes(query)
+  );
+  const pageData = paginateSection("reviews", filteredReviews);
+  const queue = pageData.items.map((signal) => `
     <li>
       <span class="rank-number">${signal.rank}</span>
       <button type="button" data-open-signal="${escapeHtml(signal.signalId)}">
@@ -298,14 +458,18 @@ function renderReviewsView() {
     </li>
   `).join("");
   return `
+    <div class="section-tools">${renderSectionCount(pageData, "revisiones")}${renderSectionSearch("reviews", "Buscar revisiones…")}</div>
     <div class="review-grid">
       <article class="content-card"><strong>${counts.candidate || 0}</strong><p>Candidatas pendientes de evidencia o decisión.</p></article>
       <article class="content-card"><strong>${counts.evolving || 0}</strong><p>En evolución y sujetas a seguimiento.</p></article>
       <article class="content-card"><strong>${counts.debated || 0}</strong><p>En debate y con revisión humana necesaria.</p></article>
     </div>
     <section class="view-block" aria-labelledby="review-queue-title">
-      <h2 id="review-queue-title">Cola de revisión</h2>
-      ${queue ? `<ol class="view-list">${queue}</ol>` : '<div class="notification-empty">No hay revisiones pendientes.</div>'}
+      <div class="view-block-heading">
+        <h2 id="review-queue-title">Señales pendientes</h2>
+      </div>
+      ${queue ? `<ol class="view-list">${queue}</ol>` : '<div class="section-empty">No hay revisiones que coincidan con la búsqueda.</div>'}
+      ${renderSectionPagination("reviews", pageData, "revisiones")}
     </section>
   `;
 }
@@ -315,7 +479,27 @@ function bindSectionActions() {
     button.addEventListener("click", () => {
       setActiveView("rankings", { focus: false });
       selectSignal(button.dataset.openSignal);
-      document.querySelector("#ranking-title")?.focus();
+    });
+  });
+
+  elements.sectionViewContent.querySelectorAll("[data-section-search]").forEach((input) => {
+    input.addEventListener("input", () => {
+      const view = input.dataset.sectionSearch;
+      state.viewQueries[view] = input.value;
+      state.viewPages[view] = 1;
+      renderActiveView();
+      const nextInput = elements.sectionViewContent.querySelector(`[data-section-search="${view}"]`);
+      nextInput?.focus();
+      nextInput?.setSelectionRange(nextInput.value.length, nextInput.value.length);
+    });
+  });
+
+  elements.sectionViewContent.querySelectorAll("[data-section-page]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const view = button.dataset.sectionPage;
+      state.viewPages[view] += Number(button.dataset.pageDelta);
+      renderActiveView();
+      elements.sectionViewContent.querySelector(`[data-section-page="${view}"][data-page-delta="${button.dataset.pageDelta}"]`)?.focus();
     });
   });
 }
@@ -337,7 +521,7 @@ function buildNotifications() {
     notifications.push({
       icon: "△",
       title: "Fuente de datos degradada",
-      detail: state.data.fallbackReason || "El dashboard está usando el fallback local.",
+      detail: state.data.fallbackReason || "El tablero está usando el respaldo local.",
     });
   }
   return notifications;
@@ -348,7 +532,9 @@ function renderNotifications() {
   elements.notificationDot.hidden = notifications.length === 0;
   elements.notificationButton.setAttribute(
     "aria-label",
-    notifications.length ? `Notificaciones, ${notifications.length} pendientes` : "Notificaciones, sin pendientes",
+    notifications.length
+      ? `Notificaciones: ${notifications.length} ${notifications.length === 1 ? "alerta pendiente" : "alertas pendientes"}`
+      : "Notificaciones, sin pendientes",
   );
   elements.notificationContent.innerHTML = notifications.length
     ? `
@@ -389,19 +575,22 @@ async function initialize() {
     state.selectedId = state.signals[0]?.signalId || null;
     state.page = 1;
     state.activeView = getInitialView();
+    state.mode = ["reviews", "evidence"].includes(state.activeView) ? "operator" : "reader";
+    state.evidenceOpen = state.activeView === "rankings" && !isEvidenceDrawer();
 
-    document.querySelector("#last-updated").textContent =
-      `Corte editorial: ${formatDate(data.generatedAt)}`;
+    const editorialCutoff = `Corte editorial: ${formatDate(data.generatedAt)}`;
+    document.querySelector("#last-updated").textContent = editorialCutoff;
+    elements.mobileLastUpdated.textContent = `Corte: ${formatCompactDate(data.generatedAt)}`;
     document.querySelector("#sidebar-signal-count").textContent =
       data.totalSignals.toLocaleString("es-CO");
     document.querySelector("#sidebar-source-count").textContent =
-      `${data.sourceCount} fuentes en snapshots`;
-    elements.dataBadge.textContent = data.source.badge;
+      `${data.sourceCount} fuentes citadas`;
+    elements.dataBadge.textContent = data.source.badge === "Cloud" ? "Datos en nube" : data.source.badge;
     elements.sourceNotice.classList.toggle("is-degraded", data.degraded);
     elements.sourceNoticeTitle.textContent = `${data.source.label}.`;
     elements.sourceNoticeText.textContent = data.degraded
       ? `Modo degradado: ${data.source.note} Motivo: ${data.fallbackReason}`
-      : "Ranking y señales consultados desde la Data API protegida por RLS.";
+      : "Ranking y señales consultados desde la API de datos protegida por RLS.";
 
     render();
     window.dispatchEvent(new Event("airadar:ready"));
@@ -414,11 +603,14 @@ async function initialize() {
 }
 
 function render() {
+  updateModeNavigation();
+  syncSidebarPresentation();
   renderRanking();
   renderEvidence();
   renderActiveView();
   renderOperator();
   renderNotifications();
+  syncEvidencePresentation();
 }
 
 function renderRanking() {
@@ -473,7 +665,7 @@ function renderRanking() {
             <span class="cell-note">/100</span>
           </td>
           <td>
-            <strong class="confidence ${confidence.label.toLowerCase()}">${confidence.label}</strong>
+            <strong class="confidence ${confidence.label.toLowerCase()}" title="Confianza editorial derivada de la confiabilidad de la fuente">${confidence.label}</strong>
             <span class="cell-note">${confidence.percent}%</span>
           </td>
           <td>
@@ -541,7 +733,7 @@ function renderEvidence() {
       <section class="evidence-section" aria-labelledby="source-title">
         <div class="subheading-row">
           <h4 id="source-title">Fuente principal</h4>
-          <span class="source-type">${escapeHtml(signal.sourceType || "sin clasificar")}</span>
+          <span class="source-type">${escapeHtml(sourceTypeLabels[signal.sourceType] || signal.sourceType || "Sin clasificar")}</span>
         </div>
         <a class="source-card" href="${escapeHtml(signal.source.url)}" target="_blank" rel="noreferrer">
           <span class="source-logo">${escapeHtml(signal.source.name.slice(0, 2).toUpperCase())}</span>
@@ -559,7 +751,7 @@ function renderEvidence() {
       </section>
 
       <section class="evidence-section rationale" aria-labelledby="rationale-title">
-        <h4 id="rationale-title">Rationale del ranking</h4>
+        <h4 id="rationale-title">Por qué ocupa esta posición</h4>
         <p>${escapeHtml(signal.reason)}</p>
       </section>
 
@@ -609,7 +801,7 @@ function renderOperator() {
     state.draft = createDraft(signal);
   }
 
-  elements.operatorTitle.textContent = `Operator mode · Signal #${signal.rank}`;
+  elements.operatorTitle.textContent = `Revisión de señal · #${signal.rank}`;
   elements.operatorStatus.value = state.draft.status;
   renderTags();
   renderScoringControls();
@@ -621,7 +813,7 @@ function renderTags() {
       (tag) => `
         <span class="tag editable-tag">
           ${escapeHtml(tag)}
-          <button type="button" data-remove-tag="${escapeHtml(tag)}" aria-label="Eliminar tag ${escapeHtml(tag)}">×</button>
+          <button type="button" data-remove-tag="${escapeHtml(tag)}" aria-label="Eliminar etiqueta ${escapeHtml(tag)}">×</button>
         </span>
       `,
     )
@@ -678,12 +870,14 @@ function updateWeightedScore() {
 }
 
 function selectSignal(signalId) {
+  state.lastFocusedElement = document.activeElement;
   state.selectedId = signalId;
   state.draft = null;
   state.evidenceOpen = true;
-  elements.evidencePanel.classList.remove("is-closed");
-  elements.evidenceToggle.setAttribute("aria-expanded", "true");
   render();
+  if (isEvidenceDrawer()) {
+    window.setTimeout(() => document.querySelector("#evidence-close")?.focus(), 0);
+  }
 }
 
 function applyFilters() {
@@ -723,26 +917,54 @@ function clearFilters() {
 }
 
 function setMode(mode) {
+  if (!modeMetadata[mode]) return;
   state.mode = mode;
-  document.querySelectorAll("[data-mode]").forEach((button) => {
-    const active = button.dataset.mode === mode;
-    button.classList.toggle("is-active", active);
-    button.setAttribute("aria-pressed", String(active));
-  });
-  if (mode === "operator" && state.activeView !== "rankings") {
-    setActiveView("rankings", { focus: false });
+  updateModeNavigation();
+  setActiveView(modeMetadata[mode].defaultView, { focus: true });
+}
+
+function syncEvidencePresentation() {
+  const drawer = isEvidenceDrawer();
+  const visible = state.activeView === "rankings" && state.evidenceOpen;
+  elements.evidencePanel.classList.toggle("is-closed", !visible);
+  elements.evidencePanel.setAttribute("aria-hidden", String(!visible));
+  elements.evidenceToggle.setAttribute("aria-expanded", String(visible));
+  elements.evidenceBackdrop.hidden = !(drawer && visible);
+  elements.body.classList.toggle("evidence-drawer-open", drawer && visible);
+  if (drawer) {
+    elements.evidencePanel.setAttribute("role", "dialog");
+    elements.evidencePanel.setAttribute("aria-modal", "true");
+  } else {
+    elements.evidencePanel.removeAttribute("role");
+    elements.evidencePanel.removeAttribute("aria-modal");
   }
-  renderOperator();
-  if (mode === "operator") {
-    elements.operatorPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function openEvidence({ focus = true } = {}) {
+  if (focus) state.lastFocusedElement = document.activeElement;
+  state.evidenceOpen = true;
+  syncEvidencePresentation();
+  if (focus && isEvidenceDrawer()) {
+    window.setTimeout(() => document.querySelector("#evidence-close")?.focus(), 0);
+  }
+}
+
+function closeEvidence({ restoreFocus = true } = {}) {
+  if (!state.evidenceOpen && elements.evidencePanel.classList.contains("is-closed")) return;
+  state.evidenceOpen = false;
+  syncEvidencePresentation();
+  if (restoreFocus) {
+    const focusTarget = state.lastFocusedElement?.isConnected
+      ? state.lastFocusedElement
+      : elements.evidenceToggle;
+    focusTarget?.focus();
   }
 }
 
 function toggleEvidence(forceOpen) {
-  state.evidenceOpen = forceOpen ?? !state.evidenceOpen;
-  elements.evidencePanel.classList.toggle("is-closed", !state.evidenceOpen);
-  elements.evidenceToggle.setAttribute("aria-expanded", String(state.evidenceOpen));
-  if (!state.evidenceOpen) elements.evidenceToggle.focus();
+  const nextOpen = forceOpen ?? !state.evidenceOpen;
+  if (nextOpen) openEvidence();
+  else closeEvidence();
 }
 
 function buildDraftExport() {
@@ -764,7 +986,7 @@ function exportDraft() {
   anchor.download = `${state.draft.id}-draft.json`;
   anchor.click();
   URL.revokeObjectURL(url);
-  showToast("Borrador exportado. Los snapshots del repositorio no fueron modificados.");
+  showToast("Borrador exportado. Los cortes versionados del repositorio no fueron modificados.");
 }
 
 function openPreview() {
@@ -779,7 +1001,7 @@ function closePreview() {
   state.lastFocusedElement?.focus();
 }
 
-document.querySelectorAll("[data-mode]").forEach((button) => {
+document.querySelectorAll(".mode-button[data-mode]").forEach((button) => {
   button.addEventListener("click", () => setMode(button.dataset.mode));
 });
 
@@ -815,6 +1037,7 @@ document.querySelector("#filter-button").addEventListener("click", (event) => {
 
 document.querySelector("#evidence-close").addEventListener("click", () => toggleEvidence(false));
 elements.evidenceToggle.addEventListener("click", () => toggleEvidence());
+elements.evidenceBackdrop.addEventListener("click", () => closeEvidence());
 
 elements.operatorStatus.addEventListener("change", () => {
   state.draft.status = elements.operatorStatus.value;
@@ -860,6 +1083,7 @@ elements.menuButton.addEventListener("click", () => {
   const open = elements.sidebar.classList.toggle("is-open");
   elements.menuButton.setAttribute("aria-expanded", String(open));
   elements.menuButton.setAttribute("aria-label", open ? "Cerrar navegación" : "Abrir navegación");
+  syncSidebarPresentation();
 });
 
 document.querySelector("#theme-button").addEventListener("click", (event) => {
@@ -875,15 +1099,45 @@ window.addEventListener("keydown", (event) => {
     toggleNotifications(false);
     return;
   }
+  if (event.key === "Escape" && state.evidenceOpen && state.activeView === "rankings") {
+    closeEvidence();
+    return;
+  }
+  if (event.key === "Tab" && isEvidenceDrawer() && state.evidenceOpen && state.activeView === "rankings") {
+    const focusable = getFocusableElements(elements.evidencePanel);
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if (!first || !last) return;
+    if (!elements.evidencePanel.contains(document.activeElement)) {
+      event.preventDefault();
+      first.focus();
+    } else if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+    return;
+  }
   if (event.key === "Escape" && elements.sidebar.classList.contains("is-open")) {
     elements.sidebar.classList.remove("is-open");
     elements.menuButton.setAttribute("aria-expanded", "false");
+    syncSidebarPresentation();
     elements.menuButton.focus();
   }
 });
 
 window.addEventListener("hashchange", () => {
   setActiveView(getInitialView(), { updateUrl: false });
+});
+
+window.addEventListener("resize", () => {
+  const drawer = isEvidenceDrawer();
+  if (drawer && !state.evidenceDrawerViewport) state.evidenceOpen = false;
+  state.evidenceDrawerViewport = drawer;
+  syncSidebarPresentation();
+  syncEvidencePresentation();
 });
 
 initialize();

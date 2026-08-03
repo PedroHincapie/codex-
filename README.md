@@ -52,10 +52,10 @@ Al 31 de julio de 2026, el proyecto cuenta con:
 - persistencia Supabase local y Cloud con 4 migraciones versionadas, RLS y 449
   filas;
 - dashboard estatico responsive en `frontend/`, conectado primero a Supabase
-  Cloud, con cinco secciones operativas, notificaciones verificables, fixtures
-  versionados como fallback visible y 12 capturas de
+  Cloud, con navegación separada para Explorar y Revisar, notificaciones
+  verificables, fixtures versionados como respaldo visible y 26 capturas de
   evidencia;
-- 44 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
+- 47 pruebas `unittest` para el dominio, el CLI, el catalogo, la persistencia y
   la sincronizacion de skills y documentacion.
 
 El corte verificable, las decisiones tomadas y las piezas pendientes se
@@ -96,6 +96,7 @@ para crear tools y capacidades actuales, esta en:
 
 - [docs/ai-radar-operating-model.md](docs/ai-radar-operating-model.md)
 - [docs/ai-radar-current-state.md](docs/ai-radar-current-state.md)
+- [docs/ai-radar-ui-glossary.md](docs/ai-radar-ui-glossary.md)
 - [docs/supabase-cloud.md](docs/supabase-cloud.md)
 - [skills/ai-radar-source-manager/references/source-contract.md](skills/ai-radar-source-manager/references/source-contract.md)
 
